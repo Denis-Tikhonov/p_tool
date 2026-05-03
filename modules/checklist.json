@@ -1,0 +1,31 @@
+{
+  "safa": [
+    {
+      "id": "weather",
+      "title": "Метео условия",
+      "items": [
+        { "id": "metar", "label": "METAR получен" },
+        { "id": "taf", "label": "TAF анализ выполнен" },
+        { "id": "wind", "label": "Ветер проверен" }
+      ]
+    },
+    {
+      "id": "notam",
+      "title": "NOTAM и предупреждения",
+      "items": [
+        { "id": "notam1", "label": "NOTAM A001 проверен" },
+        { "id": "notam2", "label": "Лист предупреждений изучен" }
+      ]
+    }
+  ],
+  "customs": [
+    {
+      "id": "documents",
+      "title": "Документы экипажа",
+      "items": [
+        { "id": "licenses", "label": "Лицензии действительны" },
+        { "id": "passports", "label": "Паспорта и визы" }
+      ]
+    }
+  ]
+}
