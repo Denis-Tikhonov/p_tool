@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#B71C1C">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="PilotTool">
+  <title>Pilot's Tool</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="libs/photoswipe/photoswipe.css">
+  <link rel="stylesheet" href="libs/photoswipe/default-skin/default-skin.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header id="appHeader" class="app-header">
+    <div class="header-left" id="headerLeft"></div>
+    <div class="header-center" id="headerCenter"></div>
+    <div class="header-right" id="headerRight"></div>
+  </header>
+
+  <!-- Side Menu Overlay -->
+  <div id="sideMenuOverlay" class="side-menu-overlay"></div>
+
+  <!-- Side Menu Panel -->
+  <nav id="sideMenu" class="side-menu">
+    <ul class="side-menu-list">
+      <li class="side-menu-item" onclick="showInstallPrompt()">
+        <span class="side-menu-icon">📱</span>
+        <span class="side-menu-text">Установить приложение</span>
+      </li>
+      <li class="side-menu-item" onclick="app.navigateTo('phonebook'); closeSideMenu();">
+        <span class="side-menu-icon">📞</span>
+        <span class="side-menu-text">Телефонный справочник</span>
+      </li>
+      <li class="side-menu-item" onclick="alert('Раздел в разработке')">
+        <span class="side-menu-icon">✈️</span>
+        <span class="side-menu-text">Летные процедуры</span>
+      </li>
+      <li class="side-menu-item" onclick="app.navigateTo('checklists'); closeSideMenu();">
+        <span class="side-menu-icon">✅</span>
+        <span class="side-menu-text">Чеклисты (SAFA / Customs)</span>
+      </li>
+      <li class="side-menu-item" onclick="app.navigateTo('krs'); closeSideMenu();">
+        <span class="side-menu-icon">📋</span>
+        <span class="side-menu-text">Указания КРС</span>
+      </li>
+      <li class="side-menu-item" onclick="alert('Раздел в разработке')">
+        <span class="side-menu-icon">🔗</span>
+        <span class="side-menu-text">Ссылки</span>
+      </li>
+      <li class="side-menu-item" onclick="alert('Раздел в разработке')">
+        <span class="side-menu-icon">❓</span>
+        <span class="side-menu-text">FAQ</span>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Main App Container -->
+  <div id="app">
+    <!-- Main Screen -->
+    <div id="mainScreen" class="screen active">
+      <div class="main-bg"></div>
+      <div class="main-content">
+        <p class="main-quote">Лучше тупой карандаш, чем острая память!</p>
+      </div>
+    </div>
+
+    <!-- Phonebook Screen -->
+    <div id="phonebookScreen" class="screen">
+      <div class="phonebook-container" id="phonebookContainer"></div>
+    </div>
+
+    <!-- Checklists Screen -->
+    <div id="checklistsScreen" class="screen">
+      <div class="checklists-container" id="checklistsContainer"></div>
+    </div>
+
+    <!-- KRS Screen -->
+    <div id="krsScreen" class="screen">
+      <div class="krs-container" id="krsContainer"></div>
+    </div>
+  </div>
+
+  <!-- PhotoSwipe Container -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+      <div class="pswp__ui pswp__ui--hidden">
+        <div class="pswp__top-bar">
+          <div class="pswp__counter"></div>
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="libs/pdfjs/pdf.min.js"></script>
+  <script>
+    if (typeof pdfjsLib !== 'undefined') {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'libs/pdfjs/pdf.worker.min.js';
+    }
+  </script>
+  <script src="libs/photoswipe/photoswipe.min.js"></script>
+  <script src="libs/photoswipe/photoswipe-ui-default.min.js"></script>
+  <script src="modules/phonebook.js"></script>
+  <script src="modules/checklist.js"></script>
+  <script src="modules/krs.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  </script>
+</body>
+</html>
