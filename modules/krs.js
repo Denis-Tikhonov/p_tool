@@ -1,237 +1,223 @@
-/* ==================== KRS MODULE ==================== */
-let cachedInstructions = null;
-let krsSearchMode = false;
+(function() {
+  let cachedInstructions = null;
+  let isSearchMode = false;
+  let openBlocks = {};
 
-function renderKRSHeader(left, center, right) {
-  if (krsSearchMode) {
-    left.innerHTML = `<button class="header-search-cancel" onclick="exitKRSSearch()">Отмена</button>`;
-    center.innerHTML = `<input type="search" class="header-search-input" id="krsSearchInput" placeholder="Поиск..." autocomplete="off">`;
-    right.innerHTML = '';
+  window.initKRS = function() {
+    const container = document.getElementById('krsContainer');
+    if (!container) {
+      console.error('Контейнер krsContainer не найден!');
+      return;
+    }
 
-    setTimeout(() => {
-      const input = document.getElementById('krsSearchInput');
-      if (input) {
-        input.focus();
-        input.addEventListener('input', onKRSSearch);
-      }
-    }, 50);
-  } else {
-    left.innerHTML = `<button class="header-btn" onclick="app.navigateTo('main')" aria-label="Back">←</button>`;
-    center.textContent = 'Указания КРС';
-    right.innerHTML = `<button class="header-btn" onclick="enterKRSSearch()" aria-label="Search">🔍</button>`;
-  }
-}
+    renderKRSHeader(false);
 
-function enterKRSSearch() {
-  krsSearchMode = true;
-  renderHeader('krs');
-}
+    if (cachedInstructions) {
+      renderInstructions(cachedInstructions);
+      return;
+    }
 
-function exitKRSSearch() {
-  krsSearchMode = false;
-  const input = document.getElementById('krsSearchInput');
-  if (input) {
-    input.value = '';
-  }
-  renderHeader('krs');
-  if (cachedInstructions) {
-    renderKRSList(cachedInstructions.instructions);
-  }
-}
+    window.app.showSkeleton(container, 'blocks');
 
-function onKRSSearch(e) {
-  const query = e.target.value.toLowerCase().trim();
-  if (!cachedInstructions) return;
-
-  const filtered = cachedInstructions.instructions.filter(item =>
-    item.title.toLowerCase().includes(query) ||
-    item.text.toLowerCase().includes(query)
-  );
-
-  renderKRSList(filtered);
-}
-
-function getStatusBadge(dateStr) {
-  const ageYears = Math.floor((Date.now() - new Date(dateStr)) / (1000 * 60 * 60 * 24 * 365));
-  if (ageYears < 1) {
-    return { emoji: '🟢', text: 'Актуально', color: '#388E3C' };
-  } else if (ageYears <= 3) {
-    return { emoji: '🟡', text: 'Проверить', color: '#FBC02D' };
-  } else {
-    return { emoji: '🔴', text: 'Устарело', color: '#D32F2F' };
-  }
-}
-
-function toggleKRSBlock(blockId) {
-  const block = document.querySelector(`.krs-block[data-block-id="${blockId}"]`);
-  if (!block) return;
-
-  const content = block.querySelector('.krs-block-content');
-  const arrow = block.querySelector('.block-arrow');
-
-  const isOpen = content.classList.contains('open');
-  if (isOpen) {
-    content.classList.remove('open');
-    arrow.classList.remove('open');
-  } else {
-    content.classList.add('open');
-    arrow.classList.add('open');
-  }
-}
-
-function openPhotoSwipe(imageUrl) {
-  if (window.PhotoSwipe && window.PhotoSwipeUI_Default) {
-    const pswpElement = document.querySelector('.pswp');
-    const items = [{ src: imageUrl, w: 0, h: 0 }];
-    const options = {
-      index: 0,
-      getThumbBoundsFn: () => ({ x: 0, y: 0, w: 0 })
-    };
-    const gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
-    gallery.listen('gettingData', (index, item) => {
-      if (item.w === 0 && item.h === 0) {
-        const img = new Image();
-        img.onload = () => {
-          item.w = img.naturalWidth;
-          item.h = img.naturalHeight;
-          gallery.updateSize(true);
-        };
-        img.src = item.src;
-      }
-    });
-    gallery.init();
-  } else {
-    window.open(imageUrl, '_blank');
-  }
-}
-
-function openPDFModal(pdfUrl) {
-  if (!window.pdfjsLib) {
-    window.open(pdfUrl, '_blank');
-    return;
-  }
-
-  const modal = document.createElement('div');
-  modal.className = 'pdf-modal';
-  modal.id = 'pdfModal';
-
-  const closeBtn = document.createElement('button');
-  closeBtn.className = 'pdf-modal-close';
-  closeBtn.textContent = '✕';
-  closeBtn.onclick = () => {
-    modal.remove();
+    fetch('modules/krs.json')
+      .then(response => response.json())
+      .then(data => {
+        cachedInstructions = data.instructions;
+        renderInstructions(cachedInstructions);
+      })
+      .catch(() => {
+        window.app.showError(container, 'Не удалось загрузить указания КРС');
+      });
   };
 
-  modal.appendChild(closeBtn);
-  document.body.appendChild(modal);
+  function renderKRSHeader(searchMode) {
+    const header = document.getElementById('header');
+    if (!header) return;
 
-  pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
-    for (let i = 1; i <= pdf.numPages; i++) {
-      pdf.getPage(i).then(page => {
-        const viewport = page.getViewport({ scale: 1 });
-        const scale = viewport.width > window.innerWidth ? window.innerWidth / viewport.width : 1;
-        const scaledViewport = page.getViewport({ scale });
+    isSearchMode = searchMode;
 
-        const canvas = document.createElement('canvas');
-        canvas.width = scaledViewport.width;
-        canvas.height = scaledViewport.height;
-        modal.appendChild(canvas);
-
-        const ctx = canvas.getContext('2d');
-        page.render({ canvasContext: ctx, viewport: scaledViewport });
-      });
-    }
-  }).catch(() => {
-    modal.remove();
-    window.open(pdfUrl, '_blank');
-  });
-}
-
-function renderKRSList(instructions) {
-  const container = document.getElementById('krsContainer');
-  if (!container) return;
-
-  if (instructions.length === 0) {
-    container.innerHTML = '<p class="empty-message">Ничего не найдено</p>';
-    return;
-  }
-
-  const sorted = [...instructions].sort((a, b) => new Date(b.date) - new Date(a.date));
-
-  const html = sorted.map(item => {
-    const status = getStatusBadge(item.date);
-    const formattedDate = new Date(item.date).toLocaleDateString('ru-RU');
-
-    let mediaHtml = '';
-    if (item.pic) {
-      mediaHtml += `
-        <img class="krs-photo-thumb" src="${item.pic}"
-          onclick="openPhotoSwipe('${item.pic}')"
-          onerror="this.src='icon-192.png'" alt="Фото">
-      `;
-    }
-    if (item.pdf) {
-      mediaHtml += `
-        <button class="krs-pdf-btn" onclick="openPDFModal('${item.pdf}')">
-          📄 Открыть оригинал PDF
+    header.innerHTML = `
+      <div class="header-layer ${searchMode ? 'hidden' : ''}" id="krsHeaderDefault">
+        <button class="header-btn" onclick="window.app.navigateTo('main')">
+          ${window.ICONS.back}
         </button>
-      `;
-    }
-
-    return `
-      <div class="krs-block" data-block-id="${item.id}">
-        <div class="krs-block-header" onclick="toggleKRSBlock('${item.id}')">
-          <span class="status-badge" style="background:${status.color};color:#FFF;font-size:11px;font-weight:700;padding:2px 6px;border-radius:4px;min-width:28px;text-align:center;">
-            ${status.emoji}
-          </span>
-          <span class="krs-doc-id">${item.id}</span>
-          <span class="krs-block-title">${escapeHtml(item.title)}</span>
-          <span class="block-arrow">▼</span>
-        </div>
-        <div class="krs-block-content">
-          <div class="krs-date">${formattedDate}</div>
-          <div class="krs-author">Автор: ${escapeHtml(item.name)}</div>
-          <div class="krs-text">${escapeHtml(item.text)}</div>
-          ${mediaHtml}
-        </div>
+        <div class="header-title">Указания КРС</div>
+        <button class="header-btn" onclick="window.toggleKRSSearch()">
+          ${window.ICONS.search}
+        </button>
+      </div>
+      <div class="header-layer ${searchMode ? '' : 'hidden'}" id="krsHeaderSearch">
+        <input 
+          type="search" 
+          class="header-search-input" 
+          id="krsSearchInput" 
+          placeholder="Поиск..." 
+          autocomplete="off"
+        >
+        <button class="header-cancel" onclick="window.toggleKRSSearch()">Отмена</button>
       </div>
     `;
-  }).join('');
 
-  container.innerHTML = html;
-}
-
-function initKRS() {
-  const container = document.getElementById('krsContainer');
-  if (!container) {
-    console.error('Контейнер krsContainer не найден!');
-    return;
+    if (searchMode) {
+      setTimeout(() => {
+        const input = document.getElementById('krsSearchInput');
+        if (input) {
+          input.focus();
+          input.addEventListener('input', handleKRSSearch);
+        }
+      }, 100);
+    }
   }
 
-  if (cachedInstructions) {
-    renderKRSList(cachedInstructions.instructions);
-    return;
+  window.toggleKRSSearch = function() {
+    renderKRSHeader(!isSearchMode);
+    if (!isSearchMode) {
+      renderInstructions(cachedInstructions);
+    }
+  };
+
+  function handleKRSSearch(e) {
+    const query = e.target.value.toLowerCase().trim();
+    if (!query) {
+      renderInstructions(cachedInstructions);
+      return;
+    }
+    const filtered = cachedInstructions.filter(item =>
+      item.title.toLowerCase().includes(query) ||
+      item.text.toLowerCase().includes(query)
+    );
+    renderInstructions(filtered);
   }
 
-  app.showSpinner(container);
+  function renderInstructions(instructions) {
+    const container = document.getElementById('krsContainer');
+    if (!container) return;
 
-  fetch('modules/krs.json')
-    .then(r => {
-      if (!r.ok) throw new Error('Failed');
-      return r.json();
-    })
-    .then(data => {
-      cachedInstructions = data;
-      app.hideSpinner(container, '');
-      renderKRSList(data.instructions);
-    })
-    .catch(() => {
-      app.showError(container, 'Не удалось загрузить указания КРС');
+    if (!instructions || instructions.length === 0) {
+      window.app.hideSpinner(container, '<p class="empty-message">Ничего не найдено</p>');
+      return;
+    }
+
+    const sorted = instructions.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    let html = '';
+    sorted.forEach(item => {
+      const age = Math.floor((Date.now() - new Date(item.date)) / (1000*60*60*24*365));
+      let badge = '🟢';
+      if (age >= 3) badge = '🔴';
+      else if (age >= 1) badge = '🟡';
+
+      const isOpen = openBlocks[item.id] || false;
+
+      html += `
+        <div class="krs-block-header" onclick="window.toggleKRSBlock('${item.id}')">
+          <div class="krs-status-badge">${badge}</div>
+          <div class="krs-doc-id">${item.id}</div>
+          <div class="block-title">${item.title}</div>
+          <div class="block-chevron ${isOpen ? 'rotated' : ''}" id="krs_chevron_${item.id}">
+            ${window.ICONS.chevronDown}
+          </div>
+        </div>
+        <div class="krs-block-content ${isOpen ? 'open' : ''}" id="krs_content_${item.id}">
+          ${renderKRSContent(item)}
+        </div>
+      `;
     });
-}
 
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
+    window.app.hideSpinner(container, html);
+  }
+
+  function renderKRSContent(item) {
+    const dateStr = new Date(item.date).toLocaleDateString('ru-RU');
+    let html = `
+      <div class="krs-date">Дата: ${dateStr}</div>
+      <div class="krs-author">Автор: ${item.name}</div>
+      <div class="krs-text">${item.text}</div>
+    `;
+
+    if (item.pic) {
+      html += `<img src="${item.pic}" class="krs-photo-thumb" alt="Фото" onerror="this.src='icon-192.png'" onclick="window.openKRSPhoto('${item.pic}')">`;
+    }
+
+    if (item.pdf) {
+      html += `<button class="krs-pdf-btn" onclick="window.openKRSPDF('${item.pdf}')">📄 Открыть оригинал PDF</button>`;
+    }
+
+    return html;
+  }
+
+  window.toggleKRSBlock = function(blockId) {
+    openBlocks[blockId] = !openBlocks[blockId];
+    const content = document.getElementById(`krs_content_${blockId}`);
+    const chevron = document.getElementById(`krs_chevron_${blockId}`);
+    if (content) {
+      content.classList.toggle('open');
+    }
+    if (chevron) {
+      chevron.classList.toggle('rotated');
+    }
+  };
+
+  window.openKRSPhoto = function(url) {
+    if (window.PhotoSwipe && window.PhotoSwipeUI_Default) {
+      const pswpElement = document.querySelectorAll('.pswp')[0];
+      const items = [{
+        src: url,
+        w: 1200,
+        h: 900
+      }];
+      const options = {
+        index: 0,
+        bgOpacity: 0.9,
+        shareEl: false
+      };
+      const gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+      gallery.init();
+    } else {
+      window.open(url, '_blank');
+    }
+  };
+
+  window.openKRSPDF = function(url) {
+    if (window.pdfjsLib) {
+      showPDFModal(url);
+    } else {
+      window.open(url, '_blank');
+    }
+  };
+
+  function showPDFModal(url) {
+    const modal = document.createElement('div');
+    modal.className = 'pdf-modal';
+    modal.innerHTML = `<button class="pdf-modal-close" onclick="this.parentElement.remove()">✕</button>`;
+    document.body.appendChild(modal);
+
+    pdfjsLib.getDocument(url).promise.then(pdf => {
+      const numPages = pdf.numPages;
+      for (let i = 1; i <= numPages; i++) {
+        pdf.getPage(i).then(page => {
+          const viewport = page.getViewport({ scale: 1.5 });
+          const canvas = document.createElement('canvas');
+          const context = canvas.getContext('2d');
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          
+          const scale = viewport.width > window.innerWidth ? window.innerWidth / viewport.width : 1;
+          const scaledViewport = page.getViewport({ scale: 1.5 * scale });
+          canvas.width = scaledViewport.width;
+          canvas.height = scaledViewport.height;
+
+          page.render({
+            canvasContext: context,
+            viewport: scaledViewport
+          });
+
+          modal.appendChild(canvas);
+        });
+      }
+    }).catch(() => {
+      modal.remove();
+      window.open(url, '_blank');
+    });
+  }
+})();

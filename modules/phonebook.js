@@ -1,111 +1,119 @@
-/* ==================== PHONEBOOK MODULE ==================== */
-let cachedContacts = null;
-let phonebookSearchMode = false;
+(function() {
+  let cachedContacts = null;
+  let isSearchMode = false;
 
-function renderPhonebookHeader(left, center, right) {
-  if (phonebookSearchMode) {
-    left.innerHTML = `<button class="header-search-cancel" onclick="exitPhonebookSearch()">Отмена</button>`;
-    center.innerHTML = `<input type="search" class="header-search-input" id="phonebookSearchInput" placeholder="Поиск..." autocomplete="off">`;
-    right.innerHTML = '';
+  window.initPhonebook = function() {
+    const container = document.getElementById('phonebookContainer');
+    if (!container) {
+      console.error('Контейнер phonebookContainer не найден!');
+      return;
+    }
 
-    setTimeout(() => {
-      const input = document.getElementById('phonebookSearchInput');
-      if (input) {
-        input.focus();
-        input.addEventListener('input', onPhonebookSearch);
-      }
-    }, 50);
-  } else {
-    left.innerHTML = `<button class="header-btn" onclick="app.navigateTo('main')" aria-label="Back">←</button>`;
-    center.textContent = 'Телефонный справочник';
-    right.innerHTML = `<button class="header-btn" onclick="enterPhonebookSearch()" aria-label="Search">🔍</button>`;
-  }
-}
+    renderPhonebookHeader(false);
 
-function enterPhonebookSearch() {
-  phonebookSearchMode = true;
-  renderHeader('phonebook');
-}
+    if (cachedContacts) {
+      renderContacts(cachedContacts);
+      return;
+    }
 
-function exitPhonebookSearch() {
-  phonebookSearchMode = false;
-  const input = document.getElementById('phonebookSearchInput');
-  if (input) {
-    input.value = '';
-  }
-  renderHeader('phonebook');
-  renderContactList(cachedContacts ? cachedContacts.contacts : []);
-}
+    window.app.showSkeleton(container, 'list');
 
-function onPhonebookSearch(e) {
-  const query = e.target.value.toLowerCase().trim();
-  if (!cachedContacts) return;
+    fetch('modules/phonebook.json')
+      .then(response => response.json())
+      .then(data => {
+        cachedContacts = data.contacts;
+        renderContacts(cachedContacts);
+      })
+      .catch(() => {
+        window.app.showError(container, 'Не удалось загрузить справочник');
+      });
+  };
 
-  const filtered = cachedContacts.contacts.filter(c =>
-    c.name.toLowerCase().includes(query) ||
-    c.phone.toLowerCase().includes(query)
-  );
+  function renderPhonebookHeader(searchMode) {
+    const header = document.getElementById('header');
+    if (!header) return;
 
-  renderContactList(filtered);
-}
+    isSearchMode = searchMode;
 
-function renderContactList(contacts) {
-  const container = document.getElementById('phonebookContainer');
-  if (!container) return;
-
-  if (contacts.length === 0) {
-    container.innerHTML = '<p class="empty-message">Ничего не найдено</p>';
-    return;
-  }
-
-  const sorted = [...contacts].sort((a, b) => a.name.localeCompare(b.name, 'ru'));
-
-  const html = sorted.map(contact => `
-    <div class="contact-item">
-      <div class="contact-avatar">👤</div>
-      <div class="contact-info">
-        <span class="contact-name">${escapeHtml(contact.name)}</span>
-        <span class="contact-phone">
-          <a href="tel:${contact.phone.replace(/\s/g, '')}">${escapeHtml(contact.phone)}</a>
-        </span>
+    header.innerHTML = `
+      <div class="header-layer ${searchMode ? 'hidden' : ''}" id="phonebookHeaderDefault">
+        <button class="header-btn" onclick="window.app.navigateTo('main')">
+          ${window.ICONS.back}
+        </button>
+        <div class="header-title">Телефонный справочник</div>
+        <button class="header-btn" onclick="window.togglePhonebookSearch()">
+          ${window.ICONS.search}
+        </button>
       </div>
-    </div>
-  `).join('');
+      <div class="header-layer ${searchMode ? '' : 'hidden'}" id="phonebookHeaderSearch">
+        <input 
+          type="search" 
+          class="header-search-input" 
+          id="phonebookSearchInput" 
+          placeholder="Поиск..." 
+          autocomplete="off"
+        >
+        <button class="header-cancel" onclick="window.togglePhonebookSearch()">Отмена</button>
+      </div>
+    `;
 
-  container.innerHTML = html;
-}
-
-function initPhonebook() {
-  const container = document.getElementById('phonebookContainer');
-  if (!container) {
-    console.error('Контейнер phonebookContainer не найден!');
-    return;
+    if (searchMode) {
+      setTimeout(() => {
+        const input = document.getElementById('phonebookSearchInput');
+        if (input) {
+          input.focus();
+          input.addEventListener('input', handlePhonebookSearch);
+        }
+      }, 100);
+    }
   }
 
-  if (cachedContacts) {
-    renderContactList(cachedContacts.contacts);
-    return;
+  window.togglePhonebookSearch = function() {
+    renderPhonebookHeader(!isSearchMode);
+    if (!isSearchMode) {
+      renderContacts(cachedContacts);
+    }
+  };
+
+  function handlePhonebookSearch(e) {
+    const query = e.target.value.toLowerCase().trim();
+    if (!query) {
+      renderContacts(cachedContacts);
+      return;
+    }
+    const filtered = cachedContacts.filter(contact =>
+      contact.name.toLowerCase().includes(query) ||
+      contact.phone.toLowerCase().includes(query)
+    );
+    renderContacts(filtered);
   }
 
-  app.showSpinner(container);
+  function renderContacts(contacts) {
+    const container = document.getElementById('phonebookContainer');
+    if (!container) return;
 
-  fetch('modules/phonebook.json')
-    .then(r => {
-      if (!r.ok) throw new Error('Failed');
-      return r.json();
-    })
-    .then(data => {
-      cachedContacts = data;
-      app.hideSpinner(container, '');
-      renderContactList(data.contacts);
-    })
-    .catch(() => {
-      app.showError(container, 'Не удалось загрузить справочник');
+    if (!contacts || contacts.length === 0) {
+      window.app.hideSpinner(container, '<p class="empty-message">Ничего не найдено</p>');
+      return;
+    }
+
+    const sorted = contacts.slice().sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+    
+    let html = '';
+    sorted.forEach(contact => {
+      html += `
+        <div class="contact-item">
+          <div class="contact-avatar">
+            ${window.ICONS.phone}
+          </div>
+          <div class="contact-info">
+            <div class="contact-name">${contact.name}</div>
+            <a href="tel:${contact.phone}" class="contact-phone">${contact.phone}</a>
+          </div>
+        </div>
+      `;
     });
-}
 
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
+    window.app.hideSpinner(container, html);
+  }
+})();

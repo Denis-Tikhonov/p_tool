@@ -1,193 +1,180 @@
-/* ==================== CHECKLISTS MODULE ==================== */
-let cachedData = null;
-let activeTab = 'safa';
+(function() {
+  let cachedData = null;
+  let activeTab = 'safa';
+  let openBlocks = {};
 
-function renderChecklistsHeader(left, center, right) {
-  left.innerHTML = `<button class="header-btn" onclick="app.navigateTo('main')" aria-label="Back">←</button>`;
-  center.innerHTML = `
-    <div class="tab-group">
-      <button class="tab-btn ${activeTab === 'safa' ? 'active' : ''}" onclick="switchTab('safa')">SAFA</button>
-      <button class="tab-btn ${activeTab === 'customs' ? 'active' : ''}" onclick="switchTab('customs')">Customs</button>
-    </div>
-  `;
-  right.innerHTML = `<button class="header-btn" onclick="openCommitsDrawer()" aria-label="Actions">+</button>`;
-}
-
-function switchTab(tab) {
-  activeTab = tab;
-  renderHeader('checklists');
-
-  document.querySelectorAll('.checklist-group').forEach(g => {
-    g.style.display = g.dataset.tab === tab ? 'block' : 'none';
-  });
-}
-
-function openCommitsDrawer() {
-  const overlay = document.getElementById('commitsOverlay');
-  const drawer = document.getElementById('commitsDrawer');
-  if (overlay && drawer) {
-    overlay.classList.add('open');
-    drawer.classList.add('open');
-  }
-}
-
-function closeCommitsDrawer() {
-  const overlay = document.getElementById('commitsOverlay');
-  const drawer = document.getElementById('commitsDrawer');
-  if (overlay && drawer) {
-    overlay.classList.remove('open');
-    drawer.classList.remove('open');
-  }
-}
-
-function onChecklistCheckboxChange(blockId, itemId) {
-  const checkbox = document.getElementById(`chk_${blockId}_${itemId}`);
-  const checked = checkbox ? checkbox.checked : false;
-  sessionStorage.setItem(`checklist_${blockId}_${itemId}`, checked ? 'true' : 'false');
-  updateBlockBadge(blockId);
-}
-
-function updateBlockBadge(blockId) {
-  const block = document.querySelector(`.checklist-block[data-block-id="${blockId}"]`);
-  if (!block) return;
-
-  const checkboxes = block.querySelectorAll('input[type="checkbox"]');
-  const allChecked = Array.from(checkboxes).every(ch => ch.checked);
-
-  const badge = block.querySelector('.status-badge');
-  if (badge) {
-    badge.className = 'status-badge ' + (allChecked ? 'ok' : 'no');
-    badge.textContent = allChecked ? 'OK' : 'NO';
-  }
-}
-
-function toggleBlock(blockId) {
-  const block = document.querySelector(`.checklist-block[data-block-id="${blockId}"]`);
-  if (!block) return;
-
-  const content = block.querySelector('.block-content');
-  const arrow = block.querySelector('.block-arrow');
-
-  const isOpen = content.classList.contains('open');
-  if (isOpen) {
-    content.classList.remove('open');
-    arrow.classList.remove('open');
-  } else {
-    content.classList.add('open');
-    arrow.classList.add('open');
-  }
-}
-
-function renderChecklists(data) {
-  const container = document.getElementById('checklistsContainer');
-  if (!container) return;
-
-  let html = '';
-
-  ['safa', 'customs'].forEach(tab => {
-    const groups = data[tab] || [];
-    const display = tab === activeTab ? 'block' : 'none';
-
-    if (groups.length === 0) {
-      html += `<div class="checklist-group" data-tab="${tab}" style="display:${display}"><p class="empty-message">Нет заданий</p></div>`;
+  window.initChecklists = function() {
+    const container = document.getElementById('checklistsContainer');
+    if (!container) {
+      console.error('Контейнер checklistsContainer не найден!');
       return;
     }
 
-    html += `<div class="checklist-group" data-tab="${tab}" style="display:${display}">`;
+    renderChecklistsHeader();
+    setupCommitsPanel();
 
-    groups.forEach(group => {
-      const itemsHtml = group.items.map(item => {
-        const key = `checklist_${group.id}_${item.id}`;
-        const saved = sessionStorage.getItem(key) === 'true';
-        return `
-          <label class="checkbox-label">
-            <input type="checkbox" id="chk_${group.id}_${item.id}"
-              ${saved ? 'checked' : ''}
-              onchange="onChecklistCheckboxChange('${group.id}', '${item.id}')">
-            <span class="checkbox-text">${escapeHtml(item.label)}</span>
-          </label>
-        `;
-      }).join('');
+    if (cachedData) {
+      renderChecklists();
+      return;
+    }
 
-      const checkboxes = group.items.map(item => {
-        return sessionStorage.getItem(`checklist_${group.id}_${item.id}`) === 'true';
+    window.app.showSkeleton(container, 'blocks');
+
+    fetch('modules/checklist.json')
+      .then(response => response.json())
+      .then(data => {
+        cachedData = data;
+        renderChecklists();
+      })
+      .catch(() => {
+        window.app.showError(container, 'Не удалось загрузить чеклисты');
       });
-      const allChecked = checkboxes.length > 0 && checkboxes.every(v => v);
+  };
+
+  function renderChecklistsHeader() {
+    const header = document.getElementById('header');
+    if (!header) return;
+
+    header.innerHTML = `
+      <button class="header-btn" onclick="window.app.navigateTo('main')">
+        ${window.ICONS.back}
+      </button>
+      <div class="tab-group">
+        <button class="tab-btn ${activeTab === 'safa' ? 'active' : ''}" onclick="window.switchChecklistTab('safa')">
+          SAFA Инспекция
+        </button>
+        <button class="tab-btn ${activeTab === 'customs' ? 'active' : ''}" onclick="window.switchChecklistTab('customs')">
+          Customs чеклисты
+        </button>
+      </div>
+      <button class="header-btn" onclick="window.openCommitsPanel()">+</button>
+    `;
+  }
+
+  window.switchChecklistTab = function(tab) {
+    activeTab = tab;
+    renderChecklistsHeader();
+    renderChecklists();
+  };
+
+  function setupCommitsPanel() {
+    const overlay = document.getElementById('commitsOverlay');
+    const panel = document.getElementById('commitsPanel');
+    const closeBtn = document.getElementById('commitsPanelClose');
+
+    if (overlay) {
+      overlay.addEventListener('click', closeCommitsPanel);
+    }
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeCommitsPanel);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeCommitsPanel();
+    });
+  }
+
+  window.openCommitsPanel = function() {
+    const overlay = document.getElementById('commitsOverlay');
+    const panel = document.getElementById('commitsPanel');
+    if (overlay) overlay.classList.add('open');
+    if (panel) panel.classList.add('open');
+  };
+
+  function closeCommitsPanel() {
+    const overlay = document.getElementById('commitsOverlay');
+    const panel = document.getElementById('commitsPanel');
+    if (overlay) overlay.classList.remove('open');
+    if (panel) panel.classList.remove('open');
+  }
+
+  function renderChecklists() {
+    const container = document.getElementById('checklistsContainer');
+    if (!container || !cachedData) return;
+
+    const blocks = cachedData[activeTab] || [];
+    
+    if (blocks.length === 0) {
+      window.app.hideSpinner(container, '<p class="empty-message">Нет заданий</p>');
+      return;
+    }
+
+    let html = '';
+    blocks.forEach(block => {
+      const allChecked = block.items.every(item => {
+        const key = `checklist_${block.id}_${item.id}`;
+        return sessionStorage.getItem(key) === 'true';
+      });
+
+      const badgeClass = allChecked ? 'ok' : 'no';
+      const badgeText = allChecked ? 'OK' : 'NO';
+      const isOpen = openBlocks[block.id] || false;
 
       html += `
-        <div class="checklist-block" data-block-id="${group.id}">
-          <div class="block-header" onclick="toggleBlock('${group.id}')">
-            <span class="status-badge ${allChecked ? 'ok' : 'no'}">${allChecked ? 'OK' : 'NO'}</span>
-            <span class="checklist-block-title">${escapeHtml(group.title)}</span>
-            <span class="block-arrow">▼</span>
+        <div class="block-header" onclick="window.toggleChecklistBlock('${block.id}')">
+          <div class="block-badge ${badgeClass}" id="badge_${block.id}">${badgeText}</div>
+          <div class="block-title">${block.title}</div>
+          <div class="block-chevron ${isOpen ? 'rotated' : ''}" id="chevron_${block.id}">
+            ${window.ICONS.chevronDown}
           </div>
-          <div class="block-content">
-            ${itemsHtml}
-          </div>
+        </div>
+        <div class="block-content ${isOpen ? 'open' : ''}" id="content_${block.id}">
+          ${renderChecklistItems(block)}
         </div>
       `;
     });
 
-    html += '</div>';
-  });
+    window.app.hideSpinner(container, html);
 
-  // Drawer markup
-  html += `
-    <div id="commitsOverlay" class="drawer-overlay" onclick="closeCommitsDrawer()"></div>
-    <div id="commitsDrawer" class="drawer-panel">
-      <div class="drawer-header">
-        <span>Действия</span>
-        <button class="drawer-close" onclick="closeCommitsDrawer()">✕</button>
-      </div>
-      <div class="drawer-item" onclick="alert('Упс... Функция в разработке')">
-        <span>📸</span><span>Сделать фото</span>
-      </div>
-      <div class="drawer-item" onclick="alert('Упс... Функция в разработке')">
-        <span>💬</span><span>Комментарий</span>
-      </div>
-    </div>
-  `;
-
-  container.innerHTML = html;
-}
-
-function initChecklists() {
-  const container = document.getElementById('checklistsContainer');
-  if (!container) {
-    console.error('Контейнер checklistsContainer не найден!');
-    return;
-  }
-
-  if (cachedData) {
-    renderChecklists(cachedData);
-    return;
-  }
-
-  app.showSpinner(container);
-
-  fetch('modules/checklist.json')
-    .then(r => {
-      if (!r.ok) throw new Error('Failed');
-      return r.json();
-    })
-    .then(data => {
-      cachedData = data;
-      app.hideSpinner(container, '');
-      renderChecklists(data);
-    })
-    .catch(() => {
-      app.showError(container, 'Не удалось загрузить чеклисты');
+    blocks.forEach(block => {
+      block.items.forEach(item => {
+        const checkbox = document.getElementById(`checkbox_${block.id}_${item.id}`);
+        if (checkbox) {
+          const key = `checklist_${block.id}_${item.id}`;
+          checkbox.checked = sessionStorage.getItem(key) === 'true';
+          checkbox.addEventListener('change', () => {
+            sessionStorage.setItem(key, checkbox.checked);
+            updateBlockBadge(block.id, block.items);
+          });
+        }
+      });
     });
-}
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    closeCommitsDrawer();
   }
-});
 
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
+  function renderChecklistItems(block) {
+    let html = '';
+    block.items.forEach(item => {
+      html += `
+        <div class="checklist-item">
+          <input type="checkbox" id="checkbox_${block.id}_${item.id}">
+          <label for="checkbox_${block.id}_${item.id}">${item.label}</label>
+        </div>
+      `;
+    });
+    return html;
+  }
+
+  window.toggleChecklistBlock = function(blockId) {
+    openBlocks[blockId] = !openBlocks[blockId];
+    const content = document.getElementById(`content_${blockId}`);
+    const chevron = document.getElementById(`chevron_${blockId}`);
+    if (content) {
+      content.classList.toggle('open');
+    }
+    if (chevron) {
+      chevron.classList.toggle('rotated');
+    }
+  };
+
+  function updateBlockBadge(blockId, items) {
+    const allChecked = items.every(item => {
+      const key = `checklist_${blockId}_${item.id}`;
+      return sessionStorage.getItem(key) === 'true';
+    });
+    const badge = document.getElementById(`badge_${blockId}`);
+    if (badge) {
+      badge.className = `block-badge ${allChecked ? 'ok' : 'no'}`;
+      badge.textContent = allChecked ? 'OK' : 'NO';
+    }
+  }
+})();

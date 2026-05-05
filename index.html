@@ -2,90 +2,87 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#B71C1C">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="PilotTool">
   <title>Pilot's Tool</title>
-  <link rel="manifest" href="manifest.json">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="libs/photoswipe/photoswipe.css">
   <link rel="stylesheet" href="libs/photoswipe/default-skin/default-skin.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Header -->
-  <header id="appHeader" class="app-header">
-    <div class="header-left" id="headerLeft"></div>
-    <div class="header-center" id="headerCenter"></div>
-    <div class="header-right" id="headerRight"></div>
-  </header>
+  <div id="cacheProgressOverlay" style="
+    display: none;
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--color-primary);
+    flex-direction: column;
+    align-items: center; justify-content: center;
+    color: #fff; font-family: var(--font-main);
+  ">
+    <p style="margin-bottom: 16px; font-size: 1rem;">Подготовка к работе offline...</p>
+    <div style="width: 240px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 2px;">
+      <div id="cacheProgressBar" style="
+        height: 4px; width: 0%; background: #fff;
+        border-radius: 2px; transition: width 0.2s ease;
+      "></div>
+    </div>
+    <p id="cacheProgressText" style="margin-top: 12px; font-size: 0.875rem; opacity: 0.8;">0%</p>
+  </div>
 
-  <!-- Side Menu Overlay -->
-  <div id="sideMenuOverlay" class="side-menu-overlay"></div>
+  <header id="header" class="header"></header>
 
-  <!-- Side Menu Panel -->
-  <nav id="sideMenu" class="side-menu">
-    <ul class="side-menu-list">
-      <li class="side-menu-item" onclick="showInstallPrompt()">
-        <span class="side-menu-icon">📱</span>
-        <span class="side-menu-text">Установить приложение</span>
-      </li>
-      <li class="side-menu-item" onclick="app.navigateTo('phonebook'); closeSideMenu();">
-        <span class="side-menu-icon">📞</span>
-        <span class="side-menu-text">Телефонный справочник</span>
-      </li>
-      <li class="side-menu-item" onclick="alert('Раздел в разработке')">
-        <span class="side-menu-icon">✈️</span>
-        <span class="side-menu-text">Летные процедуры</span>
-      </li>
-      <li class="side-menu-item" onclick="app.navigateTo('checklists'); closeSideMenu();">
-        <span class="side-menu-icon">✅</span>
-        <span class="side-menu-text">Чеклисты (SAFA / Customs)</span>
-      </li>
-      <li class="side-menu-item" onclick="app.navigateTo('krs'); closeSideMenu();">
-        <span class="side-menu-icon">📋</span>
-        <span class="side-menu-text">Указания КРС</span>
-      </li>
-      <li class="side-menu-item" onclick="alert('Раздел в разработке')">
-        <span class="side-menu-icon">🔗</span>
-        <span class="side-menu-text">Ссылки</span>
-      </li>
-      <li class="side-menu-item" onclick="alert('Раздел в разработке')">
-        <span class="side-menu-icon">❓</span>
-        <span class="side-menu-text">FAQ</span>
-      </li>
-    </ul>
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <nav class="side-menu" id="sideMenu">
+    <div class="menu-item" onclick="app.showInstallPrompt()">📱 Установить приложение</div>
+    <div class="menu-item" onclick="app.navigateTo('phonebook')">📞 Телефонный справочник</div>
+    <div class="menu-item" onclick="alert('Раздел в разработке')">✈️ Летные процедуры</div>
+    <div class="menu-item" onclick="app.navigateTo('checklists')">✅ Чеклисты (SAFA / Customs)</div>
+    <div class="menu-item" onclick="app.navigateTo('krs')">📋 Указания КРС</div>
+    <div class="menu-item" onclick="alert('Раздел в разработке')">🔗 Ссылки</div>
+    <div class="menu-item" onclick="alert('Раздел в разработке')">❓ FAQ</div>
+    <div class="menu-item" onclick="app.toggleTheme()" id="themeToggle">🌙 Темная тема</div>
   </nav>
 
-  <!-- Main App Container -->
+  <div class="commits-overlay" id="commitsOverlay"></div>
+  <div class="commits-panel" id="commitsPanel">
+    <div class="commits-panel-header">
+      <span class="commits-panel-title">Действия</span>
+      <button class="commits-panel-close" id="commitsPanelClose">✕</button>
+    </div>
+    <div class="commits-panel-body">
+      <button class="commits-action-item" onclick="alert('Упс... Функция в разработке')">
+        📸 Сделать фото
+      </button>
+      <button class="commits-action-item" onclick="alert('Упс... Функция в разработке')">
+        💬 Комментарий
+      </button>
+    </div>
+  </div>
+
   <div id="app">
-    <!-- Main Screen -->
     <div id="mainScreen" class="screen active">
       <div class="main-bg"></div>
       <div class="main-content">
-        <p class="main-quote">Лучше тупой карандаш, чем острая память!</p>
+        <blockquote class="main-quote">Лучше тупой карандаш, чем острая память!</blockquote>
       </div>
     </div>
 
-    <!-- Phonebook Screen -->
     <div id="phonebookScreen" class="screen">
       <div class="phonebook-container" id="phonebookContainer"></div>
     </div>
 
-    <!-- Checklists Screen -->
     <div id="checklistsScreen" class="screen">
       <div class="checklists-container" id="checklistsContainer"></div>
     </div>
 
-    <!-- KRS Screen -->
     <div id="krsScreen" class="screen">
       <div class="krs-container" id="krsContainer"></div>
     </div>
   </div>
 
-  <!-- PhotoSwipe Container -->
   <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="pswp__bg"></div>
     <div class="pswp__scroll-wrap">
@@ -121,22 +118,35 @@
     </div>
   </div>
 
-  <!-- Scripts -->
+  <script src="icons.js"></script>
   <script src="libs/pdfjs/pdf.min.js"></script>
-  <script>
-    if (typeof pdfjsLib !== 'undefined') {
-      pdfjsLib.GlobalWorkerOptions.workerSrc = 'libs/pdfjs/pdf.worker.min.js';
-    }
-  </script>
+  <script>if(window.pdfjsLib){pdfjsLib.GlobalWorkerOptions.workerSrc='libs/pdfjs/pdf.worker.min.js';}</script>
   <script src="libs/photoswipe/photoswipe.min.js"></script>
   <script src="libs/photoswipe/photoswipe-ui-default.min.js"></script>
+  <script src="app.js"></script>
   <script src="modules/phonebook.js"></script>
   <script src="modules/checklist.js"></script>
   <script src="modules/krs.js"></script>
-  <script src="app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js');
+      navigator.serviceWorker.register('/sw.js').then(reg => {
+        if (reg.installing) {
+          const overlay = document.getElementById('cacheProgressOverlay');
+          const bar = document.getElementById('cacheProgressBar');
+          const text = document.getElementById('cacheProgressText');
+          if (overlay) overlay.style.display = 'flex';
+          navigator.serviceWorker.addEventListener('message', (event) => {
+            if (event.data && event.data.type === 'CACHE_PROGRESS') {
+              const pct = Math.round(event.data.progress * 100);
+              if (bar) bar.style.width = pct + '%';
+              if (text) text.textContent = pct + '%';
+              if (pct >= 100 && overlay) {
+                setTimeout(() => { overlay.style.display = 'none'; }, 400);
+              }
+            }
+          });
+        }
+      });
     }
   </script>
 </body>

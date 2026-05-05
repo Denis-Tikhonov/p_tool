@@ -1,148 +1,153 @@
-/* ==================== GLOBAL APP ==================== */
-window.app = {
-  currentScreen: 'main',
+(function() {
+  let currentScreen = 'main';
+  let menuOpen = false;
+  let deferredInstallPrompt = null;
 
-  showSpinner(container) {
-    if (!container) return;
-    container.innerHTML = `
-      <div class="spinner">
-        <div class="spinner-circle"></div>
-      </div>
-    `;
-  },
+  window.app = {
+    navigateTo: function(screenName) {
+      const screens = document.querySelectorAll('.screen');
+      screens.forEach(s => s.classList.remove('active'));
+      const targetScreen = document.getElementById(screenName + 'Screen');
+      if (targetScreen) {
+        targetScreen.classList.add('active');
+        currentScreen = screenName;
+        this.closeMenu();
+        this.renderHeader(screenName);
+        if (screenName === 'phonebook' && window.initPhonebook) {
+          window.initPhonebook();
+        } else if (screenName === 'checklists' && window.initChecklists) {
+          window.initChecklists();
+        } else if (screenName === 'krs' && window.initKRS) {
+          window.initKRS();
+        }
+      }
+    },
 
-  hideSpinner(container, htmlContent) {
-    if (!container) return;
-    container.innerHTML = htmlContent;
-  },
+    renderHeader: function(screenName) {
+      const header = document.getElementById('header');
+      if (!header) return;
+      if (screenName === 'main') {
+        header.innerHTML = `
+          <button class="header-btn" onclick="app.toggleMenu()" id="menuToggleBtn">
+            ${menuOpen ? window.ICONS.close : window.ICONS.menu}
+          </button>
+          <div class="header-title">Pilot's tool</div>
+          <div style="width:44px;"></div>
+        `;
+      }
+    },
 
-  showError(container, text) {
-    if (!container) return;
-    container.innerHTML = `
-      <div class="error-message">
-        <p>${text}</p>
-      </div>
-    `;
-  },
+    toggleMenu: function() {
+      menuOpen = !menuOpen;
+      const menu = document.getElementById('sideMenu');
+      const overlay = document.getElementById('menuOverlay');
+      const btn = document.getElementById('menuToggleBtn');
+      if (menuOpen) {
+        menu.classList.add('open');
+        overlay.classList.add('open');
+        if (btn) btn.innerHTML = window.ICONS.close;
+      } else {
+        menu.classList.remove('open');
+        overlay.classList.remove('open');
+        if (btn) btn.innerHTML = window.ICONS.menu;
+      }
+    },
 
-  navigateTo(screenName) {
-    const screens = document.querySelectorAll('.screen');
-    screens.forEach(s => s.classList.remove('active'));
+    closeMenu: function() {
+      if (menuOpen) {
+        menuOpen = false;
+        const menu = document.getElementById('sideMenu');
+        const overlay = document.getElementById('menuOverlay');
+        const btn = document.getElementById('menuToggleBtn');
+        menu.classList.remove('open');
+        overlay.classList.remove('open');
+        if (btn) btn.innerHTML = window.ICONS.menu;
+      }
+    },
 
-    const target = document.getElementById(screenName + 'Screen');
-    if (target) {
-      target.classList.add('active');
+    showSkeleton: function(container, type) {
+      if (!container) return;
+      let html = '';
+      if (type === 'list') {
+        for (let i = 0; i < 6; i++) {
+          html += `
+            <div class="skeleton-item">
+              <div class="skeleton skeleton-avatar"></div>
+              <div class="skeleton-lines">
+                <div class="skeleton skeleton-line-long"></div>
+                <div class="skeleton skeleton-line-short"></div>
+              </div>
+            </div>
+          `;
+        }
+      } else if (type === 'blocks') {
+        for (let i = 0; i < 4; i++) {
+          html += `
+            <div class="skeleton-block">
+              <div class="skeleton skeleton-line-long"></div>
+            </div>
+          `;
+        }
+      }
+      container.innerHTML = html;
+    },
+
+    hideSpinner: function(container, htmlContent) {
+      if (!container) return;
+      container.innerHTML = htmlContent;
+    },
+
+    showError: function(container, text) {
+      if (!container) return;
+      container.innerHTML = `<p class="error-message">${text}</p>`;
+    },
+
+    toggleTheme: function() {
+      const body = document.body;
+      const themeToggle = document.getElementById('themeToggle');
+      const isDark = body.classList.toggle('dark-theme');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      if (themeToggle) {
+        themeToggle.textContent = isDark ? '☀️ Светлая тема' : '🌙 Темная тема';
+      }
+    },
+
+    showInstallPrompt: function() {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        deferredInstallPrompt.userChoice.then(() => {
+          deferredInstallPrompt = null;
+        });
+      } else {
+        alert('Приложение уже установлено или браузер не поддерживает установку');
+      }
+    }
+  };
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+  });
+
+  window.addEventListener('appinstalled', () => {
+    deferredInstallPrompt = null;
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme');
+    const themeToggle = document.getElementById('themeToggle');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-theme');
+      if (themeToggle) themeToggle.textContent = '☀️ Светлая тема';
     }
 
-    this.currentScreen = screenName;
-    renderHeader(screenName);
-
-    if (screenName === 'phonebook' && typeof initPhonebook === 'function') {
-      initPhonebook();
+    const overlay = document.getElementById('menuOverlay');
+    if (overlay) {
+      overlay.addEventListener('click', function() {
+        app.closeMenu();
+      });
     }
-    if (screenName === 'checklists' && typeof initChecklists === 'function') {
-      initChecklists();
-    }
-    if (screenName === 'krs' && typeof initKRS === 'function') {
-      initKRS();
-    }
-  }
-};
 
-/* ==================== HEADER ==================== */
-function renderHeader(screenName) {
-  const left = document.getElementById('headerLeft');
-  const center = document.getElementById('headerCenter');
-  const right = document.getElementById('headerRight');
-
-  if (!left || !center || !right) return;
-
-  if (screenName === 'main') {
-    const isMenuOpen = document.getElementById('sideMenu').classList.contains('open');
-    left.innerHTML = `<button class="header-btn" onclick="toggleSideMenu()" aria-label="Menu">${isMenuOpen ? '✕' : '☰'}</button>`;
-    center.textContent = "Pilot's tool";
-    right.innerHTML = '';
-    return;
-  }
-
-  if (screenName === 'phonebook') {
-    if (typeof renderPhonebookHeader === 'function') {
-      renderPhonebookHeader(left, center, right);
-    }
-    return;
-  }
-
-  if (screenName === 'checklists') {
-    if (typeof renderChecklistsHeader === 'function') {
-      renderChecklistsHeader(left, center, right);
-    }
-    return;
-  }
-
-  if (screenName === 'krs') {
-    if (typeof renderKRSHeader === 'function') {
-      renderKRSHeader(left, center, right);
-    }
-    return;
-  }
-}
-
-/* ==================== SIDE MENU ==================== */
-function toggleSideMenu() {
-  const menu = document.getElementById('sideMenu');
-  const overlay = document.getElementById('sideMenuOverlay');
-  const isOpen = menu.classList.contains('open');
-
-  if (isOpen) {
-    closeSideMenu();
-  } else {
-    menu.classList.add('open');
-    overlay.classList.add('open');
-    if (app.currentScreen === 'main') {
-      renderHeader('main');
-    }
-  }
-}
-
-function closeSideMenu() {
-  const menu = document.getElementById('sideMenu');
-  const overlay = document.getElementById('sideMenuOverlay');
-  menu.classList.remove('open');
-  overlay.classList.remove('open');
-  if (app.currentScreen === 'main') {
-    renderHeader('main');
-  }
-}
-
-/* ==================== PWA INSTALL PROMPT ==================== */
-let deferredInstallPrompt = null;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredInstallPrompt = e;
-});
-
-window.addEventListener('appinstalled', () => {
-  deferredInstallPrompt = null;
-});
-
-function showInstallPrompt() {
-  if (deferredInstallPrompt !== null) {
-    deferredInstallPrompt.prompt();
-  } else {
-    alert('Приложение уже установлено или браузер не поддерживает установку');
-  }
-}
-
-/* ==================== OVERLAY CLICK ==================== */
-document.addEventListener('click', (e) => {
-  const overlay = document.getElementById('sideMenuOverlay');
-  if (e.target === overlay && overlay.classList.contains('open')) {
-    closeSideMenu();
-  }
-});
-
-/* ==================== INIT ==================== */
-document.addEventListener('DOMContentLoaded', () => {
-  renderHeader('main');
-});
+    app.renderHeader('main');
+  });
+})();
