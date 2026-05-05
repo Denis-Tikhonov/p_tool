@@ -24,16 +24,17 @@
     },
 
     renderHeader: function(screenName) {
-      const header = document.getElementById('header');
-      if (!header) return;
+      const headerLeft = document.getElementById('headerLeft');
+      const headerCenter = document.getElementById('headerCenter');
+      const headerRight = document.getElementById('headerRight');
+      
+      if (!headerLeft || !headerCenter || !headerRight) return;
+
       if (screenName === 'main') {
-        header.innerHTML = `
-          <button class="header-btn" onclick="app.toggleMenu()" id="menuToggleBtn">
-            ${menuOpen ? window.ICONS.close : window.ICONS.menu}
-          </button>
-          <div class="header-title">Pilot's tool</div>
-          <div style="width:44px;"></div>
-        `;
+        headerLeft.innerHTML = window.getIcon(menuOpen ? 'close' : 'menu');
+        headerLeft.onclick = () => this.toggleMenu();
+        headerCenter.innerHTML = '<div class="header-title">Pilot\'s tool</div>';
+        headerRight.innerHTML = '';
       }
     },
 
@@ -41,15 +42,16 @@
       menuOpen = !menuOpen;
       const menu = document.getElementById('sideMenu');
       const overlay = document.getElementById('menuOverlay');
-      const btn = document.getElementById('menuToggleBtn');
+      const btn = document.getElementById('headerLeft');
+      
       if (menuOpen) {
         menu.classList.add('open');
         overlay.classList.add('open');
-        if (btn) btn.innerHTML = window.ICONS.close;
+        if (btn) btn.innerHTML = window.getIcon('close');
       } else {
         menu.classList.remove('open');
         overlay.classList.remove('open');
-        if (btn) btn.innerHTML = window.ICONS.menu;
+        if (btn) btn.innerHTML = window.getIcon('menu');
       }
     },
 
@@ -58,16 +60,20 @@
         menuOpen = false;
         const menu = document.getElementById('sideMenu');
         const overlay = document.getElementById('menuOverlay');
-        const btn = document.getElementById('menuToggleBtn');
+        const btn = document.getElementById('headerLeft');
+        
         menu.classList.remove('open');
         overlay.classList.remove('open');
-        if (btn) btn.innerHTML = window.ICONS.menu;
+        if (btn && currentScreen === 'main') {
+          btn.innerHTML = window.getIcon('menu');
+        }
       }
     },
 
     showSkeleton: function(container, type) {
       if (!container) return;
       let html = '';
+      
       if (type === 'list') {
         for (let i = 0; i < 6; i++) {
           html += `
@@ -89,6 +95,7 @@
           `;
         }
       }
+      
       container.innerHTML = html;
     },
 
@@ -104,11 +111,17 @@
 
     toggleTheme: function() {
       const body = document.body;
-      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = document.getElementById('themeIcon');
+      const themeLabel = document.getElementById('themeLabel');
       const isDark = body.classList.toggle('dark-theme');
+      
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      if (themeToggle) {
-        themeToggle.textContent = isDark ? '☀️ Светлая тема' : '🌙 Темная тема';
+      
+      if (themeIcon) {
+        themeIcon.innerHTML = window.getIcon(isDark ? 'sun' : 'moon');
+      }
+      if (themeLabel) {
+        themeLabel.textContent = isDark ? 'Светлая тема' : 'Ночной режим';
       }
     },
 
@@ -121,8 +134,46 @@
       } else {
         alert('Приложение уже установлено или браузер не поддерживает установку');
       }
+    },
+
+    initServiceWorker: function() {
+      if (!('serviceWorker' in navigator)) return;
+
+      navigator.serviceWorker.register('./sw.js').then(reg => {
+        if (reg.installing) {
+          const overlay = document.getElementById('cacheProgressOverlay');
+          const bar = document.getElementById('cacheProgressBar');
+          const text = document.getElementById('cacheProgressText');
+          if (overlay) overlay.style.display = 'flex';
+
+          const channel = new BroadcastChannel('sw-progress');
+          channel.onmessage = (event) => {
+            if (event.data.type === 'CACHE_PROGRESS') {
+              const pct = Math.round(event.data.progress * 100);
+              if (bar) bar.style.width = pct + '%';
+              if (text) text.textContent = pct + '%';
+            }
+            if (event.data.type === 'CACHE_DONE') {
+              if (bar) bar.style.width = '100%';
+              if (text) text.textContent = '100%';
+              localStorage.setItem('offlineReady', 'true');
+              updateOfflineStatus(true);
+              setTimeout(() => {
+                if (overlay) overlay.style.display = 'none';
+                channel.close();
+              }, 600);
+            }
+          };
+        }
+      }).catch(err => console.error('SW registration failed:', err));
     }
   };
+
+  function updateOfflineStatus(ready) {
+    const el = document.getElementById('offlineStatus');
+    if (!el) return;
+    el.textContent = ready ? '✅ Доступно offline' : '⬇️ Загрузка ресурсов...';
+  }
 
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
@@ -135,18 +186,39 @@
 
   document.addEventListener('DOMContentLoaded', function() {
     const savedTheme = localStorage.getItem('theme');
-    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+    
     if (savedTheme === 'dark') {
       document.body.classList.add('dark-theme');
-      if (themeToggle) themeToggle.textContent = '☀️ Светлая тема';
+      if (themeIcon) themeIcon.innerHTML = window.getIcon('sun');
+      if (themeLabel) themeLabel.textContent = 'Светлая тема';
+    } else {
+      if (themeIcon) themeIcon.innerHTML = window.getIcon('moon');
+    }
+
+    if (localStorage.getItem('offlineReady') === 'true') {
+      updateOfflineStatus(true);
     }
 
     const overlay = document.getElementById('menuOverlay');
     if (overlay) {
-      overlay.addEventListener('click', function() {
-        app.closeMenu();
-      });
+      overlay.addEventListener('click', () => app.closeMenu());
     }
+
+    const installIcon = document.getElementById('installIcon');
+    const phoneIcon = document.getElementById('phoneIcon');
+    const checklistIcon = document.getElementById('checklistIcon');
+    const krsIcon = document.getElementById('krsIcon');
+    const linkIcon = document.getElementById('linkIcon');
+    const helpIcon = document.getElementById('helpIcon');
+    
+    if (installIcon) installIcon.innerHTML = window.getIcon('smartphone');
+    if (phoneIcon) phoneIcon.innerHTML = window.getIcon('phone');
+    if (checklistIcon) checklistIcon.innerHTML = window.getIcon('checklist');
+    if (krsIcon) krsIcon.innerHTML = window.getIcon('file-text');
+    if (linkIcon) linkIcon.innerHTML = window.getIcon('link');
+    if (helpIcon) helpIcon.innerHTML = window.getIcon('help-circle');
 
     app.renderHeader('main');
   });

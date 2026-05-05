@@ -30,50 +30,52 @@
   };
 
   function renderPhonebookHeader(searchMode) {
-    const header = document.getElementById('header');
-    if (!header) return;
+    const headerLeft = document.getElementById('headerLeft');
+    const headerCenter = document.getElementById('headerCenter');
+    const headerRight = document.getElementById('headerRight');
+
+    if (!headerLeft || !headerCenter || !headerRight) return;
 
     isSearchMode = searchMode;
 
-    header.innerHTML = `
-      <div class="header-layer ${searchMode ? 'hidden' : ''}" id="phonebookHeaderDefault">
-        <button class="header-btn" onclick="window.app.navigateTo('main')">
-          ${window.ICONS.back}
-        </button>
-        <div class="header-title">Телефонный справочник</div>
-        <button class="header-btn" onclick="window.togglePhonebookSearch()">
-          ${window.ICONS.search}
-        </button>
-      </div>
-      <div class="header-layer ${searchMode ? '' : 'hidden'}" id="phonebookHeaderSearch">
-        <input 
-          type="search" 
-          class="header-search-input" 
-          id="phonebookSearchInput" 
-          placeholder="Поиск..." 
-          autocomplete="off"
-        >
-        <button class="header-cancel" onclick="window.togglePhonebookSearch()">Отмена</button>
-      </div>
-    `;
-
-    if (searchMode) {
+    if (!searchMode) {
+      headerLeft.innerHTML = window.getIcon('back');
+      headerLeft.onclick = () => window.app.navigateTo('main');
+      headerCenter.innerHTML = '<div class="header-title">Телефонный справочник</div>';
+      headerRight.innerHTML = '';
+      
+      const searchBtn = document.createElement('button');
+      searchBtn.className = 'icon-btn';
+      searchBtn.innerHTML = window.getIcon('search');
+      searchBtn.onclick = () => renderPhonebookHeader(true);
+      headerRight.appendChild(searchBtn);
+    } else {
+      headerLeft.innerHTML = '';
+      headerCenter.innerHTML = `
+        <div class="header-search-wrapper">
+          <div class="header-search">
+            <input type="search" id="headerSearchInput" placeholder="Поиск..." autocomplete="off" style="font-size: 16px;">
+          </div>
+        </div>
+      `;
+      headerRight.innerHTML = '<button class="header-cancel" id="searchCancel">Отмена</button>';
+      
       setTimeout(() => {
-        const input = document.getElementById('phonebookSearchInput');
+        const input = document.getElementById('headerSearchInput');
         if (input) {
           input.focus();
           input.addEventListener('input', handlePhonebookSearch);
         }
-      }, 100);
+        const cancelBtn = document.getElementById('searchCancel');
+        if (cancelBtn) {
+          cancelBtn.onclick = () => {
+            renderPhonebookHeader(false);
+            renderContacts(cachedContacts);
+          };
+        }
+      }, 50);
     }
   }
-
-  window.togglePhonebookSearch = function() {
-    renderPhonebookHeader(!isSearchMode);
-    if (!isSearchMode) {
-      renderContacts(cachedContacts);
-    }
-  };
 
   function handlePhonebookSearch(e) {
     const query = e.target.value.toLowerCase().trim();
@@ -104,7 +106,7 @@
       html += `
         <div class="contact-item">
           <div class="contact-avatar">
-            ${window.ICONS.phone}
+            ${window.getIcon('phone')}
           </div>
           <div class="contact-info">
             <div class="contact-name">${contact.name}</div>

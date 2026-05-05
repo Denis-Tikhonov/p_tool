@@ -1,10 +1,10 @@
 {
   "name": "Pilot's Tool",
-  "short_name": "PilotTool",
+  "short_name": "PTool",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#FFFFFF",
-  "theme_color": "#B71C1C",
+  "theme_color": "#CD202C",
   "icons": [
     {
       "src": "icon-192.png",

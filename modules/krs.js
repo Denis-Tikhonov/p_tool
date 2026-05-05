@@ -31,50 +31,52 @@
   };
 
   function renderKRSHeader(searchMode) {
-    const header = document.getElementById('header');
-    if (!header) return;
+    const headerLeft = document.getElementById('headerLeft');
+    const headerCenter = document.getElementById('headerCenter');
+    const headerRight = document.getElementById('headerRight');
+
+    if (!headerLeft || !headerCenter || !headerRight) return;
 
     isSearchMode = searchMode;
 
-    header.innerHTML = `
-      <div class="header-layer ${searchMode ? 'hidden' : ''}" id="krsHeaderDefault">
-        <button class="header-btn" onclick="window.app.navigateTo('main')">
-          ${window.ICONS.back}
-        </button>
-        <div class="header-title">Указания КРС</div>
-        <button class="header-btn" onclick="window.toggleKRSSearch()">
-          ${window.ICONS.search}
-        </button>
-      </div>
-      <div class="header-layer ${searchMode ? '' : 'hidden'}" id="krsHeaderSearch">
-        <input 
-          type="search" 
-          class="header-search-input" 
-          id="krsSearchInput" 
-          placeholder="Поиск..." 
-          autocomplete="off"
-        >
-        <button class="header-cancel" onclick="window.toggleKRSSearch()">Отмена</button>
-      </div>
-    `;
-
-    if (searchMode) {
+    if (!searchMode) {
+      headerLeft.innerHTML = window.getIcon('back');
+      headerLeft.onclick = () => window.app.navigateTo('main');
+      headerCenter.innerHTML = '<div class="header-title">Указания КРС</div>';
+      headerRight.innerHTML = '';
+      
+      const searchBtn = document.createElement('button');
+      searchBtn.className = 'icon-btn';
+      searchBtn.innerHTML = window.getIcon('search');
+      searchBtn.onclick = () => renderKRSHeader(true);
+      headerRight.appendChild(searchBtn);
+    } else {
+      headerLeft.innerHTML = '';
+      headerCenter.innerHTML = `
+        <div class="header-search-wrapper">
+          <div class="header-search">
+            <input type="search" id="headerSearchInput" placeholder="Поиск..." autocomplete="off" style="font-size: 16px;">
+          </div>
+        </div>
+      `;
+      headerRight.innerHTML = '<button class="header-cancel" id="searchCancel">Отмена</button>';
+      
       setTimeout(() => {
-        const input = document.getElementById('krsSearchInput');
+        const input = document.getElementById('headerSearchInput');
         if (input) {
           input.focus();
           input.addEventListener('input', handleKRSSearch);
         }
-      }, 100);
+        const cancelBtn = document.getElementById('searchCancel');
+        if (cancelBtn) {
+          cancelBtn.onclick = () => {
+            renderKRSHeader(false);
+            renderInstructions(cachedInstructions);
+          };
+        }
+      }, 50);
     }
   }
-
-  window.toggleKRSSearch = function() {
-    renderKRSHeader(!isSearchMode);
-    if (!isSearchMode) {
-      renderInstructions(cachedInstructions);
-    }
-  };
 
   function handleKRSSearch(e) {
     const query = e.target.value.toLowerCase().trim();
@@ -115,7 +117,7 @@
           <div class="krs-doc-id">${item.id}</div>
           <div class="block-title">${item.title}</div>
           <div class="block-chevron ${isOpen ? 'rotated' : ''}" id="krs_chevron_${item.id}">
-            ${window.ICONS.chevronDown}
+            ${window.getIcon('chevron-down')}
           </div>
         </div>
         <div class="krs-block-content ${isOpen ? 'open' : ''}" id="krs_content_${item.id}">
@@ -189,7 +191,7 @@
   function showPDFModal(url) {
     const modal = document.createElement('div');
     modal.className = 'pdf-modal';
-    modal.innerHTML = `<button class="pdf-modal-close" onclick="this.parentElement.remove()">✕</button>`;
+    modal.innerHTML = '<button class="pdf-modal-close" onclick="this.parentElement.remove()">✕</button>';
     document.body.appendChild(modal);
 
     pdfjsLib.getDocument(url).promise.then(pdf => {
@@ -199,8 +201,6 @@
           const viewport = page.getViewport({ scale: 1.5 });
           const canvas = document.createElement('canvas');
           const context = canvas.getContext('2d');
-          canvas.width = viewport.width;
-          canvas.height = viewport.height;
           
           const scale = viewport.width > window.innerWidth ? window.innerWidth / viewport.width : 1;
           const scaledViewport = page.getViewport({ scale: 1.5 * scale });

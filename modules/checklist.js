@@ -32,13 +32,16 @@
   };
 
   function renderChecklistsHeader() {
-    const header = document.getElementById('header');
-    if (!header) return;
+    const headerLeft = document.getElementById('headerLeft');
+    const headerCenter = document.getElementById('headerCenter');
+    const headerRight = document.getElementById('headerRight');
 
-    header.innerHTML = `
-      <button class="header-btn" onclick="window.app.navigateTo('main')">
-        ${window.ICONS.back}
-      </button>
+    if (!headerLeft || !headerCenter || !headerRight) return;
+
+    headerLeft.innerHTML = window.getIcon('back');
+    headerLeft.onclick = () => window.app.navigateTo('main');
+
+    headerCenter.innerHTML = `
       <div class="tab-group">
         <button class="tab-btn ${activeTab === 'safa' ? 'active' : ''}" onclick="window.switchChecklistTab('safa')">
           SAFA Инспекция
@@ -47,8 +50,14 @@
           Customs чеклисты
         </button>
       </div>
-      <button class="header-btn" onclick="window.openCommitsPanel()">+</button>
     `;
+
+    headerRight.innerHTML = '';
+    const plusBtn = document.createElement('button');
+    plusBtn.className = 'icon-btn';
+    plusBtn.innerHTML = window.getIcon('plus');
+    plusBtn.onclick = () => openCommitsPanel();
+    headerRight.appendChild(plusBtn);
   }
 
   window.switchChecklistTab = function(tab) {
@@ -59,7 +68,6 @@
 
   function setupCommitsPanel() {
     const overlay = document.getElementById('commitsOverlay');
-    const panel = document.getElementById('commitsPanel');
     const closeBtn = document.getElementById('commitsPanelClose');
 
     if (overlay) {
@@ -74,12 +82,12 @@
     });
   }
 
-  window.openCommitsPanel = function() {
+  function openCommitsPanel() {
     const overlay = document.getElementById('commitsOverlay');
     const panel = document.getElementById('commitsPanel');
     if (overlay) overlay.classList.add('open');
     if (panel) panel.classList.add('open');
-  };
+  }
 
   function closeCommitsPanel() {
     const overlay = document.getElementById('commitsOverlay');
@@ -115,7 +123,7 @@
           <div class="block-badge ${badgeClass}" id="badge_${block.id}">${badgeText}</div>
           <div class="block-title">${block.title}</div>
           <div class="block-chevron ${isOpen ? 'rotated' : ''}" id="chevron_${block.id}">
-            ${window.ICONS.chevronDown}
+            ${window.getIcon('chevron-down')}
           </div>
         </div>
         <div class="block-content ${isOpen ? 'open' : ''}" id="content_${block.id}">

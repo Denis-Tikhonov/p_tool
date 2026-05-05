@@ -17,11 +17,12 @@
   <div id="cacheProgressOverlay" style="
     display: none;
     position: fixed; inset: 0; z-index: 9999;
-    background: var(--color-primary);
+    background: #CD202C;
     flex-direction: column;
     align-items: center; justify-content: center;
-    color: #fff; font-family: var(--font-main);
+    color: #fff; font-family: sans-serif;
   ">
+    <div style="font-size: 2rem; margin-bottom: 16px;">✈️</div>
     <p style="margin-bottom: 16px; font-size: 1rem;">Подготовка к работе offline...</p>
     <div style="width: 240px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 2px;">
       <div id="cacheProgressBar" style="
@@ -32,18 +33,52 @@
     <p id="cacheProgressText" style="margin-top: 12px; font-size: 0.875rem; opacity: 0.8;">0%</p>
   </div>
 
-  <header id="header" class="header"></header>
+  <div id="menuOverlay" class="menu-overlay"></div>
 
-  <div class="menu-overlay" id="menuOverlay"></div>
+  <header class="header" id="appHeader">
+    <div class="header-inner">
+      <button class="icon-btn" id="headerLeft" aria-label="Меню"></button>
+      <div class="header-center" id="headerCenter"></div>
+      <div class="header-right" id="headerRight"></div>
+    </div>
+  </header>
+
   <nav class="side-menu" id="sideMenu">
-    <div class="menu-item" onclick="app.showInstallPrompt()">📱 Установить приложение</div>
-    <div class="menu-item" onclick="app.navigateTo('phonebook')">📞 Телефонный справочник</div>
-    <div class="menu-item" onclick="alert('Раздел в разработке')">✈️ Летные процедуры</div>
-    <div class="menu-item" onclick="app.navigateTo('checklists')">✅ Чеклисты (SAFA / Customs)</div>
-    <div class="menu-item" onclick="app.navigateTo('krs')">📋 Указания КРС</div>
-    <div class="menu-item" onclick="alert('Раздел в разработке')">🔗 Ссылки</div>
-    <div class="menu-item" onclick="alert('Раздел в разработке')">❓ FAQ</div>
-    <div class="menu-item" onclick="app.toggleTheme()" id="themeToggle">🌙 Темная тема</div>
+    <ul class="menu-list">
+      <li class="menu-item" onclick="app.showInstallPrompt()">
+        <span class="menu-icon" id="installIcon"></span>
+        Установить приложение
+      </li>
+      <div id="offlineStatus" class="menu-offline-status">⬇️ Загрузка ресурсов...</div>
+      <li class="menu-item" onclick="app.navigateTo('phonebook')">
+        <span class="menu-icon" id="phoneIcon"></span>
+        Телефонный справочник
+      </li>
+      <li class="menu-item" onclick="alert('Раздел в разработке')">
+        <span class="menu-icon">✈️</span>
+        Летные процедуры
+      </li>
+      <li class="menu-item" onclick="app.navigateTo('checklists')">
+        <span class="menu-icon" id="checklistIcon"></span>
+        Чеклисты (SAFA / Customs)
+      </li>
+      <li class="menu-item" onclick="app.navigateTo('krs')">
+        <span class="menu-icon" id="krsIcon"></span>
+        Указания КРС
+      </li>
+      <li class="menu-item" onclick="alert('Раздел в разработке')">
+        <span class="menu-icon" id="linkIcon"></span>
+        Ссылки
+      </li>
+      <li class="menu-item" onclick="alert('Раздел в разработке')">
+        <span class="menu-icon" id="helpIcon"></span>
+        FAQ
+      </li>
+      <li class="menu-item" onclick="app.toggleTheme()">
+        <span class="menu-icon" id="themeIcon"></span>
+        <span id="themeLabel">Ночной режим</span>
+      </li>
+    </ul>
   </nav>
 
   <div class="commits-overlay" id="commitsOverlay"></div>
@@ -94,10 +129,10 @@
       <div class="pswp__ui pswp__ui--hidden">
         <div class="pswp__top-bar">
           <div class="pswp__counter"></div>
-          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+          <button class="pswp__button pswp__button--close" title="Close"></button>
           <button class="pswp__button pswp__button--share" title="Share"></button>
-          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+          <button class="pswp__button pswp__button--fs" title="Fullscreen"></button>
+          <button class="pswp__button pswp__button--zoom" title="Zoom"></button>
           <div class="pswp__preloader">
             <div class="pswp__preloader__icn">
               <div class="pswp__preloader__cut">
@@ -109,8 +144,8 @@
         <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
           <div class="pswp__share-tooltip"></div>
         </div>
-        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+        <button class="pswp__button pswp__button--arrow--left" title="Previous"></button>
+        <button class="pswp__button pswp__button--arrow--right" title="Next"></button>
         <div class="pswp__caption">
           <div class="pswp__caption__center"></div>
         </div>
@@ -127,27 +162,6 @@
   <script src="modules/phonebook.js"></script>
   <script src="modules/checklist.js"></script>
   <script src="modules/krs.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').then(reg => {
-        if (reg.installing) {
-          const overlay = document.getElementById('cacheProgressOverlay');
-          const bar = document.getElementById('cacheProgressBar');
-          const text = document.getElementById('cacheProgressText');
-          if (overlay) overlay.style.display = 'flex';
-          navigator.serviceWorker.addEventListener('message', (event) => {
-            if (event.data && event.data.type === 'CACHE_PROGRESS') {
-              const pct = Math.round(event.data.progress * 100);
-              if (bar) bar.style.width = pct + '%';
-              if (text) text.textContent = pct + '%';
-              if (pct >= 100 && overlay) {
-                setTimeout(() => { overlay.style.display = 'none'; }, 400);
-              }
-            }
-          });
-        }
-      });
-    }
-  </script>
+  <script>app.initServiceWorker();</script>
 </body>
 </html>
