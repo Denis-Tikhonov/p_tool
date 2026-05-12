@@ -1,188 +1,104 @@
-(function() {
-  let cachedData = null;
-  let activeTab = 'safa';
-  let openBlocks = {};
-
-  window.initChecklists = function() {
-    const container = document.getElementById('checklistsContainer');
-    if (!container) {
-      console.error('Контейнер checklistsContainer не найден!');
-      return;
-    }
-
-    renderChecklistsHeader();
-    setupCommitsPanel();
-
-    if (cachedData) {
-      renderChecklists();
-      return;
-    }
-
-    window.app.showSkeleton(container, 'blocks');
-
-    fetch('modules/checklist.json')
-      .then(response => response.json())
-      .then(data => {
-        cachedData = data;
-        renderChecklists();
-      })
-      .catch(() => {
-        window.app.showError(container, 'Не удалось загрузить чеклисты');
-      });
-  };
-
-  function renderChecklistsHeader() {
-    const headerLeft = document.getElementById('headerLeft');
-    const headerCenter = document.getElementById('headerCenter');
-    const headerRight = document.getElementById('headerRight');
-
-    if (!headerLeft || !headerCenter || !headerRight) return;
-
-    headerLeft.innerHTML = window.getIcon('back');
-    headerLeft.onclick = () => window.app.navigateTo('main');
-
-    headerCenter.innerHTML = `
-      <div class="tab-group">
-        <button class="tab-btn ${activeTab === 'safa' ? 'active' : ''}" onclick="window.switchChecklistTab('safa')">
-          SAFA Инспекция
-        </button>
-        <button class="tab-btn ${activeTab === 'customs' ? 'active' : ''}" onclick="window.switchChecklistTab('customs')">
-          Customs чеклисты
-        </button>
-      </div>
-    `;
-
-    headerRight.innerHTML = '';
-    const plusBtn = document.createElement('button');
-    plusBtn.className = 'icon-btn';
-    plusBtn.innerHTML = window.getIcon('plus');
-    plusBtn.onclick = () => openCommitsPanel();
-    headerRight.appendChild(plusBtn);
-  }
-
-  window.switchChecklistTab = function(tab) {
-    activeTab = tab;
-    renderChecklistsHeader();
-    renderChecklists();
-  };
-
-  function setupCommitsPanel() {
-    const overlay = document.getElementById('commitsOverlay');
-    const closeBtn = document.getElementById('commitsPanelClose');
-
-    if (overlay) {
-      overlay.addEventListener('click', closeCommitsPanel);
-    }
-    if (closeBtn) {
-      closeBtn.addEventListener('click', closeCommitsPanel);
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeCommitsPanel();
+// modules/checklist.js
+let cachedData = null;
+let activeTab = 'safa';
+function renderChecklistsHeader() {
+  const left = document.getElementById('headerLeft');
+  const center = document.getElementById('headerCenter');
+  const right = document.getElementById('headerRight');
+  if (left) left.innerHTML = `<button class="icon-btn" aria-label="Меню" onclick="window.app.toggleMenu()">${window.ICONS.menu}</button>`;
+  if (center) center.innerHTML = `<div class="tab-group"><button class="tab-btn ${activeTab === 'safa' ? 'active' : ''}" data-tab="safa">SAFA Инспекция</button><button class="tab-btn ${activeTab === 'customs' ? 'active' : ''}" data-tab="customs">Customs Чек-листы</button></div>`;
+  if (right) right.innerHTML = `<button class="icon-btn" aria-label="Действия">${window.ICONS.plus}</button>`;
+  center?.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      activeTab = btn.dataset.tab;
+      renderChecklistsHeader();
+      renderContent();
     });
+  });
+  const plusBtn = right?.querySelector('.icon-btn');
+  if (plusBtn) plusBtn.onclick = () => openCommitsPanel();
+}
+function openCommitsPanel() {
+  const panel = document.getElementById('commitsPanel');
+  const overlay = document.getElementById('commitsOverlay');
+  if (panel) panel.classList.add('open');
+  if (overlay) overlay.classList.add('open');
+}
+function closeCommitsPanel() {
+  const panel = document.getElementById('commitsPanel');
+  const overlay = document.getElementById('commitsOverlay');
+  if (panel) panel.classList.remove('open');
+  if (overlay) overlay.classList.remove('open');
+}
+function renderContent() {
+  const container = document.getElementById('checklistsContainer');
+  if (!container) return;
+  const data = cachedData?.[activeTab];
+  if (!data || !data.length) {
+    container.innerHTML = '<p class="empty-message">Нет заданий</p>';
+    return;
   }
-
-  function openCommitsPanel() {
-    const overlay = document.getElementById('commitsOverlay');
-    const panel = document.getElementById('commitsPanel');
-    if (overlay) overlay.classList.add('open');
-    if (panel) panel.classList.add('open');
-  }
-
-  function closeCommitsPanel() {
-    const overlay = document.getElementById('commitsOverlay');
-    const panel = document.getElementById('commitsPanel');
-    if (overlay) overlay.classList.remove('open');
-    if (panel) panel.classList.remove('open');
-  }
-
-  function renderChecklists() {
-    const container = document.getElementById('checklistsContainer');
-    if (!container || !cachedData) return;
-
-    const blocks = cachedData[activeTab] || [];
-    
-    if (blocks.length === 0) {
-      window.app.hideSpinner(container, '<p class="empty-message">Нет заданий</p>');
-      return;
-    }
-
-    let html = '';
-    blocks.forEach(block => {
-      const allChecked = block.items.every(item => {
-        const key = `checklist_${block.id}_${item.id}`;
-        return sessionStorage.getItem(key) === 'true';
-      });
-
-      const badgeClass = allChecked ? 'ok' : 'no';
-      const badgeText = allChecked ? 'OK' : 'NO';
-      const isOpen = openBlocks[block.id] || false;
-
-      html += `
-        <div class="block-header" onclick="window.toggleChecklistBlock('${block.id}')">
-          <div class="block-badge ${badgeClass}" id="badge_${block.id}">${badgeText}</div>
-          <div class="block-title">${block.title}</div>
-          <div class="block-chevron ${isOpen ? 'rotated' : ''}" id="chevron_${block.id}">
-            ${window.getIcon('chevron-down')}
-          </div>
-        </div>
-        <div class="block-content ${isOpen ? 'open' : ''}" id="content_${block.id}">
-          ${renderChecklistItems(block)}
-        </div>
-      `;
+  const html = data.map(block => {
+    const itemsHtml = block.items.map(item => {
+      const checked = sessionStorage.getItem(`checklist_${block.id}_${item.id}`) === 'true';
+      return `<div class="checklist-item"><label><input type="checkbox" data-block="${block.id}" data-item="${item.id}" ${checked ? 'checked' : ''}> <span>${item.label}</span></label></div>`;
+    }).join('');
+    const allChecked = block.items.every(it => sessionStorage.getItem(`checklist_${block.id}_${it.id}`) === 'true');
+    const badgeClass = allChecked ? 'ok' : '';
+    return `<div class="checklist-block" data-block-id="${block.id}"><div class="block-header"><span class="status-badge ${badgeClass}">${allChecked ? 'OK' : 'NO'}</span><span class="collapsible-title">${block.title}</span><span class="collapsible-chevron">${window.ICONS['chevron-down']}</span></div><div class="block-content">${itemsHtml}</div></div>`;
+  }).join('');
+  window.app.hideSkeleton(container, html);
+  container.querySelectorAll('.block-header').forEach(header => {
+    header.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const block = header.closest('.checklist-block');
+      if (block) block.classList.toggle('open');
     });
-
-    window.app.hideSpinner(container, html);
-
-    blocks.forEach(block => {
-      block.items.forEach(item => {
-        const checkbox = document.getElementById(`checkbox_${block.id}_${item.id}`);
-        if (checkbox) {
-          const key = `checklist_${block.id}_${item.id}`;
-          checkbox.checked = sessionStorage.getItem(key) === 'true';
-          checkbox.addEventListener('change', () => {
-            sessionStorage.setItem(key, checkbox.checked);
-            updateBlockBadge(block.id, block.items);
-          });
+  });
+  container.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', (e) => {
+      const blockId = cb.dataset.block;
+      const itemId = cb.dataset.item;
+      sessionStorage.setItem(`checklist_${blockId}_${itemId}`, cb.checked);
+      const blockDiv = cb.closest('.checklist-block');
+      if (blockDiv) {
+        const block = cachedData[activeTab].find(b => b.id === blockId);
+        if (block) {
+          const allChecked = block.items.every(it => sessionStorage.getItem(`checklist_${blockId}_${it.id}`) === 'true');
+          const badge = blockDiv.querySelector('.status-badge');
+          if (badge) {
+            badge.textContent = allChecked ? 'OK' : 'NO';
+            if (allChecked) badge.classList.add('ok'); else badge.classList.remove('ok');
+          }
         }
-      });
+      }
     });
+  });
+}
+function initChecklists() {
+  renderChecklistsHeader();
+  const container = document.getElementById('checklistsContainer');
+  if (!container) { console.error('Контейнер checklistsContainer не найден!'); return; }
+  window.app.showSkeleton(container, 'blocks');
+  if (cachedData) {
+    renderContent();
+    return;
   }
-
-  function renderChecklistItems(block) {
-    let html = '';
-    block.items.forEach(item => {
-      html += `
-        <div class="checklist-item">
-          <input type="checkbox" id="checkbox_${block.id}_${item.id}">
-          <label for="checkbox_${block.id}_${item.id}">${item.label}</label>
-        </div>
-      `;
-    });
-    return html;
-  }
-
-  window.toggleChecklistBlock = function(blockId) {
-    openBlocks[blockId] = !openBlocks[blockId];
-    const content = document.getElementById(`content_${blockId}`);
-    const chevron = document.getElementById(`chevron_${blockId}`);
-    if (content) {
-      content.classList.toggle('open');
-    }
-    if (chevron) {
-      chevron.classList.toggle('rotated');
-    }
-  };
-
-  function updateBlockBadge(blockId, items) {
-    const allChecked = items.every(item => {
-      const key = `checklist_${blockId}_${item.id}`;
-      return sessionStorage.getItem(key) === 'true';
-    });
-    const badge = document.getElementById(`badge_${blockId}`);
-    if (badge) {
-      badge.className = `block-badge ${allChecked ? 'ok' : 'no'}`;
-      badge.textContent = allChecked ? 'OK' : 'NO';
-    }
-  }
-})();
+  fetch('modules/checklist.json').then(res => res.json()).then(data => {
+    cachedData = data;
+    renderContent();
+  }).catch(() => {
+    window.app.showError(container, 'Не удалось загрузить чеклисты', () => initChecklists());
+  });
+  const panelClose = document.getElementById('commitsPanelClose');
+  const overlay = document.getElementById('commitsOverlay');
+  if (panelClose) panelClose.onclick = closeCommitsPanel;
+  if (overlay) overlay.onclick = closeCommitsPanel;
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeCommitsPanel();
+  });
+  document.querySelectorAll('.commits-action-item').forEach(btn => {
+    btn.addEventListener('click', () => { alert('Функция в разработке'); closeCommitsPanel(); });
+  });
+}
+window.initChecklists = initChecklists;

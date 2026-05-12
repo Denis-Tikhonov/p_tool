@@ -1,104 +1,76 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="PilotTool">
-  <title>Pilot's Tool</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <title>Pilot's Tool</title>
   <link rel="stylesheet" href="libs/photoswipe/photoswipe.css">
   <link rel="stylesheet" href="libs/photoswipe/default-skin/default-skin.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="cacheProgressOverlay" style="
-    display: none;
-    position: fixed; inset: 0; z-index: 9999;
-    background: #CD202C;
-    flex-direction: column;
-    align-items: center; justify-content: center;
-    color: #fff; font-family: sans-serif;
-  ">
-    <div style="font-size: 2rem; margin-bottom: 16px;">✈️</div>
-    <p style="margin-bottom: 16px; font-size: 1rem;">Подготовка к работе offline...</p>
-    <div style="width: 240px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 2px;">
-      <div id="cacheProgressBar" style="
-        height: 4px; width: 0%; background: #fff;
-        border-radius: 2px; transition: width 0.2s ease;
-      "></div>
-    </div>
-    <p id="cacheProgressText" style="margin-top: 12px; font-size: 0.875rem; opacity: 0.8;">0%</p>
-  </div>
-
-  <div id="menuOverlay" class="menu-overlay"></div>
-
-  <header class="header" id="appHeader">
-    <div class="header-inner">
-      <button class="icon-btn" id="headerLeft" aria-label="Меню"></button>
-      <div class="header-center" id="headerCenter"></div>
-      <div class="header-right" id="headerRight"></div>
-    </div>
-  </header>
-
-  <nav class="side-menu" id="sideMenu">
-    <ul class="menu-list">
-      <li class="menu-item" onclick="app.showInstallPrompt()">
-        <span class="menu-icon" id="installIcon"></span>
-        Установить приложение
-      </li>
-      <div id="offlineStatus" class="menu-offline-status">⬇️ Загрузка ресурсов...</div>
-      <li class="menu-item" onclick="app.navigateTo('phonebook')">
-        <span class="menu-icon" id="phoneIcon"></span>
-        Телефонный справочник
-      </li>
-      <li class="menu-item" onclick="alert('Раздел в разработке')">
-        <span class="menu-icon">✈️</span>
-        Летные процедуры
-      </li>
-      <li class="menu-item" onclick="app.navigateTo('checklists')">
-        <span class="menu-icon" id="checklistIcon"></span>
-        Чеклисты (SAFA / Customs)
-      </li>
-      <li class="menu-item" onclick="app.navigateTo('krs')">
-        <span class="menu-icon" id="krsIcon"></span>
-        Указания КРС
-      </li>
-      <li class="menu-item" onclick="alert('Раздел в разработке')">
-        <span class="menu-icon" id="linkIcon"></span>
-        Ссылки
-      </li>
-      <li class="menu-item" onclick="alert('Раздел в разработке')">
-        <span class="menu-icon" id="helpIcon"></span>
-        FAQ
-      </li>
-      <li class="menu-item" onclick="app.toggleTheme()">
-        <span class="menu-icon" id="themeIcon"></span>
-        <span id="themeLabel">Ночной режим</span>
-      </li>
-    </ul>
-  </nav>
-
-  <div class="commits-overlay" id="commitsOverlay"></div>
-  <div class="commits-panel" id="commitsPanel">
-    <div class="commits-panel-header">
-      <span class="commits-panel-title">Действия</span>
-      <button class="commits-panel-close" id="commitsPanelClose">✕</button>
-    </div>
-    <div class="commits-panel-body">
-      <button class="commits-action-item" onclick="alert('Упс... Функция в разработке')">
-        📸 Сделать фото
-      </button>
-      <button class="commits-action-item" onclick="alert('Упс... Функция в разработке')">
-        💬 Комментарий
-      </button>
-    </div>
-  </div>
-
   <div id="app">
-    <div id="mainScreen" class="screen active">
+    <!-- Хедер (глобальный) -->
+    <header class="header" id="appHeader">
+      <div class="header-inner">
+        <div id="headerLeft"></div>
+        <div id="headerCenter"></div>
+        <div id="headerRight"></div>
+      </div>
+    </header>
+
+    <!-- Боковое меню и overlay -->
+    <div id="menuOverlay" class="menu-overlay"></div>
+    <nav id="sideMenu" class="side-menu">
+      <ul class="menu-list">
+        <li class="menu-item" data-nav="phonebook">
+          <span class="menu-icon"></span>
+          Телефонный справочник
+        </li>
+        <li class="menu-item" data-nav="checklists">
+          <span class="menu-icon"></span>
+          Чеклисты (SAFA / Customs)
+        </li>
+        <li class="menu-item" data-nav="krs">
+          <span class="menu-icon"></span>
+          Указания КРС
+        </li>
+        <li class="menu-item" data-nav="flightprocedures">
+          <span class="menu-icon"></span>
+          Летные процедуры
+        </li>
+        <li class="menu-item" data-placeholder="links">
+          <span class="menu-icon"></span>
+          Ссылки
+        </li>
+        <li class="menu-item" data-placeholder="faq">
+          <span class="menu-icon"></span>
+          FAQ
+        </li>
+        <li class="menu-item" id="themeToggle">
+          <span class="menu-icon" id="themeIcon"></span>
+          <span id="themeLabel">Ночной режим</span>
+        </li>
+        <li class="menu-item" id="installApp">
+          <span class="menu-icon"></span>
+          Установить приложение
+        </li>
+      </ul>
+      <div id="offlineStatus" class="menu-offline-status">⬇️ Загрузка ресурсов...</div>
+      <div class="menu-footer">
+        <div class="menu-footer-text">Pilot's Tool v1.0</div>
+        <div class="menu-footer-text" id="menuNetworkStatus">● Онлайн</div>
+      </div>
+    </nav>
+
+    <!-- Экраны (Screens) -->
+    <div id="mainScreen" class="screen">
       <div class="main-bg"></div>
       <div class="main-content">
         <blockquote class="main-quote">Лучше тупой карандаш, чем острая память!</blockquote>
@@ -116,52 +88,96 @@
     <div id="krsScreen" class="screen">
       <div class="krs-container" id="krsContainer"></div>
     </div>
-  </div>
 
-  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="pswp__bg"></div>
-    <div class="pswp__scroll-wrap">
-      <div class="pswp__container">
-        <div class="pswp__item"></div>
-        <div class="pswp__item"></div>
-        <div class="pswp__item"></div>
+    <div id="flightproceduresScreen" class="screen">
+      <div class="fp-container" id="fpContainer"></div>
+    </div>
+
+    <!-- Компактная панель действий чеклистов -->
+    <div class="commits-overlay" id="commitsOverlay"></div>
+    <div class="commits-panel" id="commitsPanel">
+      <div class="commits-panel-header">
+        <span class="commits-panel-title">Действия</span>
+        <button class="commits-panel-close" id="commitsPanelClose">✕</button>
       </div>
-      <div class="pswp__ui pswp__ui--hidden">
-        <div class="pswp__top-bar">
-          <div class="pswp__counter"></div>
-          <button class="pswp__button pswp__button--close" title="Close"></button>
-          <button class="pswp__button pswp__button--share" title="Share"></button>
-          <button class="pswp__button pswp__button--fs" title="Fullscreen"></button>
-          <button class="pswp__button pswp__button--zoom" title="Zoom"></button>
-          <div class="pswp__preloader">
-            <div class="pswp__preloader__icn">
-              <div class="pswp__preloader__cut">
-                <div class="pswp__preloader__donut"></div>
-              </div>
-            </div>
+      <div class="commits-panel-body">
+        <button class="commits-action-item" data-action="photo">
+          📸 Сделать фото
+        </button>
+        <button class="commits-action-item" data-action="comment">
+          💬 Комментарий
+        </button>
+      </div>
+    </div>
+
+    <!-- PhotoSwipe шаблон -->
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="pswp__bg"></div>
+      <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+          <div class="pswp__item"></div>
+          <div class="pswp__item"></div>
+          <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+          <div class="pswp__top-bar">
+            <div class="pswp__counter"></div>
+            <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+            <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+            <div class="pswp__preloader"></div>
           </div>
-        </div>
-        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-          <div class="pswp__share-tooltip"></div>
-        </div>
-        <button class="pswp__button pswp__button--arrow--left" title="Previous"></button>
-        <button class="pswp__button pswp__button--arrow--right" title="Next"></button>
-        <div class="pswp__caption">
-          <div class="pswp__caption__center"></div>
+          <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+            <div class="pswp__share-tooltip"></div>
+          </div>
+          <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+          <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+          <div class="pswp__caption">
+            <div class="pswp__caption__center"></div>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- Оверлей прогресса первой загрузки PWA -->
+    <div id="cacheProgressOverlay" style="
+      display: none;
+      position: fixed; inset: 0; z-index: 9999;
+      background: #CD202C;
+      flex-direction: column;
+      align-items: center; justify-content: center;
+      color: #fff; font-family: sans-serif;
+    ">
+      <div style="font-size: 2rem; margin-bottom: 16px;">✈️</div>
+      <p style="margin-bottom: 16px; font-size: 1rem;">Подготовка к работе offline...</p>
+      <div style="width: 240px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 2px;">
+        <div id="cacheProgressBar" style="
+          height: 4px; width: 0%; background: #fff;
+          border-radius: 2px; transition: width 0.2s ease;
+        "></div>
+      </div>
+      <p id="cacheProgressText" style="margin-top: 12px; font-size: 0.875rem; opacity: 0.8;">0%</p>
+    </div>
   </div>
 
+  <!-- Скрипты -->
   <script src="icons.js"></script>
   <script src="libs/pdfjs/pdf.min.js"></script>
-  <script>if(window.pdfjsLib){pdfjsLib.GlobalWorkerOptions.workerSrc='libs/pdfjs/pdf.worker.min.js';}</script>
+  <script>
+    if (window.pdfjsLib) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'libs/pdfjs/pdf.worker.min.js';
+    }
+  </script>
   <script src="libs/photoswipe/photoswipe.min.js"></script>
   <script src="libs/photoswipe/photoswipe-ui-default.min.js"></script>
   <script src="app.js"></script>
   <script src="modules/phonebook.js"></script>
   <script src="modules/checklist.js"></script>
   <script src="modules/krs.js"></script>
-  <script>app.initServiceWorker();</script>
+  <script src="modules/flightprocedures.js"></script>
+  <script>
+    if (window.app && typeof window.app.initServiceWorker === 'function') {
+      window.app.initServiceWorker();
+    }
+  </script>
 </body>
 </html>
