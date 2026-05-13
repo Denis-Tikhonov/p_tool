@@ -2,19 +2,24 @@
   "contacts": [
     {
       "name": "Абдрахманов Ирек Ильсурович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "i.abdrakhmanov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 903 684 53 59",
           "tel": "+79036845359",
           "type": "work"
+        },
+        {
+          "display": "8 905 819 79 14",
+          "tel": "+79058197914",
+          "type": "default"
         }
       ]
     },
     {
-      "name": "Абдуллаева ЕкатеринаНиколаевна",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "name": "Абдуллаева Екатерина Николаевна",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "e.abdullaeva@nordwindairlines.ru",
       "phones": [
         {
@@ -27,23 +32,40 @@
     {
       "name": "Авдеев Юрий Витальевич",
       "position": "Пилот инструктор ЛМО",
-      "email": "y.avdeev@nordwindairlines.ru"
+      "email": "y.avdeev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 966 389 83 96",
+          "tel": "+79663898396",
+          "type": "work"
+        },
+        {
+          "display": "8 926 591 21 80",
+          "tel": "+79265912180",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Авхадеев Ильдар Сабирзянович",
-      "position": "Командирвоздушного судна А-321",
+      "position": "Командир воздушного судна А-321",
       "email": "i.avkhadeev@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 965 216 59 54",
           "tel": "+79652165954",
           "type": "work"
+        },
+        {
+          "display": "8 917 852 17 07",
+          "tel": "+79178521707",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Агибалов Сергей Владимирович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "s.agibalov@nordwindairlines.ru",
       "phones": [
         {
@@ -55,7 +77,7 @@
     },
     {
       "name": "Агиян Тигран Эдуардович",
-      "position": "Второй пилотвоздушного суднаА-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "t.agiyan@nordwindairlines.ru",
       "phones": [
         {
@@ -67,7 +89,7 @@
     },
     {
       "name": "Адашков Сергей Валерьевич",
-      "position": "Пилот-инструктор воздушного суднаБоинг-777",
+      "position": "Пилот-инструктор воздушного судна Боинг-777",
       "email": "s.adashkov@nordwindairlines.ru",
       "phones": [
         {
@@ -84,7 +106,7 @@
     },
     {
       "name": "Александров Артем Олегович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.aleksandrov@nordwindairlines.ru",
       "phones": [
         {
@@ -95,15 +117,20 @@
         {
           "display": "8 986 737 76 12",
           "tel": "+79867377612",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Алексин Дмитрий Валерьевич",
-      "position": "Командирвоздушного судна Боинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "d.aleksin@nordwindairlines.ru",
       "phones": [
+        {
+          "display": "8 915 075 86 72",
+          "tel": "+79150758672",
+          "type": "work"
+        },
         {
           "display": "8 916 697 14 74",
           "tel": "+79166971474",
@@ -112,59 +139,83 @@
       ]
     },
     {
-      "name": "Алтыбаев КонстантинРоманович",
-      "position": "Командирвоздушного судна А-330",
-      "email": "k.altybaev@nordwindairlines.ru"
+      "name": "Алтыбаев Константин Романович",
+      "position": "Командир воздушного судна А-330",
+      "email": "k.altybaev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 985 813 80 43",
+          "tel": "+79858138043",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Андреев Михаил Игоревич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "m.andreev@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "m.andreev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 965 149 83 99",
+          "tel": "+79651498399",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Анфалов Владимир Витальевич",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "v.anfalov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 968 591 67 96",
           "tel": "+79685916796",
           "type": "work"
+        },
+        {
+          "display": "8 903 101 19 83",
+          "tel": "+79031011983",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Арасланов Ахат Мусаевич",
-      "position": "Командирвоздушного суднаБоинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "A.Araslanov@nordwindairlines.ru",
       "phones": [
+        {
+          "display": "8 916 604 40 47",
+          "tel": "+79166044047",
+          "type": "default"
+        },
         {
           "display": "8 968 591 68 03",
           "tel": "+79685916803",
           "type": "work"
-        },
-        {
-          "display": "8 916 604 40 47",
-          "tel": "+79166044047",
-          "type": "home"
         }
       ]
     },
     {
       "name": "Артеев Алексей Геннадьевич",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "a.arteev@nordwindairlines.ru",
       "phones": [
         {
+          "display": "8 966 389 84 40",
+          "tel": "+79663898440",
+          "type": "work"
+        },
+        {
           "display": "8 903 979 50 05",
           "tel": "+79039795005",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Бабийчук Андрей Николаевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.babiychuk@nordwindairlines.ru",
       "phones": [
         {
@@ -181,7 +232,7 @@
     },
     {
       "name": "Бакеев Александр Николаевич",
-      "position": "Второй пилотвоздушного судна А-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "a.bakeev@nordwindairlines.ru",
       "phones": [
         {
@@ -193,12 +244,19 @@
     },
     {
       "name": "Банный Игорь Сергеевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "i.bannyy@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "i.bannyy@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 963 663 84 06",
+          "tel": "+79636638406",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Баранов Иван Анатольевич",
-      "position": "Пилот-инструктор воздушного суднаБоинг-737",
+      "position": "Пилот-инструктор воздушного судна Боинг-737",
       "email": "i.baranov@nordwindairlines.ru",
       "phones": [
         {
@@ -209,13 +267,13 @@
         {
           "display": "8 987 278 71 39",
           "tel": "+79872787139",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Барков Вадим Александрович",
-      "position": "Командирвоздушного судна Боинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "v.barkov@nordwindairlines.ru",
       "phones": [
         {
@@ -232,7 +290,7 @@
     },
     {
       "name": "Башмаков Максим Олегович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "ma.bashmakov@nordwindairlines.ru",
       "phones": [
         {
@@ -244,19 +302,24 @@
     },
     {
       "name": "Безбородов Сергей Владимирович",
-      "position": "Командирвоздушного судна Боинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "s.bezborodov@nordwindairlines.ru",
       "phones": [
         {
-          "display": "+7 (968) 722-85-24",
-          "tel": "+79687228524",
+          "display": "+7 722-85-24",
+          "tel": "+77228524",
           "type": "work"
+        },
+        {
+          "display": "+7 918 561 15 86",
+          "tel": "+79185611586",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Безруких Андрей Витальевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.bezrukikh@nordwindairlines.ru",
       "phones": [
         {
@@ -268,7 +331,7 @@
     },
     {
       "name": "Безруков Алексей Алексеевич",
-      "position": "Командирвоздушного суднаБоинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "a.bezrukov@nordwindairlines.ru",
       "phones": [
         {
@@ -279,25 +342,25 @@
         {
           "display": "8 903 114 01 71",
           "tel": "+79031140171",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
-      "name": "Белобородько ТимурАлександрович",
-      "position": "Командирвоздушного судна А-321",
+      "name": "Белобородько Тимур Александрович",
+      "position": "Командир воздушного судна А-321",
       "email": "t.beloborodko@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 903 612 13 30",
           "tel": "+79036121330",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Беляев Виталий Алексеевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "v.beliaev@nordwindairlines.ru",
       "phones": [
         {
@@ -309,45 +372,69 @@
     },
     {
       "name": "Бершак Владислав Дмитриевич",
-      "position": "Второй пилотвоздушного судна А-321",
-      "email": "v.bershak@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна А-321",
+      "email": "v.bershak@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 977 139 85 41",
+          "tel": "+79771398541",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Бехтер Денис Сергеевич",
-      "position": "Командирвоздушного судна Боинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "d.bekhter@nordwindairlines.ru",
       "phones": [
         {
+          "display": "8 968 861 82 21",
+          "tel": "+79688618221",
+          "type": "work"
+        },
+        {
           "display": "8 910 488 60 50",
           "tel": "+79104886050",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Богданов Андрей Викторович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "a.bogdanov@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "a.bogdanov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 987 796 84 24",
+          "tel": "+79877968424",
+          "type": "default"
+        }
+      ]
     },
     {
-      "name": "Бочкарёв АлександрАлександрович",
-      "position": "Командирвоздушного суднаБоинг-737",
+      "name": "Бочкарёв Александр Александрович",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.bochkarev@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 966 312 70 31",
           "tel": "+79663127031",
           "type": "work"
+        },
+        {
+          "display": "8 922 811 94 74",
+          "tel": "+79228119474",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Брызгалов Алексей Игоревич",
-      "position": "Второй пилотвоздушного суднаБоинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "a.bryzgalov@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 951 729 66 16 (основной)",
+          "display": "8 951 729 66 16",
           "tel": "+79517296616",
           "type": "default"
         }
@@ -355,7 +442,7 @@
     },
     {
       "name": "Букин Александр Николаевич",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "a.bukin@nordwindairlines.ru",
       "phones": [
         {
@@ -371,8 +458,8 @@
       ]
     },
     {
-      "name": "БурмистровАлександр Викторович",
-      "position": "Второй пилотвоздушного судна А-330",
+      "name": "Бурмистров Александр Викторович",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "a.burmistrov@nordwindairlines.ru",
       "phones": [
         {
@@ -384,29 +471,53 @@
     },
     {
       "name": "Бурмистров Антон Андреевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "ant.burmistrov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 968 591 68 06 .",
           "tel": "+79685916806",
           "type": "work"
+        },
+        {
+          "display": "8 915 433 31 82",
+          "tel": "+79154333182",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Бурухин Евгений Михайлович",
-      "position": "Командирвоздушного судна Боинг-737",
-      "email": "e.burukhin@nordwindairlines.ru"
+      "position": "Командир воздушного судна Боинг-737",
+      "email": "e.burukhin@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 901 307 07 03",
+          "tel": "+79013070703",
+          "type": "default"
+        },
+        {
+          "display": "8 968 885 63 99",
+          "tel": "+79688856399",
+          "type": "work"
+        }
+      ]
     },
     {
       "name": "Буслаев Вячеслав Юрьевич",
-      "position": "Второй пилотвоздушного судна Боинг-777",
-      "email": "vya.buslaev@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-777",
+      "email": "vya.buslaev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 903 291 80 62",
+          "tel": "+79032918062",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Бусыгин Игорь Михайлович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "i.busygin@nordwindairlines.ru",
       "phones": [
         {
@@ -423,11 +534,16 @@
     },
     {
       "name": "Бутковский Борис Сергеевич",
-      "position": "Пилот-инструктор воздушного суднаА-330",
+      "position": "Пилот-инструктор воздушного судна А-330",
       "email": "bo.butkovskiy@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8-909- 685-76-50 (лич.)",
+          "display": "8 968 885 27 50",
+          "tel": "+79688852750",
+          "type": "work"
+        },
+        {
+          "display": "8-909- 685-76-50",
           "tel": "+79096857650",
           "type": "default"
         }
@@ -435,12 +551,19 @@
     },
     {
       "name": "Быстров Олег Владимирович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "o.bystrov@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "o.bystrov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 977 708 87 98",
+          "tel": "+79777088798",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Вагнер Валерий Андреевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "v.vagner@nordwindairlines.ru",
       "phones": [
         {
@@ -451,24 +574,45 @@
         {
           "display": "8 963 145 35 09",
           "tel": "+79631453509",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Ванчаев Алексей Олегович",
-      "position": "Второй пилотвоздушного суднаБоинг-737",
-      "email": "al.vanchaev@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "al.vanchaev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 987 890 11 73",
+          "tel": "+79878901173",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Васильев Владимир Валентинович",
-      "position": "Командирвоздушного судна А-330",
-      "email": "v.vasilyev@nordwindairlines.ru"
+      "position": "Командир воздушного судна А-330",
+      "email": "v.vasilyev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 926 322 88 89",
+          "tel": "+79263228889",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Вахитов Виталий Валерьевич",
-      "position": "Командирвоздушного судна А-321",
-      "email": "v.vakhitov@nordwindairlines.ru"
+      "position": "Командир воздушного судна А-321",
+      "email": "v.vakhitov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 905 890 33 61",
+          "tel": "+79058903361",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Величутин Павел Валерьевич",
@@ -479,12 +623,17 @@
           "display": "8 963 995 07 79",
           "tel": "+79639950779",
           "type": "work"
+        },
+        {
+          "display": "8 916 811 65 15",
+          "tel": "+79168116515",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Верещака Дмитрий Владимирович",
-      "position": "Второй пилотвоздушного судна А-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "d.vereshchaka@nordwindairlines.ru",
       "phones": [
         {
@@ -496,12 +645,19 @@
     },
     {
       "name": "Верхушина Алена Константиновна",
-      "position": "Второй пилотвоздушного судна А-321",
-      "email": "a.verkhushina@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна А-321",
+      "email": "a.verkhushina@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 950 142 87 77",
+          "tel": "+79501428777",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Ветелев Александр Николаевич",
-      "position": "Командирвоздушного суднаА-321",
+      "position": "Командир воздушного судна А-321",
       "email": "a.vetelev@nordwindairlines.ru",
       "phones": [
         {
@@ -513,19 +669,24 @@
     },
     {
       "name": "Визулайнен Андрей Николаевич",
-      "position": "Командирвоздушного суднаБоинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.vizulaynen@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 963 991 66 94",
           "tel": "+79639916694",
           "type": "work"
+        },
+        {
+          "display": "8 987 855 06 23",
+          "tel": "+79878550623",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Власов Александр Александрович",
-      "position": "Пилот-инструктор воздушного суднаБоинг-737",
+      "position": "Пилот-инструктор воздушного судна Боинг-737",
       "email": "al.vlasov@nordwindairlines.ru",
       "phones": [
         {
@@ -534,15 +695,15 @@
           "type": "work"
         },
         {
-          "display": "+7-926-780-16-50",
+          "display": ".+7-926-780-16-50",
           "tel": "+79267801650",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Водяной Виктор Александрович",
-      "position": "Второй пилотвоздушного судна Боинг-777",
+      "position": "Второй пилот воздушного судна Боинг-777",
       "email": "v.vodianoi@nordwindairlines.ru",
       "phones": [
         {
@@ -551,7 +712,7 @@
           "type": "default"
         },
         {
-          "display": "8 978 726 97 40 (Крым)",
+          "display": "8 978 726 97 40",
           "tel": "+79787269740",
           "type": "default"
         }
@@ -559,12 +720,24 @@
     },
     {
       "name": "Войцекян Сергей Борисович",
-      "position": "Командирвоздушного судна А-330",
-      "email": "s.voytsekyan@nordwindairlines.ru"
+      "position": "Командир воздушного судна А-330",
+      "email": "s.voytsekyan@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 968 722 47 00",
+          "tel": "+79687224700",
+          "type": "work"
+        },
+        {
+          "display": "8 964 330 22 43",
+          "tel": "+79643302243",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Волков Евгений Владимирович",
-      "position": "Второй пилотвоздушного судна А-321",
+      "position": "Второй пилот воздушного судна А-321",
       "email": "e.volkov@nordwindairlines.ru",
       "phones": [
         {
@@ -576,36 +749,41 @@
     },
     {
       "name": "Волошин Данила Сергеевич",
-      "position": "Командирвоздушного судна Боинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "d.voloshin@nordwindairlines.ru",
       "phones": [
-        {
-          "display": "8 909 939 70 51",
-          "tel": "+79099397051",
-          "type": "work"
-        },
         {
           "display": "8 926 930 63 54",
           "tel": "+79269306354",
           "type": "default"
+        },
+        {
+          "display": "8 909 939 70 51",
+          "tel": "+79099397051",
+          "type": "work"
         }
       ]
     },
     {
       "name": "Воронов Андрей Владимирович",
-      "position": "Второй пилотвоздушного судна Боинг-777",
+      "position": "Второй пилот воздушного судна Боинг-777",
       "email": "a.voronov@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 916 324 56 51 (основной)",
+          "display": "8 916 324 56 51",
           "tel": "+79163245651",
+          "type": "default"
+        },
+        {
+          "display": "8 964 798 79 88",
+          "tel": "+79647987988",
           "type": "default"
         }
       ]
     },
     {
       "name": "Воронов Игорь Леонидович",
-      "position": "Командирвоздушного судна А-321",
+      "position": "Командир воздушного судна А-321",
       "email": "ig.voronov@nordwindairlines.ru",
       "phones": [
         {
@@ -614,7 +792,7 @@
           "type": "work"
         },
         {
-          "display": "8-926- 665-81-93 (лич)",
+          "display": "8-926- 665-81-93",
           "tel": "+79266658193",
           "type": "default"
         }
@@ -622,13 +800,18 @@
     },
     {
       "name": "Воронцов Сергей Юрьевич",
-      "position": "Командирвоздушного судна А-321",
+      "position": "Командир воздушного судна А-321",
       "email": "s.vorontsov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 962 949 05 20",
           "tel": "+79629490520",
           "type": "work"
+        },
+        {
+          "display": "8 911 092 80 01",
+          "tel": "+79110928001",
+          "type": "default"
         }
       ]
     },
@@ -645,25 +828,25 @@
         {
           "display": "8 903 569 26 69",
           "tel": "+79035692669",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
-      "name": "Гавричкин АлександрСергеевич",
-      "position": "Командирвоздушного суднаА-321",
+      "name": "Гавричкин Александр Сергеевич",
+      "position": "Командир воздушного судна А-321",
       "email": "a.gavrichkin@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 916 024 92 60",
           "tel": "+79160249260",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Галиакберов Артур Филларисович",
-      "position": "Командирвоздушного судна Боинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "a.galiakberov@nordwindairlines.ru",
       "phones": [
         {
@@ -674,13 +857,13 @@
         {
           "display": "8 916 666 30 52",
           "tel": "+79166663052",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Гальвас Игорь Витальевич",
-      "position": "Второй пилотвоздушного судна А-321",
+      "position": "Второй пилот воздушного судна А-321",
       "email": "i.galvas@nordwindairlines.ru",
       "phones": [
         {
@@ -692,7 +875,7 @@
     },
     {
       "name": "Ганженко Михаил Михайлович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "m.ganzhenko@nordwindairlines.ru",
       "phones": [
         {
@@ -704,19 +887,24 @@
     },
     {
       "name": "Ганин Павел Сергеевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "p.ganin@nordwindairlines.ru",
       "phones": [
         {
+          "display": "8 968 861 75 79",
+          "tel": "+79688617579",
+          "type": "work"
+        },
+        {
           "display": "8 927 220 92 64",
           "tel": "+79272209264",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Гвозденко Виталий Евгеньевич",
-      "position": "Зам. ген. директора по ОЛР-директор летногодепартамента",
+      "position": "Зам. ген. директора по ОЛР-директор летного департамента",
       "email": "v.gvozdenko@nordwindairlines.ru",
       "phones": [
         {
@@ -727,13 +915,13 @@
         {
           "display": "8 903 275 41 41",
           "tel": "+79032754141",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Гвозденко Денис Витальевич",
-      "position": "Командирвоздушного суднаБоинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "d.gvozdenko@nordwindairlines.ru",
       "phones": [
         {
@@ -744,13 +932,13 @@
         {
           "display": "8 968 737 73 71",
           "tel": "+79687377371",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Гнусин Артем Анатольевич",
-      "position": "Командирвоздушного судна А-321",
+      "position": "Командир воздушного судна А-321",
       "email": "a.gnusin@nordwindairlines.ru",
       "phones": [
         {
@@ -767,7 +955,7 @@
     },
     {
       "name": "Головкин Артем Игоревич",
-      "position": "Командирвоздушного судна А-321",
+      "position": "Командир воздушного судна А-321",
       "email": "a.golovkin@nordwindairlines.ru",
       "phones": [
         {
@@ -779,19 +967,24 @@
     },
     {
       "name": "Гордеев Владимир Юрьевич",
-      "position": "Командирвоздушного суднаБоинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "v.gordeev@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 906 082 00 32",
           "tel": "+79060820032",
           "type": "work"
+        },
+        {
+          "display": "8 912 842 45 97",
+          "tel": "+79128424597",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Горябин Александр Павлович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "a.goryabin@nordwindairlines.ru",
       "phones": [
         {
@@ -803,46 +996,82 @@
     },
     {
       "name": "Граицкий Андрей Васильевич",
-      "position": "Второй пилотвоздушного судна Боинг-777",
-      "email": "a.graitskiy@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-777",
+      "email": "a.graitskiy@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 905 883 54 30",
+          "tel": "+79058835430",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Граицкий Егор Андреевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "e.graitsky@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 968 591 68 07",
           "tel": "+79685916807",
           "type": "work"
+        },
+        {
+          "display": "8 906 832 94 38",
+          "tel": "+79068329438",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Григоренко Захар Васильевич",
-      "position": "Командирвоздушного судна Боинг-737",
-      "email": "z.grigorenko@nordwindairlines.ru"
+      "position": "Командир воздушного судна Боинг-737",
+      "email": "z.grigorenko@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 966 171 26 52",
+          "tel": "+79661712652",
+          "type": "work"
+        },
+        {
+          "display": "8 953 170 16 72",
+          "tel": "+79531701672",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Гришин Кирилл Алексеевич",
-      "position": "Второй пилотвоздушного судна А-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "k.grishin@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 906 738 96 98",
           "tel": "+79067389698",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Губеев Булат Феликсович",
-      "position": "Командирвоздушного судна Боинг-737",
-      "email": "b.gubeev@nordwindairlines.ru"
+      "position": "Командир воздушного судна Боинг-737",
+      "email": "b.gubeev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 906 082 21 57",
+          "tel": "+79060822157",
+          "type": "work"
+        },
+        {
+          "display": "8 977 985 54 57",
+          "tel": "+79779855457",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Гудин Виктор Валерьевич",
-      "position": "Второй пилотвоздушного судна Боинг-777",
+      "position": "Второй пилот воздушного судна Боинг-777",
       "email": "v.gudin@nordwindairlines.ru",
       "phones": [
         {
@@ -854,7 +1083,7 @@
     },
     {
       "name": "Гусаков Максим Сергеевич",
-      "position": "Второй пилотвоздушного суднаБоинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "m.gusakov@nordwindairlines.ru",
       "phones": [
         {
@@ -866,7 +1095,7 @@
     },
     {
       "name": "Гухани Вероника Юрьевна",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "v.maslenko@nordwindairlines.ru",
       "phones": [
         {
@@ -878,7 +1107,7 @@
     },
     {
       "name": "Давыденко Евгений Иванович",
-      "position": "Пилот-инструкторвоздушного судна Боинг-737",
+      "position": "Пилот-инструктор воздушного судна Боинг-737",
       "email": "e.davydenko@nordwindairlines.ru",
       "phones": [
         {
@@ -889,25 +1118,30 @@
         {
           "display": "8 903 391 45 16",
           "tel": "+79033914516",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
-      "name": "Данилевский АндрейАнатольевич",
-      "position": "Пилот-инструктор воздушного суднаА-330",
+      "name": "Данилевский Андрей Анатольевич",
+      "position": "Пилот-инструктор воздушного судна А-330",
       "email": "a.danilevskiy@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 966 118 05 77",
           "tel": "+79661180577",
           "type": "work"
+        },
+        {
+          "display": "8 916 675 88 69",
+          "tel": "+79166758869",
+          "type": "default"
         }
       ]
     },
     {
-      "name": "Дарьяновский АлексейАлексеевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "name": "Дарьяновский Алексей Алексеевич",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "a.daryanovskiy@nordwindairlines.ru",
       "phones": [
         {
@@ -919,17 +1153,41 @@
     },
     {
       "name": "Дегтярев Андрей Андреевич",
-      "position": "Командирвоздушного судна Боинг-737",
-      "email": "a.degtyarev@nordwindairlines.ru"
+      "position": "Командир воздушного судна Боинг-737",
+      "email": "a.degtyarev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 967 199 81 21",
+          "tel": "+79671998121",
+          "type": "work"
+        },
+        {
+          "display": "8 905 408 74 80",
+          "tel": "+79054087480",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Деев Роман Константинович",
-      "position": "Командирвоздушного судна Боинг-737",
-      "email": "r.deev@nordwindairlines.ru"
+      "position": "Командир воздушного судна Боинг-737",
+      "email": "r.deev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 968 591 68 05",
+          "tel": "+79685916805",
+          "type": "work"
+        },
+        {
+          "display": "8 929 770 13 72",
+          "tel": "+79297701372",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Дейнега Сергей Николаевич",
-      "position": "Командирвоздушного суднаБоинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "s.deinega@nordwindairlines.ru",
       "phones": [
         {
@@ -940,17 +1198,22 @@
         {
           "display": "8 985 420 42 34",
           "tel": "+79854204234",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Денисов Александр Александрович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "ale.denisov@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 987 770 28 98 (лич)",
+          "display": "8 968 576 59 85",
+          "tel": "+79685765985",
+          "type": "work"
+        },
+        {
+          "display": "8 987 770 28 98",
           "tel": "+79877702898",
           "type": "default"
         }
@@ -958,7 +1221,7 @@
     },
     {
       "name": "Денисов Алексей Леонидович",
-      "position": "Командирвоздушного судна Боинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "a.denisov@nordwindairlines.ru",
       "phones": [
         {
@@ -975,7 +1238,7 @@
     },
     {
       "name": "Денисов Сергей Викторович",
-      "position": "Пилот-инструкторвоздушного судна Боинг-777",
+      "position": "Пилот-инструктор воздушного судна Боинг-777",
       "email": "s.denisov@nordwindairlines.ru",
       "phones": [
         {
@@ -992,68 +1255,121 @@
     },
     {
       "name": "Дивянин Антон Васильевич",
-      "position": "Командирвоздушного судна Боинг-737",
-      "email": "a.divyanin@nordwindairlines.ru"
-    },
-    {
-      "name": "Диканская Ирина Николаевна",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "i.dikanskaya@nordwindairlines.ru"
-    },
-    {
-      "name": "Димитров Виталий Георгиевич",
-      "position": "Командирвоздушного судна Боинг-777",
-      "email": "v.dimitrov@nordwindairlines.ru",
+      "position": "Командир воздушного судна Боинг-737",
+      "email": "a.divyanin@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 968 591 68 01",
-          "tel": "+79685916801",
+          "display": "8 909 987 88 91",
+          "tel": "+79099878891",
           "type": "work"
         },
         {
-          "display": "8 916 40 63 259 (лич)",
-          "tel": "+79164063259",
+          "display": "8 987 849 04 36",
+          "tel": "+79878490436",
           "type": "default"
         }
       ]
     },
     {
+      "name": "Диканская Ирина Николаевна",
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "i.dikanskaya@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 929 777 03 82",
+          "tel": "+79297770382",
+          "type": "default"
+        }
+      ]
+    },
+    {
+      "name": "Димитров Виталий Георгиевич",
+      "position": "Командир воздушного судна Боинг-777",
+      "email": "v.dimitrov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 916 40 63 259",
+          "tel": "+79164063259",
+          "type": "default"
+        },
+        {
+          "display": "8 968 591 68 01",
+          "tel": "+79685916801",
+          "type": "work"
+        }
+      ]
+    },
+    {
       "name": "Дмитриев Павел Владимирович",
-      "position": "Командирвоздушного судна Боинг-737",
-      "email": "p.dmitriev@nordwindairlines.ru"
+      "position": "Командир воздушного судна Боинг-737",
+      "email": "p.dmitriev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 968 722 70 99",
+          "tel": "+79687227099",
+          "type": "work"
+        },
+        {
+          "display": "8 922 544 33 24",
+          "tel": "+79225443324",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Добряков Андрей Иванович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.dobryakov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 966 118 24 39",
           "tel": "+79661182439",
           "type": "work"
+        },
+        {
+          "display": "8 919 848 94 31",
+          "tel": "+79198489431",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Долгов Дмитрий Юрьевич",
-      "position": "Заместителькомандира летного отряда Боинг-737/777 (737)",
-      "email": "d.dolgov@nordwindairlines.ru"
+      "position": "Заместитель командира летного отряда Боинг-737/777 (737)",
+      "email": "d.dolgov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 906 840 17 71",
+          "tel": "+79068401771",
+          "type": "work"
+        },
+        {
+          "display": "8 915 234 85 26",
+          "tel": "+79152348526",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Долженко Алексей Викторович",
-      "position": "Командирвоздушного суднаБоинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.dolzhenko@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 966 171 26 43",
           "tel": "+79661712643",
           "type": "work"
+        },
+        {
+          "display": "8 916 560 37 83",
+          "tel": "+79165603783",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Доос Данил Дмитриевич",
-      "position": "Второй пилотвоздушного судна А-321",
+      "position": "Второй пилот воздушного судна А-321",
       "email": "d.doos@nordwindairlines.ru",
       "phones": [
         {
@@ -1065,41 +1381,53 @@
     },
     {
       "name": "Доценко Владимир Викторович",
-      "position": "Пилот-инструктор воздушного суднаА-330",
+      "position": "Пилот-инструктор воздушного судна А-330",
       "email": "v.dotcenko@nordwindairlines.ru",
       "phones": [
-        {
-          "display": "8 963 654 36 08",
-          "tel": "+79636543608",
-          "type": "work"
-        },
         {
           "display": "8 925 310 46 00",
           "tel": "+79253104600",
           "type": "default"
+        },
+        {
+          "display": "8 963 654 36 08",
+          "tel": "+79636543608",
+          "type": "work"
         }
       ]
     },
     {
       "name": "Дубровский Игорь Олегович",
-      "position": "Второй пилотвоздушного судна А-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "i.dubrovsky@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 903 193 00 97",
           "tel": "+79031930097",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Дудоров Олег Алексеевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "o.dudorov@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "o.dudorov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 912 841 28 81",
+          "tel": "+79128412881",
+          "type": "default"
+        },
+        {
+          "display": "8 996 781 94 82",
+          "tel": "+79967819482",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Дунаев Сергей Викторович",
-      "position": "Командирвоздушного суднаБоинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "s.dunaev@nordwindairlines.ru",
       "phones": [
         {
@@ -1116,7 +1444,7 @@
     },
     {
       "name": "Дусь Никита Андреевич",
-      "position": "Второй пилотвоздушного суднаБоинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "n.dus@nordwindairlines.ru",
       "phones": [
         {
@@ -1128,7 +1456,7 @@
     },
     {
       "name": "Евлашев Александр Владимирович",
-      "position": "Второй пилотвоздушного судна Боинг-777",
+      "position": "Второй пилот воздушного судна Боинг-777",
       "email": "a.evlashev@nordwindairlines.ru",
       "phones": [
         {
@@ -1140,24 +1468,36 @@
     },
     {
       "name": "Евлашев Антон Александрович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "an.evlashev@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "an.evlashev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 916 807 91 37",
+          "tel": "+79168079137",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Евсиков Александр Викторович",
-      "position": "Пилот-инструктор воздушного суднаБоинг-737",
+      "position": "Пилот-инструктор воздушного судна Боинг-737",
       "email": "a.evsikov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 909 987 69 41",
           "tel": "+79099876941",
           "type": "work"
+        },
+        {
+          "display": "8 987 858 62 63",
+          "tel": "+79878586263",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Егоров Сергей Александрович",
-      "position": "Командирвоздушного судна Боинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "s.egorov@nordwindairlines.ru",
       "phones": [
         {
@@ -1168,13 +1508,13 @@
         {
           "display": "8 910 002 33 95",
           "tel": "+79100023395",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Емельянов Сергей Владимирович",
-      "position": "Второй пилотвоздушного судна А-321",
+      "position": "Второй пилот воздушного судна А-321",
       "email": "s.emelyanov@nordwindairlines.ru",
       "phones": [
         {
@@ -1186,21 +1526,31 @@
     },
     {
       "name": "Есионов Роман Алексеевич",
-      "position": "Второй пилотвоздушного судна А-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "r.esionov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 926 276 39 00",
           "tel": "+79262763900",
           "type": "default"
+        },
+        {
+          "display": "8 902 561 83 99",
+          "tel": "+79025618399",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Ефанов Владимир Юрьевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "v.efanov@nordwindairlines.ru",
       "phones": [
+        {
+          "display": "8 906 082 04 89",
+          "tel": "+79060820489",
+          "type": "work"
+        },
         {
           "display": "8 916 324 59 05",
           "tel": "+79163245905",
@@ -1209,8 +1559,8 @@
       ]
     },
     {
-      "name": "Ефименко АлександрПетрович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "name": "Ефименко Александр Петрович",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "a.efimenko@nordwindairlines.ru",
       "phones": [
         {
@@ -1222,7 +1572,7 @@
     },
     {
       "name": "Ефремов Дмитрий Григорьевич",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "d.efremov@nordwindairlines.ru",
       "phones": [
         {
@@ -1233,13 +1583,13 @@
         {
           "display": "8 911 215 15 68",
           "tel": "+79112151568",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Жирноклеев Сергей Анатольевич",
-      "position": "Командирвоздушного судна А-321",
+      "position": "Командир воздушного судна А-321",
       "email": "s.zhirnokleev@nordwindairlines.ru",
       "phones": [
         {
@@ -1250,25 +1600,30 @@
         {
           "display": "8 922 268 62 45",
           "tel": "+79222686245",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Задора Вадим Николаевич",
-      "position": "Командирвоздушного суднаБоинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "v.zadora@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 963 991 52 76",
           "tel": "+79639915276",
           "type": "work"
+        },
+        {
+          "display": "8 916 802 17 67",
+          "tel": "+79168021767",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Задора Игорь Вадимович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "i.zadora@nordwindairlines.ru",
       "phones": [
         {
@@ -1280,8 +1635,20 @@
     },
     {
       "name": "Зайцев Алексей Игоревич",
-      "position": "Командирвоздушного судна Боинг-737",
-      "email": "al.zaytsev@nordwindairlines.ru"
+      "position": "Командир воздушного судна Боинг-737",
+      "email": "al.zaytsev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 968 861 89 68",
+          "tel": "+79688618968",
+          "type": "work"
+        },
+        {
+          "display": "8 905 884 08 88",
+          "tel": "+79058840888",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Зайченко Роман Владимирович",
@@ -1292,12 +1659,17 @@
           "display": "8 966 312 48 34",
           "tel": "+79663124834",
           "type": "work"
+        },
+        {
+          "display": "8 968 951 86 17",
+          "tel": "+79689518617",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Зарвиров Андрей Александрович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "a.zarvirov@nordwindairlines.ru",
       "phones": [
         {
@@ -1309,7 +1681,7 @@
     },
     {
       "name": "Зубов Сергей Васильевич",
-      "position": "Второй пилотвоздушного судна А-321",
+      "position": "Второй пилот воздушного судна А-321",
       "email": "s.zubov@nordwindairlines.ru",
       "phones": [
         {
@@ -1320,20 +1692,20 @@
       ]
     },
     {
-      "name": "ИванищакВладимир Николаевич",
-      "position": "Второй пилотвоздушного судна А-330",
+      "name": "Иванищак Владимир Николаевич",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "v.ivanishchak@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 985 191 21 60",
           "tel": "+79851912160",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Иванов Владимир Владимирович",
-      "position": "Второй пилотвоздушного суднаА-321",
+      "position": "Второй пилот воздушного судна А-321",
       "email": "v.ivanov@nordwindairlines.ru",
       "phones": [
         {
@@ -1345,7 +1717,7 @@
     },
     {
       "name": "Иванцов Никита Максимович",
-      "position": "Второй пилотвоздушного судна А-321",
+      "position": "Второй пилот воздушного судна А-321",
       "email": "n.ivantsov@nordwindairlines.ru",
       "phones": [
         {
@@ -1357,7 +1729,7 @@
     },
     {
       "name": "Истомин Алексей Алексеевич",
-      "position": "Второй пилотвоздушного судна Боинг-777",
+      "position": "Второй пилот воздушного судна Боинг-777",
       "email": "al.istomin@nordwindairlines.ru",
       "phones": [
         {
@@ -1369,48 +1741,70 @@
     },
     {
       "name": "Каверин Андрей Александрович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "a.kaverin@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 965 215 10 90",
           "tel": "+79652151090",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
-      "name": "Каврелишвили АлександрАлександрович",
-      "position": "Пилот-инструктор воздушного суднаА-330",
+      "name": "Каврелишвили Александр Александрович",
+      "position": "Пилот-инструктор воздушного судна А-330",
       "email": "a.kavrelishvili@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 963 625 33 61",
           "tel": "+79636253361",
           "type": "work"
+        },
+        {
+          "display": "8 917 571 87 77",
+          "tel": "+79175718777",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Калугин Константин Николаевич",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "k.kalugin@nordwindairlines.ru",
       "phones": [
         {
+          "display": "8 966 389 84 17",
+          "tel": "+79663898417",
+          "type": "work"
+        },
+        {
           "display": "8 916 168 20 34",
           "tel": "+79161682034",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Камнев Сергей Анатольевич",
-      "position": "Советник по безопасностиполетов",
-      "email": "s.kamnev@nordwindairlines.ru"
+      "position": "Советник по безопасности полетов",
+      "email": "s.kamnev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 906 082 20 80",
+          "tel": "+79060822080",
+          "type": "work"
+        },
+        {
+          "display": "8 916 876 95 05",
+          "tel": "+79168769505",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Карлюгин Евгений Олегович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "e.karlyugin@nordwindairlines.ru",
       "phones": [
         {
@@ -1421,22 +1815,29 @@
         {
           "display": "8 917 616 63 44",
           "tel": "+79176166344",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Карцев Михаил Вячеславович",
-      "position": "Второй пилотвоздушного судна Боинг-777",
-      "email": "m.kartsev@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-777",
+      "email": "m.kartsev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 987 856 69 70",
+          "tel": "+79878566970",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Качур Вадим Валерьевич",
-      "position": "Пилот-инструктор воздушного суднаА-330",
+      "position": "Пилот-инструктор воздушного судна А-330",
       "email": "v.kachur@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 926 679 77 62 (лич.)",
+          "display": "8 926 679 77 62",
           "tel": "+79266797762",
           "type": "default"
         }
@@ -1444,7 +1845,7 @@
     },
     {
       "name": "Кащеев Сергей Владимирович",
-      "position": "Второй пилотвоздушного суднаБоинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "s.kashcheev@nordwindairlines.ru",
       "phones": [
         {
@@ -1456,16 +1857,28 @@
     },
     {
       "name": "Ким Станислав Олегович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "s.kim@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "s.kim@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 911 812 55 39",
+          "tel": "+79118125539",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Киреева Евгения Станиславовна",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "e.kireeva@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 910 574 16 27 (лич)",
+          "display": "8 967 199 81 25",
+          "tel": "+79671998125",
+          "type": "work"
+        },
+        {
+          "display": "8 910 574 16 27",
           "tel": "+79105741627",
           "type": "default"
         }
@@ -1473,7 +1886,7 @@
     },
     {
       "name": "Кирилов Алексей Игоревич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "a.kirilov@nordwindairlines.ru",
       "phones": [
         {
@@ -1485,26 +1898,43 @@
     },
     {
       "name": "Кирилюк Валерий Васильевич",
-      "position": "Командирвоздушного судна Боинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "v.kirilyuk@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 909 939 58 56",
           "tel": "+79099395856",
           "type": "work"
+        },
+        {
+          "display": "8 916 458 63 85",
+          "tel": "+79164586385",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Кишинский Никита Анатольевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "n.kishinskii@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "n.kishinskii@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 905 811 38 61",
+          "tel": "+79058113861",
+          "type": "default"
+        }
+      ]
     },
     {
-      "name": "Климентьев ВладимирСергеевич",
+      "name": "Климентьев Владимир Сергеевич",
       "position": "Заместителькомандир летного отряда А-330/321(321)",
       "email": "v.klimentiev@nordwindairlines.ru",
       "phones": [
+        {
+          "display": "8 915 075 86 13",
+          "tel": "+79150758613",
+          "type": "work"
+        },
         {
           "display": "8 929 627 91 53",
           "tel": "+79296279153",
@@ -1514,7 +1944,7 @@
     },
     {
       "name": "Климов Игорь Сергеевич",
-      "position": "Командирвоздушного суднаА-321",
+      "position": "Командир воздушного судна А-321",
       "email": "i.klimov@nordwindairlines.ru",
       "phones": [
         {
@@ -1523,7 +1953,7 @@
           "type": "default"
         },
         {
-          "display": "8 965 236 03 35 (резерв)",
+          "display": "8 965 236 03 35",
           "tel": "+79652360335",
           "type": "default"
         }
@@ -1531,7 +1961,7 @@
     },
     {
       "name": "Клюев Анатолий Александрович",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "a.kliuev@nordwindairlines.ru",
       "phones": [
         {
@@ -1542,25 +1972,30 @@
         {
           "display": "8 926 715 51 39",
           "tel": "+79267155139",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Козлов Алексей Леонидович",
-      "position": "Пилот-инструкторвоздушного судна А-330",
+      "position": "Пилот-инструктор воздушного судна А-330",
       "email": "a.kozlov@nordwindairlines.ru",
       "phones": [
         {
+          "display": "8 966 389 84 24",
+          "tel": "+79663898424",
+          "type": "work"
+        },
+        {
           "display": "8 963 670 43 42",
           "tel": "+79636704342",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Козлов Дмитрий Николаевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "d.kozlov@nordwindairlines.ru",
       "phones": [
         {
@@ -1572,12 +2007,19 @@
     },
     {
       "name": "Козлов Евгений Сергеевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "e.kozlov@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "e.kozlov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 906 838 27 82",
+          "tel": "+79068382782",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Койнов Роман Николаевич",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "r.koynov@nordwindairlines.ru",
       "phones": [
         {
@@ -1586,7 +2028,7 @@
           "type": "work"
         },
         {
-          "display": "8 926 691 32 13 (лич)",
+          "display": "8 926 691 32 13",
           "tel": "+79266913213",
           "type": "default"
         }
@@ -1594,24 +2036,36 @@
     },
     {
       "name": "Колесников Денис Александрович",
-      "position": "Командирвоздушного судна А-321",
-      "email": "d.kolesnikov@nordwindairlines.ru"
+      "position": "Командир воздушного судна А-321",
+      "email": "d.kolesnikov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 985 858 26 68",
+          "tel": "+79858582668",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Колесов Евгений Иванович",
-      "position": "Пилот-инструктор воздушного суднаБоинг-737",
+      "position": "Пилот-инструктор воздушного судна Боинг-737",
       "email": "e.kolesov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 916 459 69 21",
           "tel": "+79164596921",
           "type": "work"
+        },
+        {
+          "display": "8 916 664 85 18",
+          "tel": "+79166648518",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Колос Артём Владимирович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "a.kolos@nordwindairlines.ru",
       "phones": [
         {
@@ -1622,8 +2076,8 @@
       ]
     },
     {
-      "name": "Кондратьев ВладимирНиколаевич",
-      "position": "Командирвоздушного судна А-321",
+      "name": "Кондратьев Владимир Николаевич",
+      "position": "Командир воздушного судна А-321",
       "email": "v.kondratev@nordwindairlines.ru",
       "phones": [
         {
@@ -1635,35 +2089,35 @@
     },
     {
       "name": "Коркин Сергей Николаевич",
-      "position": "Командирвоздушного суднаА-321",
+      "position": "Командир воздушного судна А-321",
       "email": "s.korkin@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 965 190 79 78",
           "tel": "+79651907978",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Королев Виталий Валерьевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "v.korolev@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 952 509 69 13",
           "tel": "+79525096913",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Короновский Егор Александрович",
-      "position": "Командирвоздушного судна А-321",
+      "position": "Командир воздушного судна А-321",
       "email": "e.koronovskiy@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 926 707 37 91 (лич)",
+          "display": "8 926 707 37 91",
           "tel": "+79267073791",
           "type": "default"
         }
@@ -1671,11 +2125,11 @@
     },
     {
       "name": "Косинцев Алексей Михайлович",
-      "position": "Командирвоздушного судна А-321",
+      "position": "Командир воздушного судна А-321",
       "email": "a.kosintsev@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8-919-101-52-40 (лич)",
+          "display": "8-919-101-52-40",
           "tel": "+79191015240",
           "type": "default"
         }
@@ -1683,7 +2137,7 @@
     },
     {
       "name": "Костырев Вадим Жоржевич",
-      "position": "Командирвоздушного судна Боинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "v.kostyrev@nordwindairlines.ru",
       "phones": [
         {
@@ -1692,15 +2146,15 @@
           "type": "work"
         },
         {
-          "display": "8 967 165 35 97",
+          "display": "8 967 165 35 97 (",
           "tel": "+79671653597",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Костяной Олег Степанович",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "o.kostianoi@nordwindairlines.ru",
       "phones": [
         {
@@ -1711,17 +2165,22 @@
         {
           "display": "8 923 754 74 95",
           "tel": "+79237547495",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Котов Георгий Николаевич",
-      "position": "Пилот-инструкторвоздушного судна А-330",
+      "position": "Пилот-инструктор воздушного судна А-330",
       "email": "g.kotov@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 926 705 45 69 (лич.)",
+          "display": "8 966 389 84 16",
+          "tel": "+79663898416",
+          "type": "work"
+        },
+        {
+          "display": "8 926 705 45 69",
           "tel": "+79267054569",
           "type": "default"
         }
@@ -1729,24 +2188,36 @@
     },
     {
       "name": "Кошелев Сергей Витальевич",
-      "position": "Командирвоздушного суднаА-330",
-      "email": "s.koshelev@nordwindairlines.ru"
+      "position": "Командир воздушного судна А-330",
+      "email": "s.koshelev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 916 408 32 80",
+          "tel": "+79164083280",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Кравцов Игорь Иванович",
-      "position": "Второй пилотвоздушного судна Боинг-777",
+      "position": "Второй пилот воздушного судна Боинг-777",
       "email": "i.kravtsov@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 950 182 90 21 (осн.)",
+          "display": "8 950 182 90 21",
           "tel": "+79501829021",
+          "type": "default"
+        },
+        {
+          "display": "8 922 549 73 86",
+          "tel": "+79225497386",
           "type": "default"
         }
       ]
     },
     {
       "name": "Кремлев Иван Алексеевич",
-      "position": "Второй пилотвоздушного судна А-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "i.kremlev@nordwindairlines.ru",
       "phones": [
         {
@@ -1763,7 +2234,7 @@
     },
     {
       "name": "Кривоносов Сергей Григорьевич",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "s.krivonosov@nordwindairlines.ru",
       "phones": [
         {
@@ -1772,7 +2243,7 @@
           "type": "work"
         },
         {
-          "display": "8 915 003 75 97 (лич.)",
+          "display": "8 915 003 75 97",
           "tel": "+79150037597",
           "type": "default"
         }
@@ -1780,11 +2251,11 @@
     },
     {
       "name": "Кривцов Валерий Александрович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "v.krivtsov@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 903 395 25 26 (лич)",
+          "display": "8 903 395 25 26",
           "tel": "+79033952526",
           "type": "default"
         }
@@ -1792,7 +2263,7 @@
     },
     {
       "name": "Куваев Дмитрий Алексеевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "d.kuvaev@nordwindairlines.ru",
       "phones": [
         {
@@ -1803,13 +2274,20 @@
       ]
     },
     {
-      "name": "Кудашкин АлександрАнатольевич",
-      "position": "Второй пилотвоздушного судна А-330",
-      "email": "a.kudashkin@nordwindairlines.ru"
+      "name": "Кудашкин Александр Анатольевич",
+      "position": "Второй пилот воздушного судна А-330",
+      "email": "a.kudashkin@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 995 447 77 85",
+          "tel": "+79954477785",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Кудрявцев Кирилл Игоревич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "k.kudryavtsev@nordwindairlines.ru",
       "phones": [
         {
@@ -1821,11 +2299,16 @@
     },
     {
       "name": "Кузнецов Данил Николаевич",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "d.kuznetsov@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 916 210 34 11 (лич)",
+          "display": "8 966 389 84 57",
+          "tel": "+79663898457",
+          "type": "work"
+        },
+        {
+          "display": "8 916 210 34 11",
           "tel": "+79162103411",
           "type": "default"
         }
@@ -1833,7 +2316,7 @@
     },
     {
       "name": "Кузьмин Алексей Владимирович",
-      "position": "Второй пилотвоздушного судна Боинг-777",
+      "position": "Второй пилот воздушного судна Боинг-777",
       "email": "ale.kuzmin@nordwindairlines.ru",
       "phones": [
         {
@@ -1845,7 +2328,7 @@
     },
     {
       "name": "Кузьмина Валерия Станиславовна",
-      "position": "Второй пилотвоздушного суднаА-321",
+      "position": "Второй пилот воздушного судна А-321",
       "email": "v.erdyneeva@nordwindairlines.ru",
       "phones": [
         {
@@ -1857,7 +2340,7 @@
     },
     {
       "name": "Кулаков Юрий Владимирович",
-      "position": "Второй пилотвоздушного судна А-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "i.kulakov@nordwindairlines.ru",
       "phones": [
         {
@@ -1869,7 +2352,7 @@
     },
     {
       "name": "Курочкина Ксения Сергеевна",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "k.kurochkina@nordwindairlines.ru",
       "phones": [
         {
@@ -1880,8 +2363,8 @@
       ]
     },
     {
-      "name": "Кусельман АлександрСеменович",
-      "position": "Пилот-инструктор воздушного суднаБоинг-777",
+      "name": "Кусельман Александр Семенович",
+      "position": "Пилот-инструктор воздушного судна Боинг-777",
       "email": "a.kuselman@nordwindairlines.ru",
       "phones": [
         {
@@ -1892,17 +2375,17 @@
         {
           "display": "8 926 991 63 17",
           "tel": "+79269916317",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Кустов Дмитрий Андреевич",
-      "position": "Второй пилотвоздушного судна А-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "d.kustov@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 915 338 06 98 (осн.)",
+          "display": "8 915 338 06 98",
           "tel": "+79153380698",
           "type": "default"
         },
@@ -1914,8 +2397,8 @@
       ]
     },
     {
-      "name": "Кухарский АлександрВладимирович",
-      "position": "Заместителькомандира летного отряда Боинг-737/777 (777)",
+      "name": "Кухарский Александр Владимирович",
+      "position": "Заместитель командира летного отряда Боинг-737/777 (777)",
       "email": "a.kukharskiy@nordwindairlines.ru",
       "phones": [
         {
@@ -1931,22 +2414,27 @@
       ]
     },
     {
-      "name": "Лауер ПавелАлександрович",
-      "position": "Командирвоздушного суднаБоинг-737",
+      "name": "Лауер Павел Александрович",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "P.Lauer@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 965 765 48 11",
           "tel": "+79657654811",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Лебедев Андрей Николаевич",
-      "position": "Командирвоздушного суднаБоинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "an.lebedev@nordwindairlines.ru",
       "phones": [
+        {
+          "display": "8 906 840 21 11",
+          "tel": "+79068402111",
+          "type": "work"
+        },
         {
           "display": "8 915 402 46 61",
           "tel": "+79154024661",
@@ -1956,12 +2444,19 @@
     },
     {
       "name": "Левин Вадим Евгеньевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "v.levin@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "v.levin@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 912 846 50 09",
+          "tel": "+79128465009",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Лещинский Павел Александрович",
-      "position": "Командир летногоотряда Боинг-737/777",
+      "position": "Командир летного отряда Боинг-737/777",
       "email": "p.leshchinskiy@nordwindairlines.ru",
       "phones": [
         {
@@ -1978,12 +2473,24 @@
     },
     {
       "name": "Липатов Дмитрий Валерьевич",
-      "position": "Командирвоздушного судна Боинг-777",
-      "email": "dm.lipatov@nordwindairlines.ru"
+      "position": "Командир воздушного судна Боинг-777",
+      "email": "dm.lipatov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 968 861 83 20",
+          "tel": "+79688618320",
+          "type": "work"
+        },
+        {
+          "display": "8 916 323 82 16",
+          "tel": "+79163238216",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Лисицин Алексей Юрьевич",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "a.lisitsin@nordwindairlines.ru",
       "phones": [
         {
@@ -1995,7 +2502,7 @@
     },
     {
       "name": "Листопадов Даниил Александрович",
-      "position": "Командирвоздушного судна А-321",
+      "position": "Командир воздушного судна А-321",
       "email": "d.listopadov@nordwindairlines.ru",
       "phones": [
         {
@@ -2007,7 +2514,7 @@
     },
     {
       "name": "Литвинов Павел Алексеевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "p.litvinov@nordwindairlines.ru",
       "phones": [
         {
@@ -2019,7 +2526,7 @@
     },
     {
       "name": "Литош Александр Александрович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.litosh@nordwindairlines.ru",
       "phones": [
         {
@@ -2036,17 +2543,36 @@
     },
     {
       "name": "Логачев Роман Дмитриевич",
-      "position": "Командирвоздушного судна А-321",
-      "email": "r.logachev@nordwindairlines.ru"
+      "position": "Командир воздушного судна А-321",
+      "email": "r.logachev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 985 559 92 47",
+          "tel": "+79855599247",
+          "type": "default"
+        },
+        {
+          "display": "8 966 171 26 18",
+          "tel": "+79661712618",
+          "type": "work"
+        }
+      ]
     },
     {
       "name": "Лотов Яков Михайлович",
-      "position": "Второй пилотвоздушного судна А-321",
-      "email": "y.lotov@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна А-321",
+      "email": "y.lotov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 926 320 35 80",
+          "tel": "+79263203580",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Лысенко Игорь Сергеевич",
-      "position": "Второй пилотвоздушного суднаБоинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "i.lysenko@nordwindairlines.ru",
       "phones": [
         {
@@ -2058,7 +2584,7 @@
     },
     {
       "name": "Лысюк Артем Вячеславович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "a.lysiuk@nordwindairlines.ru",
       "phones": [
         {
@@ -2070,21 +2596,31 @@
     },
     {
       "name": "Люшин Евгений Владимирович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "e.lyushin@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 909 988 16 90",
           "tel": "+79099881690",
           "type": "work"
+        },
+        {
+          "display": "8 987 344 88 28",
+          "tel": "+79873448828",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Магомедов Камиль Рашидович",
-      "position": "Командирвоздушного судна А-321",
+      "position": "Командир воздушного судна А-321",
       "email": "k.magomedov@nordwindairlines.ru",
       "phones": [
+        {
+          "display": "8 915 075 83 68",
+          "tel": "+79150758368",
+          "type": "work"
+        },
         {
           "display": "8 926 940 58 29",
           "tel": "+79269405829",
@@ -2094,19 +2630,38 @@
     },
     {
       "name": "Мазилин Андрей Дмитриевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "a.mazilin@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "a.mazilin@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 925 045 88 90",
+          "tel": "+79250458890",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Макеев Сергей Юрьевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "s.makeev@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "s.makeev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 917 625 83 49",
+          "tel": "+79176258349",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Малахов Анатолий Павлович",
-      "position": "Командирвоздушного судна Боинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "a.malakhov@nordwindairlines.ru",
       "phones": [
+        {
+          "display": "8 903 571 86 31",
+          "tel": "+79035718631",
+          "type": "work"
+        },
         {
           "display": "8 926 591 01 55",
           "tel": "+79265910155",
@@ -2115,8 +2670,8 @@
       ]
     },
     {
-      "name": "Малый ИльяАлександрович",
-      "position": "Командирвоздушного суднаА-330",
+      "name": "Малый Илья Александрович",
+      "position": "Командир воздушного судна А-330",
       "email": "il.malyi@nordwindairlines.ru",
       "phones": [
         {
@@ -2128,7 +2683,7 @@
     },
     {
       "name": "Малышев Денис Михайлович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "d.malyshev@nordwindairlines.ru",
       "phones": [
         {
@@ -2139,13 +2694,13 @@
         {
           "display": "8 919 001 91 47",
           "tel": "+79190019147",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Малышкин Вадим Геннадьевич",
-      "position": "Второй пилотвоздушного судна А-321",
+      "position": "Второй пилот воздушного судна А-321",
       "email": "v.malyshkin@nordwindairlines.ru",
       "phones": [
         {
@@ -2157,25 +2712,35 @@
     },
     {
       "name": "Маркелов Андрей Андреевич",
-      "position": "Командирвоздушного судна Боинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "a.markelov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 903 683 04 14",
           "tel": "+79036830414",
           "type": "work"
+        },
+        {
+          "display": "8 926 412 82 93",
+          "tel": "+79264128293",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Марков Александр Николаевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.markov@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 903 708 36 58 ( .)",
+          "display": "8 903 708 36 58",
           "tel": "+79037083658",
           "type": "work"
+        },
+        {
+          "display": "8 905 880 06 47",
+          "tel": "+79058800647",
+          "type": "default"
         }
       ]
     },
@@ -2190,27 +2755,32 @@
           "type": "work"
         },
         {
-          "display": "8 916 373 93 68",
+          "display": "8 916 373 93 68 (",
           "tel": "+79163739368",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Мелконян Гайк Петросович",
-      "position": "Командирвоздушного судна А-321",
+      "position": "Командир воздушного судна А-321",
       "email": "g.melkonian@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 909 939 73 53",
           "tel": "+79099397353",
           "type": "work"
+        },
+        {
+          "display": "8 903 134 86 79",
+          "tel": "+79031348679",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Мельников Андрей Борисович",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "a.melnikov@nordwindairlines.ru",
       "phones": [
         {
@@ -2221,17 +2791,17 @@
         {
           "display": "8 926 111 54 42",
           "tel": "+79261115442",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Миржалолов Фуркат Мансурович",
-      "position": "Второй пилотвоздушного судна А-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "f.mirzhalolov@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 977 117 41 32 (основной)",
+          "display": "8 977 117 41 32",
           "tel": "+79771174132",
           "type": "default"
         },
@@ -2244,19 +2814,24 @@
     },
     {
       "name": "Миронов Максим Викторович",
-      "position": "Командирвоздушного суднаА-330",
+      "position": "Командир воздушного судна А-330",
       "email": "m.mironov@nordwindairlines.ru",
       "phones": [
         {
+          "display": "8 966 389 84 13",
+          "tel": "+79663898413",
+          "type": "work"
+        },
+        {
           "display": "8 903 797 51 57",
           "tel": "+79037975157",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Михайлов Никита Юрьевич",
-      "position": "Командирвоздушного суднаБоинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "n.mikhaylov@nordwindairlines.ru",
       "phones": [
         {
@@ -2267,13 +2842,13 @@
         {
           "display": "8 962 25 25 126",
           "tel": "+79622525126",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Михальчук Евгений Александрович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "e.mikhalchuk@nordwindairlines.ru",
       "phones": [
         {
@@ -2285,19 +2860,19 @@
     },
     {
       "name": "Михейчев Виталий Александрович",
-      "position": "Второй пилотвоздушного судна А-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "v.mikheychev@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 925 449 71 11",
           "tel": "+79254497111",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Млечков Леонид Анатольевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "le.mlechkov@nordwindairlines.ru",
       "phones": [
         {
@@ -2309,36 +2884,53 @@
     },
     {
       "name": "Можаев Сергей Николаевич",
-      "position": "Командирвоздушного судна Боинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "s.mozhaev@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 985 121 78 38 (основ.)",
+          "display": "8 985 121 78 38",
           "tel": "+79851217838",
+          "type": "default"
+        },
+        {
+          "display": "Екат. 8 922 609 77 54",
+          "tel": "+79226097754",
           "type": "default"
         }
       ]
     },
     {
       "name": "Молчанов Сергей Николаевич",
-      "position": "Второй пилотвоздушного судна А-321",
-      "email": "s.molchanov@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна А-321",
+      "email": "s.molchanov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 929 222 22 89",
+          "tel": "+79292222289",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Морозов Антон Викторович",
-      "position": "Командирвоздушного суднаБоинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.morozov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 909 939 16 05",
           "tel": "+79099391605",
           "type": "work"
+        },
+        {
+          "display": "8 985 879 03 09",
+          "tel": "+79858790309",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Московкин Андрей Вячеславович",
-      "position": "Второй пилотвоздушного суднаБоинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "a.moskovkin@nordwindairlines.ru",
       "phones": [
         {
@@ -2350,7 +2942,7 @@
     },
     {
       "name": "Мотин Антон Сергеевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.motin@nordwindairlines.ru",
       "phones": [
         {
@@ -2367,7 +2959,7 @@
     },
     {
       "name": "Муравщик Михаил Борисович",
-      "position": "Пилот-инструкторвоздушного судна Боинг-777",
+      "position": "Пилот-инструктор воздушного судна Боинг-777",
       "email": "m.muravshchik@nordwindairlines.ru",
       "phones": [
         {
@@ -2384,7 +2976,7 @@
     },
     {
       "name": "Мурзабаев Олег Рамильевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "o.murzabaev@nordwindairlines.ru",
       "phones": [
         {
@@ -2396,19 +2988,19 @@
     },
     {
       "name": "Мухарев Игорь Юрьевич",
-      "position": "Командирвоздушного судна А-321",
+      "position": "Командир воздушного судна А-321",
       "email": "i.mukharev@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8-903-732-29- 11(лич)",
+          "display": "8-903-732-29- 11",
           "tel": "+79037322911",
           "type": "default"
         }
       ]
     },
     {
-      "name": "Мясников ВладимирВалентинович",
-      "position": "Командирвоздушного судна А-321",
+      "name": "Мясников Владимир Валентинович",
+      "position": "Командир воздушного судна А-321",
       "email": "v.miasnikov@nordwindairlines.ru",
       "phones": [
         {
@@ -2425,12 +3017,19 @@
     },
     {
       "name": "Нагманов Рафаэль Дильшодович",
-      "position": "Второй пилотвоздушного судна А-330",
-      "email": "r.nagmanov@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна А-330",
+      "email": "r.nagmanov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "+7 999 863 06 05",
+          "tel": "+79998630605",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Нагуманов Рашит Шавкатович",
-      "position": "Второй пилотвоздушного судна Боинг-777",
+      "position": "Второй пилот воздушного судна Боинг-777",
       "email": "r.nagumanov@nordwindairlines.ru",
       "phones": [
         {
@@ -2447,7 +3046,7 @@
     },
     {
       "name": "Наумов Артем Владимирович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "a.naumov@nordwindairlines.ru",
       "phones": [
         {
@@ -2459,7 +3058,7 @@
     },
     {
       "name": "Невзоров Олег Алексеевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "o.nevzorov@nordwindairlines.ru",
       "phones": [
         {
@@ -2471,25 +3070,25 @@
     },
     {
       "name": "Неволин Анатолий Александрович",
-      "position": "Второй пилотвоздушного суднаБоинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "a.nevolin@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 922 535 24 78",
           "tel": "+79225352478",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Нестерова Наталья Владимировна",
-      "position": "Второй пилотвоздушного судна А-321",
+      "position": "Второй пилот воздушного судна А-321",
       "email": "n.nesterova@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 977 628 38 27",
           "tel": "+79776283827",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
@@ -2502,17 +3101,29 @@
           "display": "8 965 236 04 96",
           "tel": "+79652360496",
           "type": "default"
+        },
+        {
+          "display": "8 968 778 97 87",
+          "tel": "+79687789787",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Никитин Антон Игоревич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "an.nikitin@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "an.nikitin@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 913 834 83 04",
+          "tel": "+79138348304",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Николаев Павел Анатольевич",
-      "position": "Командирвоздушного судна А-321",
+      "position": "Командир воздушного судна А-321",
       "email": "p.nikolaev@nordwindairlines.ru",
       "phones": [
         {
@@ -2524,41 +3135,60 @@
     },
     {
       "name": "Новиков Александр Владимирович",
-      "position": "Командирвоздушного судна А-321",
+      "position": "Командир воздушного судна А-321",
       "email": "a.novikov@nordwindairlines.ru",
       "phones": [
         {
+          "display": "8 966 118 24 84",
+          "tel": "+79661182484",
+          "type": "work"
+        },
+        {
           "display": "8 903 156 38 91",
           "tel": "+79031563891",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
-      "name": "Образцов ВладимирАлександрович",
-      "position": "Пилот-инструкторвоздушного судна Боинг-737",
-      "email": "v.obraztsov@nordwindairlines.ru"
+      "name": "Образцов Владимир Александрович",
+      "position": "Пилот-инструктор воздушного судна Боинг-737",
+      "email": "v.obraztsov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 963 991 85 41",
+          "tel": "+79639918541",
+          "type": "work"
+        }
+      ]
     },
     {
       "name": "Олейнюк Роман Константинович",
-      "position": "Второй пилотвоздушного суднаА-321",
-      "email": "r.oleynyuk@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна А-321",
+      "email": "r.oleynyuk@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 925 216 20 81",
+          "tel": "+79252162081",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Ольхов Михаил Владимирович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "m.olkhov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 980 502 60 55",
           "tel": "+79805026055",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Орленко Павел Александрович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "p.orlenko@nordwindairlines.ru",
       "phones": [
         {
@@ -2570,12 +3200,19 @@
     },
     {
       "name": "Орлов Александр Игоревич",
-      "position": "Второй пилотвоздушного судна Боинг-777",
-      "email": "al.orlov@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-777",
+      "email": "al.orlov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 916 299 86 81",
+          "tel": "+79162998681",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Орлов Степан Константинович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "st.orlov@nordwindairlines.ru",
       "phones": [
         {
@@ -2586,8 +3223,8 @@
       ]
     },
     {
-      "name": "Орловский АлександрАркадьевич",
-      "position": "Второй пилотвоздушного судна Боинг-777",
+      "name": "Орловский Александр Аркадьевич",
+      "position": "Второй пилот воздушного судна Боинг-777",
       "email": "a.orlovskii@nordwindairlines.ru",
       "phones": [
         {
@@ -2599,24 +3236,31 @@
     },
     {
       "name": "Осадчий Олег Николаевич",
-      "position": "Второй пилотвоздушного судна А-330",
-      "email": "o.osadchiy@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна А-330",
+      "email": "o.osadchiy@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 985 450 86 71",
+          "tel": "+79854508671",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Остапенко Евгений Владимирович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "ev.ostapenko@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 919 993 01 33",
           "tel": "+79199930133",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Очеретный Вадим Борисович",
-      "position": "Второй пилотвоздушного судна Боинг-777",
+      "position": "Второй пилот воздушного судна Боинг-777",
       "email": "v.ocheretnyy@nordwindairlines.ru",
       "phones": [
         {
@@ -2628,7 +3272,7 @@
     },
     {
       "name": "Павельев Сергей Ильич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "s.pavelyev@nordwindairlines.ru",
       "phones": [
         {
@@ -2639,18 +3283,25 @@
         {
           "display": "8 966 314 37 11",
           "tel": "+79663143711",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
-      "name": "Павленко АлександрГригорьевич",
+      "name": "Павленко Александр Григорьевич",
       "position": "Заместительдиректора летного департамента-начальник летно-методического отдела",
-      "email": "a.pavlenko@nordwindairlines.ru"
+      "email": "a.pavlenko@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 916 226 89 30",
+          "tel": "+79162268930",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Павленко Сергей Александрович",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "s.pavlenko@nordwindairlines.ru",
       "phones": [
         {
@@ -2661,15 +3312,20 @@
         {
           "display": "8 921 772 43 33",
           "tel": "+79217724333",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
-      "name": "Павлушко АлександрАнатольевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "name": "Павлушко Александр Анатольевич",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.pavlushko@nordwindairlines.ru",
       "phones": [
+        {
+          "display": "8 903 571 86 42",
+          "tel": "+79035718642",
+          "type": "work"
+        },
         {
           "display": "8 903 458 44 47",
           "tel": "+79034584447",
@@ -2678,7 +3334,7 @@
       ]
     },
     {
-      "name": "Панин ВалерийФедорович",
+      "name": "Панин Валерий Федорович",
       "position": "Второй пилот ВС А-330",
       "email": "v.panin@nordwindairlines.ru",
       "phones": [
@@ -2691,7 +3347,7 @@
     },
     {
       "name": "Пастухов Игорь Анатольевич",
-      "position": "Пилот-инструктор воздушного суднаА-330",
+      "position": "Пилот-инструктор воздушного судна А-330",
       "email": "i.pastukhov@nordwindairlines.ru",
       "phones": [
         {
@@ -2702,32 +3358,37 @@
       ]
     },
     {
-      "name": "Пачковский ВладиславВикторович",
-      "position": "Второй пилотвоздушного суднаА-321",
+      "name": "Пачковский Владислав Викторович",
+      "position": "Второй пилот воздушного судна А-321",
       "email": "v.pachkovskiy@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 911 993 35 21",
           "tel": "+79119933521",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Пашков Михаил Викторович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "m.pashkov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 966 171 26 76",
           "tel": "+79661712676",
           "type": "work"
+        },
+        {
+          "display": "8 965 090 83 66",
+          "tel": "+79650908366",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Петренко Олег Павлович",
-      "position": "Командирвоздушного судна Боинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "o.petrenko@nordwindairlines.ru",
       "phones": [
         {
@@ -2744,7 +3405,7 @@
     },
     {
       "name": "Петров Олег Юрьевич",
-      "position": "Пилот-инструкторвоздушного судна А-321",
+      "position": "Пилот-инструктор воздушного судна А-321",
       "email": "o.petrov@nordwindairlines.ru",
       "phones": [
         {
@@ -2756,7 +3417,7 @@
     },
     {
       "name": "Пидгайко Анатолий Дмитриевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.pidgayko@nordwindairlines.ru",
       "phones": [
         {
@@ -2767,7 +3428,7 @@
         {
           "display": "8 917 255 09 37",
           "tel": "+79172550937",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
@@ -2785,70 +3446,89 @@
     },
     {
       "name": "Пирогов Андрей Геннадьевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.pirogov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 965 216 53 41",
           "tel": "+79652165341",
           "type": "work"
+        },
+        {
+          "display": "8 922 866 24 04",
+          "tel": "+79228662404",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Плотников Евгений Геннадьевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "ev.plotnikov@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "ev.plotnikov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 905 747 83 67",
+          "tel": "+79057478367",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Полторжицкий Вадим Юрьевич",
-      "position": "Второй пилотвоздушного судна А-321",
-      "email": "v.poltorzhitskii@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна А-321",
+      "email": "v.poltorzhitskii@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 903 395 83 35",
+          "tel": "+79033958335",
+          "type": "default"
+        }
+      ]
     },
     {
-      "name": "ПономаревАрсений Андреевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "name": "Пономарев Арсений Андреевич",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "aa.ponomarev@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 910 457 73 66",
           "tel": "+79104577366",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
-      "name": "Приходько ДмитрийВикторович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "name": "Приходько Дмитрий Викторович",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "d.prihodko@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 999 713 56 69",
-          "tel": "+79997135669",
-          "type": "home"
-        },
-        {
           "display": "8 985 381 71 50",
           "tel": "+79853817150",
+          "type": "default"
+        },
+        {
+          "display": "8 999 713 56 69",
+          "tel": "+79997135669",
           "type": "default"
         }
       ]
     },
     {
       "name": "Приходько Марк Олегович",
-      "position": "Второй пилотвоздушного суднаБоинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "m.prihodko@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 919 605 24 98",
           "tel": "+79196052498",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Приходько Олег Андреевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "o.prikhodko@nordwindairlines.ru",
       "phones": [
         {
@@ -2859,15 +3539,20 @@
         {
           "display": "8 903 145 08 79",
           "tel": "+79031450879",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Псарев Сергей Леонидович",
-      "position": "Командирвоздушного судна Боинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "s.psarev@nordwindairlines.ru",
       "phones": [
+        {
+          "display": "8 963 991 40 81",
+          "tel": "+79639914081",
+          "type": "work"
+        },
         {
           "display": "8 916 196 69 75",
           "tel": "+79161966975",
@@ -2877,7 +3562,7 @@
     },
     {
       "name": "Рассадкин Максим Алексеевич",
-      "position": "Командирвоздушного судна А-321",
+      "position": "Командир воздушного судна А-321",
       "email": "m.rassadkin@nordwindairlines.ru",
       "phones": [
         {
@@ -2894,7 +3579,7 @@
     },
     {
       "name": "Рахимов Ренат Рафаилович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "r.rakhimov@nordwindairlines.ru",
       "phones": [
         {
@@ -2905,25 +3590,30 @@
         {
           "display": "+7 986 799 40 10",
           "tel": "+79867994010",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Родионов Юрий Владимирович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "y.rodionov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 906 082 09 38",
           "tel": "+79060820938",
           "type": "work"
+        },
+        {
+          "display": "8 922 882 15 98",
+          "tel": "+79228821598",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Рябов Максим Васильевич",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "m.ryabov@nordwindairlines.ru",
       "phones": [
         {
@@ -2934,13 +3624,13 @@
         {
           "display": "8 925 901 27 23",
           "tel": "+79259012723",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
-      "name": "Савостьянов ВалерийАлександрович",
-      "position": "Пилот-инструктор воздушного суднаБоинг-737",
+      "name": "Савостьянов Валерий Александрович",
+      "position": "Пилот-инструктор воздушного судна Боинг-737",
       "email": "v.savostyanov@nordwindairlines.ru",
       "phones": [
         {
@@ -2951,17 +3641,17 @@
         {
           "display": "8 932 544 62 02",
           "tel": "+79325446202",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Саврасов Сергей Геннадьевич",
-      "position": "Второй пилотвоздушного судна А-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "s.savrasov@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 916 504 66 07(лич)",
+          "display": "8 916 504 66 07",
           "tel": "+79165046607",
           "type": "default"
         }
@@ -2969,7 +3659,7 @@
     },
     {
       "name": "Сагалаев Евгений Александрович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "e.sagalaev@nordwindairlines.ru",
       "phones": [
         {
@@ -2981,11 +3671,18 @@
     },
     {
       "name": "Садохин Александр Сергеевич",
-      "position": "Командирвоздушного судна Боинг-737",
-      "email": "a.sadokhin@nordwindairlines.ru"
+      "position": "Командир воздушного судна Боинг-737",
+      "email": "a.sadokhin@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 903 571 96 88",
+          "tel": "+79035719688",
+          "type": "work"
+        }
+      ]
     },
     {
-      "name": "Самойлов СтаниславВладимирович",
+      "name": "Самойлов Станислав Владимирович",
       "position": "Старший пилот-инструктор летного отряда Боинг-737/777 (737)",
       "email": "s.samoylov@nordwindairlines.ru",
       "phones": [
@@ -3003,7 +3700,7 @@
     },
     {
       "name": "Самсоненко Владимир Игоревич",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "v.samsonenko@nordwindairlines.ru",
       "phones": [
         {
@@ -3020,19 +3717,24 @@
     },
     {
       "name": "Сариев Самат Джумабаевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "s.sariev@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 966 312 70 14",
           "tel": "+79663127014",
           "type": "work"
+        },
+        {
+          "display": "8 922 551 60 89",
+          "tel": "+79225516089",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Сафаров Марсель Тагирович",
-      "position": "Командирвоздушного судна А-321",
+      "position": "Командир воздушного судна А-321",
       "email": "m.safarov@nordwindairlines.ru",
       "phones": [
         {
@@ -3044,7 +3746,7 @@
     },
     {
       "name": "Селиванов Вадим Вадимович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "v.selivanov@nordwindairlines.ru",
       "phones": [
         {
@@ -3056,19 +3758,24 @@
     },
     {
       "name": "Семенов Владимир Николаевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "vl.semenov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 906 081 98 08",
           "tel": "+79060819808",
           "type": "work"
+        },
+        {
+          "display": "8 982 919 81 39",
+          "tel": "+79829198139",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Сергеев Денис Анатольевич",
-      "position": "Второй пилотвоздушного суднаБоинг-777",
+      "position": "Второй пилот воздушного судна Боинг-777",
       "email": "de.sergeev@nordwindairlines.ru",
       "phones": [
         {
@@ -3080,31 +3787,41 @@
     },
     {
       "name": "Симонюк Максим Викторович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "m.simoniuk@nordwindairlines.ru",
       "phones": [
         {
+          "display": "8 968 591 67 87",
+          "tel": "+79685916787",
+          "type": "work"
+        },
+        {
           "display": "8 915 386 09 19",
           "tel": "+79153860919",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
-      "name": "Скворцов АлександрИванович",
-      "position": "Командирвоздушного судна А-330",
+      "name": "Скворцов Александр Иванович",
+      "position": "Командир воздушного судна А-330",
       "email": "a.skvortsov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 963 995 56 23",
           "tel": "+79639955623",
           "type": "work"
+        },
+        {
+          "display": "8 916 781 10 86",
+          "tel": "+79167811086",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Скворцов Кирилл Николаевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "k.skvortsov@nordwindairlines.ru",
       "phones": [
         {
@@ -3115,23 +3832,37 @@
         {
           "display": "8 913 370 06 97",
           "tel": "+79133700697",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Скворцов Никита Николаевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "n.skvortsov@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "n.skvortsov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 953 865 49 49",
+          "tel": "+79538654949",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Скляров Алексей Петрович",
-      "position": "Второй пилотвоздушного судна А-321",
-      "email": "al.sklyarov@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна А-321",
+      "email": "al.sklyarov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 916 806 54 22",
+          "tel": "+79168065422",
+          "type": "default"
+        }
+      ]
     },
     {
-      "name": "Скоян РубенАндраникович",
-      "position": "Второй пилотвоздушного суднаБоинг-737",
+      "name": "Скоян Рубен Андраникович",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "r.skoyan@nordwindairlines.ru",
       "phones": [
         {
@@ -3143,60 +3874,70 @@
     },
     {
       "name": "Смирнов Александр Александрович",
-      "position": "Второй пилотвоздушного суднаБоинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "aa.smirnov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 999 194 33 52",
           "tel": "+79991943352",
-          "type": "home"
-        }
-      ]
-    },
-    {
-      "name": "Смирнов Антон Сергеевич",
-      "position": "Командирвоздушного судна А-330",
-      "email": "a.smirnov@nordwindairlines.ru",
-      "phones": [
-        {
-          "display": "8 965 236 05 42",
-          "tel": "+79652360542",
-          "type": "work"
-        },
-        {
-          "display": "8 981 743 38 32",
-          "tel": "+79817433832",
-          "type": "home"
-        }
-      ]
-    },
-    {
-      "name": "Соловьев Максим Олегович",
-      "position": "Командирвоздушного суднаБоинг-737",
-      "email": "m.solovev@nordwindairlines.ru",
-      "phones": [
-        {
-          "display": "8 911 195 30 04 (лич)",
-          "tel": "+79111953004",
           "type": "default"
         }
       ]
     },
     {
+      "name": "Смирнов Антон Сергеевич",
+      "position": "Командир воздушного судна А-330",
+      "email": "a.smirnov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 981 743 38 32",
+          "tel": "+79817433832",
+          "type": "default"
+        },
+        {
+          "display": "8 965 236 05 42 (служебн",
+          "tel": "+79652360542",
+          "type": "work"
+        }
+      ]
+    },
+    {
+      "name": "Соловьев Максим Олегович",
+      "position": "Командир воздушного судна Боинг-737",
+      "email": "m.solovev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 911 195 30 04",
+          "tel": "+79111953004",
+          "type": "default"
+        },
+        {
+          "display": "8 968 861 89 67",
+          "tel": "+79688618967",
+          "type": "work"
+        }
+      ]
+    },
+    {
       "name": "Сорокин Андрей Викторович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "an.sorokin@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 962 949 04 95",
           "tel": "+79629490495",
           "type": "work"
+        },
+        {
+          "display": "8 927 804 11 66",
+          "tel": "+79278041166",
+          "type": "default"
         }
       ]
     },
     {
-      "name": "Станиславский ВячеславГеннадьевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "name": "Станиславский Вячеслав Геннадьевич",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "v.stanislavskiy@nordwindairlines.ru",
       "phones": [
         {
@@ -3213,81 +3954,108 @@
     },
     {
       "name": "Степанов Андрей Геннадьевич",
-      "position": "Второй пилотвоздушного судна А-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "a.stepanov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 980 501 51 20",
           "tel": "+79805015120",
-          "type": "home"
-        }
-      ]
-    },
-    {
-      "name": "Табульдин Марсель Нажипович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "m.tabuldin@nordwindairlines.ru"
-    },
-    {
-      "name": "Тазетдинов Артем Вячеславович",
-      "position": "Командирвоздушного судна Боинг-737",
-      "email": "a.tazetdinov@nordwindairlines.ru",
-      "phones": [
-        {
-          "display": "8 962 949 05 25",
-          "tel": "+79629490525",
-          "type": "work"
-        },
-        {
-          "display": "8 905 020 94 93 (лич)",
-          "tel": "+79050209493",
           "type": "default"
         }
       ]
     },
     {
+      "name": "Табульдин Марсель Нажипович",
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "m.tabuldin@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 922 834 36 34",
+          "tel": "+79228343634",
+          "type": "default"
+        }
+      ]
+    },
+    {
+      "name": "Тазетдинов Артем Вячеславович",
+      "position": "Командир воздушного судна Боинг-737",
+      "email": "a.tazetdinov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 905 020 94 93",
+          "tel": "+79050209493",
+          "type": "default"
+        },
+        {
+          "display": "8 962 949 05 25",
+          "tel": "+79629490525",
+          "type": "work"
+        }
+      ]
+    },
+    {
       "name": "Теуважев Аслан Владимирович",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "a.teuvazhev@nordwindairlines.ru",
       "phones": [
         {
           "display": "+7-968-885-63-98",
           "tel": "+79688856398",
           "type": "work"
+        },
+        {
+          "display": "8 926 320 81 00",
+          "tel": "+79263208100",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Титов Андрей Витальевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.titov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 963 995 21 99",
           "tel": "+79639952199",
           "type": "work"
+        },
+        {
+          "display": "8 912 841 32 67",
+          "tel": "+79128413267",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Титов Евгений Иванович",
-      "position": "Командирвоздушного суднаБоинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "e.titov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 965 445 41 77",
           "tel": "+79654454177",
           "type": "work"
+        },
+        {
+          "display": "8 905 840 64 91",
+          "tel": "+79058406491",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Тихенко Александр Александрович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.tikhenko@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 917 098 37 36 (лич)",
+          "display": "8 968 591 67 89",
+          "tel": "+79685916789",
+          "type": "work"
+        },
+        {
+          "display": "8 917 098 37 36",
           "tel": "+79170983736",
           "type": "default"
         }
@@ -3295,7 +4063,7 @@
     },
     {
       "name": "Тихонов Денис Владимирович",
-      "position": "Пилот-инструкторвоздушного судна Боинг-737",
+      "position": "Пилот-инструктор воздушного судна Боинг-737",
       "email": "d.tikhonov@nordwindairlines.ru",
       "phones": [
         {
@@ -3306,8 +4074,8 @@
       ]
     },
     {
-      "name": "Тишкевич СтаниславЭдуардович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "name": "Тишкевич Станислав Эдуардович",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "s.tishkevich@nordwindairlines.ru",
       "phones": [
         {
@@ -3316,7 +4084,7 @@
           "type": "work"
         },
         {
-          "display": "8 921 961 47 00(лич)",
+          "display": "8 921 961 47 00",
           "tel": "+79219614700",
           "type": "default"
         }
@@ -3324,7 +4092,7 @@
     },
     {
       "name": "Траковец Алексей Юрьевич",
-      "position": "Второй пилотвоздушного судна А-321",
+      "position": "Второй пилот воздушного судна А-321",
       "email": "a.trakovetc@nordwindairlines.ru",
       "phones": [
         {
@@ -3335,8 +4103,8 @@
       ]
     },
     {
-      "name": "Турецкий АлександрАлексеевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "name": "Турецкий Александр Алексеевич",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "al.turetskiy@nordwindairlines.ru",
       "phones": [
         {
@@ -3348,7 +4116,7 @@
     },
     {
       "name": "Тхазеплов Азамат Анатольевич",
-      "position": "Второй пилотвоздушного судна А-321",
+      "position": "Второй пилот воздушного судна А-321",
       "email": "a.tkhazeplov@nordwindairlines.ru",
       "phones": [
         {
@@ -3360,7 +4128,7 @@
     },
     {
       "name": "Тюняев Александр Викторович",
-      "position": "Командирвоздушного суднаА-330",
+      "position": "Командир воздушного судна А-330",
       "email": "a.tunyaev@nordwindairlines.ru",
       "phones": [
         {
@@ -3378,56 +4146,73 @@
     {
       "name": "Узенбаев Дамир Габдулхакович",
       "position": "Заместительдиректора летного департамента - начальник летной службы",
-      "email": "da.uzenbaev@nordwindairlines.ru"
-    },
-    {
-      "name": "Урюпин Александр Владимирович",
-      "position": "Командирвоздушного суднаА-321",
-      "email": "a.uryupin@nordwindairlines.ru",
+      "email": "da.uzenbaev@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 906 082 35 29",
-          "tel": "+79060823529",
-          "type": "work"
-        },
-        {
-          "display": "8 915 091 50 58",
-          "tel": "+79150915058",
+          "display": "8 906 840 13 33",
+          "tel": "+79068401333",
           "type": "default"
         }
       ]
     },
     {
+      "name": "Урюпин Александр Владимирович",
+      "position": "Командир воздушного судна А-321",
+      "email": "a.uryupin@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 915 091 50 58",
+          "tel": "+79150915058",
+          "type": "default"
+        },
+        {
+          "display": "8 906 082 35 29",
+          "tel": "+79060823529",
+          "type": "work"
+        }
+      ]
+    },
+    {
       "name": "Усиков Александр Анатольевич",
-      "position": "Пилот-инструктор воздушного суднаБоинг-737",
+      "position": "Пилот-инструктор воздушного судна Боинг-737",
       "email": "a.usikov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 903 708 34 73",
           "tel": "+79037083473",
           "type": "work"
+        },
+        {
+          "display": "8 911 855 05 05",
+          "tel": "+79118550505",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Усманов Рустам Сабирович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "r.usmanov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 966 312 69 61",
           "tel": "+79663126961",
           "type": "work"
+        },
+        {
+          "display": "8 922 855 50 88",
+          "tel": "+79228555088",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Фиёшкин Андрей Викторович",
-      "position": "Второй пилотвоздушного судна Боинг-777",
+      "position": "Второй пилот воздушного судна Боинг-777",
       "email": "a.fiyoshkin@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 904 009 44 56 (основной)",
+          "display": "8 904 009 44 56",
           "tel": "+79040094456",
           "type": "default"
         },
@@ -3440,12 +4225,19 @@
     },
     {
       "name": "Филатов Владимир Дмитриевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "v.filatov@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "v.filatov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 964 588 68 83",
+          "tel": "+79645886883",
+          "type": "default"
+        }
+      ]
     },
     {
-      "name": "Филимянов ДмитрийГеоргиевич",
-      "position": "Командирвоздушного судна А-330",
+      "name": "Филимянов Дмитрий Георгиевич",
+      "position": "Командир воздушного судна А-330",
       "email": "d.filimyanov@nordwindairlines.ru",
       "phones": [
         {
@@ -3457,13 +4249,18 @@
     },
     {
       "name": "Филякин Михаил Геннадьевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "m.filyakin@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 906 082 00 38",
           "tel": "+79060820038",
           "type": "work"
+        },
+        {
+          "display": "8 987 874 15 25",
+          "tel": "+79878741525",
+          "type": "default"
         }
       ]
     },
@@ -3480,30 +4277,42 @@
         {
           "display": "8 915 002 72 94",
           "tel": "+79150027294",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Фоменко Николай Геннадиевич",
-      "position": "Второй пилотвоздушного суднаА-321",
-      "email": "n.fomenko@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна А-321",
+      "email": "n.fomenko@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 968 690 59 87",
+          "tel": "+79686905987",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Фомин Борис Игоревич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "b.fomin@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 903 708 36 37",
           "tel": "+79037083637",
           "type": "work"
+        },
+        {
+          "display": "8 987 847 64 24",
+          "tel": "+79878476424",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Фотиев Алексей Геннадьевич",
-      "position": "Второй пилотвоздушного судна Боинг-777",
+      "position": "Второй пилот воздушного судна Боинг-777",
       "email": "a.fotiev@nordwindairlines.ru",
       "phones": [
         {
@@ -3515,7 +4324,7 @@
     },
     {
       "name": "Фурашов Станислав Николаевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "s.furashov@nordwindairlines.ru",
       "phones": [
         {
@@ -3527,7 +4336,7 @@
     },
     {
       "name": "Хвостенко Владимир Петрович",
-      "position": "Второй пилотвоздушного судна А-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "v.khvostenko@nordwindairlines.ru",
       "phones": [
         {
@@ -3544,43 +4353,53 @@
     },
     {
       "name": "Хлуденцов Сергей Викторович",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "s.khludentsov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 965 236 05 96",
           "tel": "+79652360596",
           "type": "work"
+        },
+        {
+          "display": "8 910 470 84 18",
+          "tel": "+79104708418",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Хлыстов Дмитрий Михайлович",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "d.khlystov@nordwindairlines.ru",
       "phones": [
         {
+          "display": "8 967 199 80 87",
+          "tel": "+79671998087",
+          "type": "work"
+        },
+        {
           "display": "8 926 602 13 46",
           "tel": "+79266021346",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Ходов Александр Русланович",
-      "position": "Второй пилотвоздушного суднаБоинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "a.khodov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 917 616 43 52",
           "tel": "+79176164352",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Хорев Андрей Валерьевич",
-      "position": "Второй пилотвоздушного судна А-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "a.khorev@nordwindairlines.ru",
       "phones": [
         {
@@ -3592,7 +4411,7 @@
     },
     {
       "name": "Хребтов Дмитрий Владимирович",
-      "position": "Старший пилот -инспекторИнспекции по безопасностиполетов",
+      "position": "Старший пилот -инспектор Инспекции по безопасности полетов",
       "email": "d.khrebtov@nordwindairlines.ru",
       "phones": [
         {
@@ -3604,7 +4423,7 @@
     },
     {
       "name": "Чебурин Тимофей Алексеевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "t.cheburin@nordwindairlines.ru",
       "phones": [
         {
@@ -3616,7 +4435,7 @@
     },
     {
       "name": "Чепурин Владислав Валерьевич",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "v.chepurin@nordwindairlines.ru",
       "phones": [
         {
@@ -3632,13 +4451,20 @@
       ]
     },
     {
-      "name": "Черепанов ДмитрийАндреевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "d.cherepanov@nordwindairlines.ru"
+      "name": "Черепанов Дмитрий Андреевич",
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "d.cherepanov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 985 188 80 69",
+          "tel": "+79851888069",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Чернев Андрей Игоревич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "a.chernev@nordwindairlines.ru",
       "phones": [
         {
@@ -3650,12 +4476,19 @@
     },
     {
       "name": "Честнов Сергей Владимирович",
-      "position": "Командирвоздушного судна А-321",
-      "email": "s.chestnov@nordwindairlines.ru"
+      "position": "Командир воздушного судна А-321",
+      "email": "s.chestnov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 963 322 96 86",
+          "tel": "+79633229686",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Чистяков Максим Павлович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "m.chistyakov@nordwindairlines.ru",
       "phones": [
         {
@@ -3667,7 +4500,7 @@
     },
     {
       "name": "Чобану Константин Николаевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "k.chobanu@nordwindairlines.ru",
       "phones": [
         {
@@ -3684,19 +4517,19 @@
     },
     {
       "name": "Шаблий Станислав Николаевич",
-      "position": "Командирвоздушного суднаА-330",
+      "position": "Командир воздушного судна А-330",
       "email": "s.shablii@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 929 677 97 97",
           "tel": "+79296779797",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Шавыкин Максим Алексеевич",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "m.shavykin@nordwindairlines.ru",
       "phones": [
         {
@@ -3708,11 +4541,16 @@
     },
     {
       "name": "Шакин Александр Владимирович",
-      "position": "Командирвоздушного судна А-330",
+      "position": "Командир воздушного судна А-330",
       "email": "a.shakin@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 915 214 90 12 (лич.)",
+          "display": "8 968 861 75 86",
+          "tel": "+79688617586",
+          "type": "work"
+        },
+        {
+          "display": "8 915 214 90 12",
           "tel": "+79152149012",
           "type": "default"
         }
@@ -3720,7 +4558,7 @@
     },
     {
       "name": "Шалыгин Павел Николаевич",
-      "position": "Командирвоздушного судна Боинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "p.shalygin@nordwindairlines.ru",
       "phones": [
         {
@@ -3731,19 +4569,19 @@
         {
           "display": "8 910 568 01 20",
           "tel": "+79105680120",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Швецов Александр Анатольевич",
-      "position": "Второй пилотвоздушного судна А-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "a.shvetsov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 977 640 33 07",
           "tel": "+79776403307",
-          "type": "home"
+          "type": "default"
         },
         {
           "display": "8 919 963 14 79",
@@ -3754,9 +4592,14 @@
     },
     {
       "name": "Шемшур Александр Сергеевич",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.shemshur@nordwindairlines.ru",
       "phones": [
+        {
+          "display": "8 996 924 97 87",
+          "tel": "+79969249787",
+          "type": "default"
+        },
         {
           "display": "8 968 591 68 00",
           "tel": "+79685916800",
@@ -3766,7 +4609,7 @@
     },
     {
       "name": "Шершнёва Дарья Юрьевна",
-      "position": "Второй пилотвоздушного судна А-321",
+      "position": "Второй пилот воздушного судна А-321",
       "email": "d.shershneva@nordwindairlines.ru",
       "phones": [
         {
@@ -3777,10 +4620,15 @@
       ]
     },
     {
-      "name": "Шило СергейАлександрович",
-      "position": "Пилот-инструктор воздушного суднаБоинг-737",
+      "name": "Шило Сергей Александрович",
+      "position": "Пилот-инструктор воздушного судна Боинг-737",
       "email": "s.shilo@nordwindairlines.ru",
       "phones": [
+        {
+          "display": "8 906 840 22 11",
+          "tel": "+79068402211",
+          "type": "work"
+        },
         {
           "display": "8 960 372 64 62",
           "tel": "+79603726462",
@@ -3790,12 +4638,19 @@
     },
     {
       "name": "Ширяев Виталий Андреевич",
-      "position": "Второй пилотвоздушного судна А-321",
-      "email": "v.shiriaev@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна А-321",
+      "email": "v.shiriaev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 961 853 42 52",
+          "tel": "+79618534252",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Ширяев Илья Дмитриевич",
-      "position": "Командирвоздушного судна Боинг-777",
+      "position": "Командир воздушного судна Боинг-777",
       "email": "i.shiryaev@nordwindairlines.ru",
       "phones": [
         {
@@ -3812,7 +4667,7 @@
     },
     {
       "name": "Шишкин Данила Александрович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "d.shishkin@nordwindairlines.ru",
       "phones": [
         {
@@ -3821,7 +4676,7 @@
           "type": "work"
         },
         {
-          "display": "8 906 235 01 08 (лич)",
+          "display": "8 906 235 01 08",
           "tel": "+79062350108",
           "type": "default"
         }
@@ -3829,17 +4684,36 @@
     },
     {
       "name": "Шорин Данила Станиславович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
-      "email": "d.shorin@nordwindairlines.ru"
+      "position": "Второй пилот воздушного судна Боинг-737",
+      "email": "d.shorin@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 920 740 86 42",
+          "tel": "+79207408642",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Штирц Виктор Александрович",
-      "position": "Командирвоздушного судна Боинг-737",
-      "email": "v.shtirts@nordwindairlines.ru"
+      "position": "Командир воздушного судна Боинг-737",
+      "email": "v.shtirts@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 910 505 16 82",
+          "tel": "+79105051682",
+          "type": "default"
+        },
+        {
+          "display": "8 968 591 67 88",
+          "tel": "+79685916788",
+          "type": "work"
+        }
+      ]
     },
     {
       "name": "Шуклин Александр Викторович",
-      "position": "Второй пилотвоздушного судна А-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "a.shuklin@nordwindairlines.ru",
       "phones": [
         {
@@ -3851,7 +4725,7 @@
     },
     {
       "name": "Шуляк Вячеслав Александрович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "v.shulayk@nordwindairlines.ru",
       "phones": [
         {
@@ -3863,19 +4737,19 @@
     },
     {
       "name": "Щербаков Никита Олегович",
-      "position": "Второй пилотвоздушного судна Боинг-737",
+      "position": "Второй пилот воздушного судна Боинг-737",
       "email": "n.shcherbakov@nordwindairlines.ru",
       "phones": [
         {
           "display": "8 922 542 97 02",
           "tel": "+79225429702",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Юдин Владимир Сергеевич",
-      "position": "Второй пилотвоздушного судна А-330",
+      "position": "Второй пилот воздушного судна А-330",
       "email": "v.yudin@nordwindairlines.ru",
       "phones": [
         {
@@ -3887,7 +4761,7 @@
     },
     {
       "name": "Юмашин Андрей Эдуардович",
-      "position": "Командирвоздушного суднаБоинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "a.yumashin@nordwindairlines.ru",
       "phones": [
         {
@@ -3898,13 +4772,13 @@
         {
           "display": "8 903 360 23 59",
           "tel": "+79033602359",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Юткин Владимир Иванович",
-      "position": "Пилот-инструктор воздушного суднаБоинг-737",
+      "position": "Пилот-инструктор воздушного судна Боинг-737",
       "email": "v.yutkin@nordwindairlines.ru",
       "phones": [
         {
@@ -3916,35 +4790,83 @@
     },
     {
       "name": "Янкин Виталий Иванович",
-      "position": "Командирвоздушного судна Боинг-737",
+      "position": "Командир воздушного судна Боинг-737",
       "email": "v.yankin@nordwindairlines.ru",
       "phones": [
         {
+          "display": "8 966 312 48 87",
+          "tel": "+79663124887",
+          "type": "work"
+        },
+        {
           "display": "8 961 938 77 37",
           "tel": "+79619387737",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
     {
       "name": "Ясько Анатолий Андреевич",
-      "position": "Командирвоздушного судна Боинг-737",
-      "email": "a.iasko@nordwindairlines.ru"
+      "position": "Командир воздушного судна Боинг-737",
+      "email": "a.iasko@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 967 199 81 24",
+          "tel": "+79671998124",
+          "type": "work"
+        },
+        {
+          "display": "8 916 102 19 19",
+          "tel": "+79161021919",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Гаязова Татьяна Васильевна",
       "position": "Начальник штаба лётногодепартамента",
-      "email": "t.gayazova@nordwindairlines.r u"
+      "email": "t.gayazova@nordwindairlines.r u",
+      "phones": [
+        {
+          "display": "+7-903-207-39-77",
+          "tel": "+79032073977",
+          "type": "default"
+        },
+        {
+          "display": "+7-495-730-43-30 доб. 327",
+          "tel": "+74957304330327;ext=327",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Перминов Михаил Владимирович",
       "position": "Заместительначальника штаба",
-      "email": "m.perminov@nordwindairlines. ru"
+      "email": "m.perminov@nordwindairlines. ru",
+      "phones": [
+        {
+          "display": "+ 7-963-625-35-01 +7-495-730-43-30 доб. 560",
+          "tel": "+7963625350174957304330560;ext=560",
+          "type": "work"
+        }
+      ]
     },
     {
       "name": "Кириллова Анастасия Сергеевна",
       "position": "Специалист по работе с летно-штабнойдокументацией",
-      "email": "a.kirillova@nordwindairlines.r u"
+      "email": "a.kirillova@nordwindairlines.r u",
+      "phones": [
+        {
+          "display": "+7 966 118 25 37",
+          "tel": "+79661182537",
+          "type": "work"
+        },
+        {
+          "display": "+7 916 516 50 88 Доб. 559",
+          "tel": "+79165165088559;ext=559",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Сердюк Елена Викторовна",
@@ -3959,14 +4881,38 @@
       ]
     },
     {
-      "name": "Титовская АннаВячеславовна",
+      "name": "Титовская Анна Вячеславовна",
       "position": "Специалист по работе с летно-штабнойдокументацией",
-      "email": "a.titovskaya@nordwindairlines. ru"
+      "email": "a.titovskaya@nordwindairlines. ru",
+      "phones": [
+        {
+          "display": "+7-495-730-43-30 доб. 466",
+          "tel": "+74957304330466;ext=466",
+          "type": "default"
+        },
+        {
+          "display": "+7-968-860-60-28",
+          "tel": "+79688606028",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Титовский Евгений Викторович",
       "position": "Специалист по работе с летно-штабнойдокументацией",
-      "email": "e.titovskiy@nordwindairlines.r u"
+      "email": "e.titovskiy@nordwindairlines.r u",
+      "phones": [
+        {
+          "display": "+7-495-730-43-30 доб. 466",
+          "tel": "+74957304330466;ext=466",
+          "type": "default"
+        },
+        {
+          "display": "+7-925-417-59-88",
+          "tel": "+79254175988",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Лыкова Инна Савельевна",
@@ -3976,7 +4922,7 @@
         {
           "display": "8 968 662 38 57",
           "tel": "+79686623857",
-          "type": "home"
+          "type": "default"
         }
       ]
     },
@@ -3985,15 +4931,22 @@
       "position": "Директор по работе с персоналом",
       "phones": [
         {
-          "display": "+7 906 715-50-96",
-          "tel": "+79067155096;ext=623",
-          "type": "work"
+          "display": "+7 906 715-50-96 доб.623",
+          "tel": "+79067155096623;ext=623",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Отдел кадров",
-      "position": "+7-495-730-43-30 доб. 122,184,141,228,436"
+      "position": "+7-495-730-43-30 доб. 122,184,141,228,436",
+      "phones": [
+        {
+          "display": "hr@nordwindairlines.ru",
+          "tel": "+7",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Якубов Дмитрий Тагирович",
@@ -4003,12 +4956,29 @@
           "display": "+7-917-5661846",
           "tel": "+79175661846",
           "type": "default"
+        },
+        {
+          "display": "+7-495-730-43-30 доб. 142",
+          "tel": "+74957304330142;ext=142",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Баранов Владимир Алексеевич",
-      "position": "Главный штурман"
+      "position": "Главный штурман",
+      "phones": [
+        {
+          "display": "+7-965-216-62-63",
+          "tel": "+79652166263",
+          "type": "default"
+        },
+        {
+          "display": "+7-495-730-43-30 доб. 267",
+          "tel": "+74957304330267;ext=267",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Дымченко Александр Евгеньевич",
@@ -4031,16 +5001,28 @@
       "email": "d.kondratev@nordwindairlines.ru",
       "phones": [
         {
-          "display": "+7-495-730-43-30",
-          "tel": "+74957304330;ext=487",
-          "type": "work"
+          "display": "+7-495-730-43-30 доб. 487",
+          "tel": "+74957304330487;ext=487",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Борисова Татьяна Николаевна",
       "position": "Начальник отдела наземного планирования",
-      "email": "t.borisova@nordwindairlines.ru"
+      "email": "t.borisova@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 966 118 19 28",
+          "tel": "+79661181928",
+          "type": "default"
+        },
+        {
+          "display": "+7-495-730-43-30 Доб.312",
+          "tel": "+74957304330312;ext=312",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Годунова Татьяна Борисовна",
@@ -4048,16 +5030,23 @@
       "email": "t.godunova@nordwindairlines.ru",
       "phones": [
         {
-          "display": "+7-495-730-43-30",
-          "tel": "+74957304330;ext=182",
-          "type": "work"
+          "display": "+7-495-730-43-30 доб. 182",
+          "tel": "+74957304330182;ext=182",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Огурцов Дмитрий Викторович",
       "position": "Специалист отдела наземного планирования (тренажеры)",
-      "email": "d.ogurtsov@nordwindairlines.ru"
+      "email": "d.ogurtsov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 967 199 80 95",
+          "tel": "+79671998095",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Давыденка Сергей Степанович",
@@ -4068,6 +5057,11 @@
           "display": "+7-963-995-46-32",
           "tel": "+79639954632",
           "type": "work"
+        },
+        {
+          "display": "+7-926- 815-43-90",
+          "tel": "+79268154390",
+          "type": "default"
         }
       ]
     },
@@ -4104,6 +5098,11 @@
           "display": "+7 915 075 79 22",
           "tel": "+79150757922",
           "type": "work"
+        },
+        {
+          "display": "+7 917 532 60 83",
+          "tel": "+79175326083",
+          "type": "default"
         }
       ]
     },
@@ -4113,14 +5112,14 @@
       "email": "s.cherminskiy@nordwindairlines.ru",
       "phones": [
         {
-          "display": "+7-968-591- 67-93",
-          "tel": "+79685916793",
-          "type": "work"
-        },
-        {
           "display": "+7-905-588-65- 60",
           "tel": "+79055886560",
           "type": "default"
+        },
+        {
+          "display": "+7-968-591- 67-93",
+          "tel": "+79685916793",
+          "type": "work"
         }
       ]
     },
@@ -4130,9 +5129,14 @@
       "email": "ad.tsvetkov@nordwindairlines.ru",
       "phones": [
         {
-          "display": "+79037083609 (",
+          "display": "+79037083609",
           "tel": "+79037083609",
           "type": "work"
+        },
+        {
+          "display": "+7 961 901 16 98",
+          "tel": "+79619011698",
+          "type": "default"
         }
       ]
     },
@@ -4181,13 +5185,30 @@
           "display": "8 906 082 28 76",
           "tel": "+79060822876",
           "type": "work"
+        },
+        {
+          "display": "8 926 373 85 56",
+          "tel": "+79263738556",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Лыков Дмитрий Анатольевич",
       "position": "Заместитель генерального директора по безопасности полетов – начальникинспекции по безопасности полетов",
-      "email": "d.lykov@nordwindairlines.ru"
+      "email": "d.lykov@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "+7-915-075-79-67",
+          "tel": "+79150757967",
+          "type": "default"
+        },
+        {
+          "display": "+7-495-730-43-30 доб. 262",
+          "tel": "+74957304330262;ext=262",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Зайченко Роман Владимирович",
@@ -4198,6 +5219,11 @@
           "display": "8 966 312 48 34",
           "tel": "+79663124834",
           "type": "work"
+        },
+        {
+          "display": "8 968 951 86 17",
+          "tel": "+79689518617",
+          "type": "default"
         }
       ]
     },
@@ -4216,7 +5242,19 @@
     {
       "name": "Авдеев Юрий Витальевич",
       "position": "Пилот инструктор ЛМО",
-      "email": "y.avdeev@nordwindairlines.ru"
+      "email": "y.avdeev@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8 966 389 83 96",
+          "tel": "+79663898396",
+          "type": "work"
+        },
+        {
+          "display": "8 926 591 21 80",
+          "tel": "+79265912180",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Гущин Петр Евгеньевич",
@@ -4263,6 +5301,11 @@
           "display": "8 965 236 04 96",
           "tel": "+79652360496",
           "type": "default"
+        },
+        {
+          "display": "8 968 778 97 87",
+          "tel": "+79687789787",
+          "type": "default"
         }
       ]
     },
@@ -4272,7 +5315,12 @@
       "email": "a.pavlenko@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 914 710 38 73 (лич)",
+          "display": "8 967 199 80 97",
+          "tel": "+79671998097",
+          "type": "work"
+        },
+        {
+          "display": "8 914 710 38 73",
           "tel": "+79147103873",
           "type": "default"
         }
@@ -4281,17 +5329,53 @@
     {
       "name": "Акимова Елена Владимировна",
       "position": "Специалист по планированию экипажей",
-      "email": "pilotplaning@nordwindairlines.ru"
+      "email": "pilotplaning@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "+7-917-566-52-63",
+          "tel": "+79175665263",
+          "type": "default"
+        },
+        {
+          "display": "+7-495-730-43-30 доб. 166",
+          "tel": "+74957304330166;ext=166",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Гундаров Константин Анатольевич",
       "position": "Специалист по планированию экипажей",
-      "email": "pilotplaning@nordwindairlines.ru"
+      "email": "pilotplaning@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "+7-917-566-52-63",
+          "tel": "+79175665263",
+          "type": "default"
+        },
+        {
+          "display": "+7-495-730-43-30 доб. 166",
+          "tel": "+74957304330166;ext=166",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Курносов Павел Олегович",
       "position": "Начальник отдела планирования",
-      "email": "pilotplaning@nordwindairlines.ru"
+      "email": "pilotplaning@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "+7-917-566-52-63",
+          "tel": "+79175665263",
+          "type": "default"
+        },
+        {
+          "display": "+7-495-730-43-30 доб. 437",
+          "tel": "+74957304330437;ext=437",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Латкин Дмитрий Андреевич",
@@ -4302,6 +5386,16 @@
           "display": "+7 963 995-44-31",
           "tel": "+79639954431",
           "type": "default"
+        },
+        {
+          "display": "+7 917 566-52-63",
+          "tel": "+79175665263",
+          "type": "default"
+        },
+        {
+          "display": "+7-495-730-43-30 Доб. 520",
+          "tel": "+74957304330520;ext=520",
+          "type": "default"
         }
       ]
     },
@@ -4311,9 +5405,9 @@
       "email": "n.andronova@nordwindairlines.ru",
       "phones": [
         {
-          "display": "+7-495-730-43-30",
-          "tel": "+74957304330;ext=422",
-          "type": "work"
+          "display": "+7-495-730-43-30 доб.422",
+          "tel": "+74957304330422;ext=422",
+          "type": "default"
         }
       ]
     },
@@ -4323,9 +5417,9 @@
       "email": "g.korshunova@nordwindairlines.ru",
       "phones": [
         {
-          "display": "+7-495-730-43-30",
-          "tel": "+74957304330;ext=325",
-          "type": "work"
+          "display": "+7-495-730-43-30 доб. 325",
+          "tel": "+74957304330325;ext=325",
+          "type": "default"
         }
       ]
     },
@@ -4342,9 +5436,21 @@
       ]
     },
     {
-      "name": "Скворцова Екатерина, УчватоваНаталья",
+      "name": "Скворцова Екатерина, Учватова Наталья",
       "position": "Менеджер группы бронирования",
-      "email": "Вопросы по размещению в ГОСТИНИЦЕ, бронированиюбилетов, таксиcrewreserv@nordwindairlines.ru"
+      "email": "Вопросы по размещению в ГОСТИНИЦЕ, бронированиюбилетов, таксиcrewreserv@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "+7 965 236 03 97",
+          "tel": "+79652360397",
+          "type": "default"
+        },
+        {
+          "display": "+7-495-221-33- 68 доб. 1608",
+          "tel": "+749522133681608;ext=1608",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Арафалова Елизавета",
@@ -4352,13 +5458,13 @@
       "email": "Вопросы по размещению в ГОСТИНИЦЕ, бронированиюбилетов, таксиcrewreserv@nordwindairlines.ru",
       "phones": [
         {
-          "display": "+7-495-221-33-68",
-          "tel": "+74952213368;ext=1610",
-          "type": "work"
-        },
-        {
           "display": "+7 965 236 05 57",
           "tel": "+79652360557",
+          "type": "default"
+        },
+        {
+          "display": "+7-495-221-33-68 доб. 1610",
+          "tel": "+749522133681610;ext=1610",
           "type": "default"
         }
       ]
@@ -4404,9 +5510,9 @@
       "email": "a.artemov@nordwindairlines.ru",
       "phones": [
         {
-          "display": "+7-495-730-43-30",
-          "tel": "+74957304330;ext=308",
-          "type": "work"
+          "display": "+7-495-730-43-30 доб. 308",
+          "tel": "+74957304330308;ext=308",
+          "type": "default"
         }
       ]
     },
@@ -4416,9 +5522,9 @@
       "email": "a.lebedeva@nordwindairlines.ru",
       "phones": [
         {
-          "display": "+7-495-730-43-30",
-          "tel": "+74957304330;ext=169",
-          "type": "work"
+          "display": "+7-495-730-43-30 доб. 169",
+          "tel": "+74957304330169;ext=169",
+          "type": "default"
         }
       ]
     },
@@ -4428,16 +5534,23 @@
       "email": "Рабочее время: понедельник -пятница 9-00 до 19-00суббота 10-00 до 17-00 (удаленная поддержка по телефону) IT-отдел support@allupnet.ru.",
       "phones": [
         {
-          "display": "+7-495-730-43-30",
-          "tel": "+74957304330;ext=1111",
-          "type": "work"
+          "display": "+7-495-730-43-30 доб. 1111",
+          "tel": "+749573043301111;ext=1111",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Блохин Виталий Валентинович",
       "position": "Начальник транспортногоотдела",
-      "email": "v.blokhin@nordwindairlines.ru"
+      "email": "v.blokhin@nordwindairlines.ru",
+      "phones": [
+        {
+          "display": "8-917-566-53-20 8-495-730-43-30 доб. 157",
+          "tel": "+7917566532084957304330157;ext=157",
+          "type": "default"
+        }
+      ]
     },
     {
       "name": "Клочко Елена Васильевна",
@@ -4445,9 +5558,9 @@
       "email": "e.klochko@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8-495-730-43-30",
-          "tel": "+74957304330;ext=628",
-          "type": "work"
+          "display": "8-495-730-43-30 доб. 628",
+          "tel": "+74957304330628;ext=628",
+          "type": "default"
         }
       ]
     },
@@ -4469,25 +5582,32 @@
       "email": "i.dobrenkov@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8 909-1627562",
-          "tel": "+79091627562;ext=76036",
-          "type": "work"
+          "display": "8 909-1627562 доб. 76036",
+          "tel": "+7909162756276036;ext=76036",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Производственно-диспетчерская служба (ПДС)",
+      "position": "",
       "email": "fcc@nordwindairlines.ru",
       "phones": [
         {
-          "display": "8-495-730-43-30",
-          "tel": "+74957304330;ext=275",
-          "type": "work"
+          "display": "8-495-730-43-30 доб. 275",
+          "tel": "+74957304330275;ext=275",
+          "type": "default"
+        },
+        {
+          "display": "103 8-915-286-96-36",
+          "tel": "+710389152869636",
+          "type": "default"
         }
       ]
     },
     {
       "name": "Представитель на перроне а/п ШРМ",
+      "position": "",
       "phones": [
         {
           "display": "8-917-566-51-52",
