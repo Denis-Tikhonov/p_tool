@@ -1,135 +1,172 @@
-// modules/flightprocedures.js
-let cachedProcedures = null;
-function renderFPHeader() {
-  const center = document.getElementById('headerCenter');
-  if (!center) return;
-  center.innerHTML = `<div class="hc-default">Лётные процедуры</div><div class="hc-search"><input type="search" id="headerSearchInput" placeholder="Поиск..." autocomplete="off"></div>`;
-  showFPDefaultHeader();
-}
-function showFPDefaultHeader() {
-  const left = document.getElementById('headerLeft');
-  const right = document.getElementById('headerRight');
-  const def = document.querySelector('.hc-default');
-  const srch = document.querySelector('.hc-search');
-  if (left) left.innerHTML = `<button class="icon-btn" aria-label="Меню" onclick="window.app.toggleMenu()">${window.ICONS.menu}</button>`;
-  if (def) def.classList.remove('hidden');
-  if (srch) srch.classList.remove('visible');
-  if (right) {
-    right.innerHTML = `<button class="icon-btn" aria-label="Поиск">${window.ICONS.search}</button>`;
-    right.onclick = () => showFPSearchHeader();
-  }
-  const input = document.getElementById('headerSearchInput');
-  if (input) { input.value = ''; if (cachedProcedures) renderFilteredFP(''); }
-}
-function showFPSearchHeader() {
-  const left = document.getElementById('headerLeft');
-  const right = document.getElementById('headerRight');
-  const def = document.querySelector('.hc-default');
-  const srch = document.querySelector('.hc-search');
-  const input = document.getElementById('headerSearchInput');
-  if (left) left.innerHTML = '';
-  if (def) def.classList.add('hidden');
-  if (srch) srch.classList.add('visible');
-  if (right) {
-    right.innerHTML = `<button class="icon-btn" aria-label="Отмена">${window.ICONS.back}</button>`;
-    right.onclick = () => showFPDefaultHeader();
-  }
-  if (input) input.focus();
-}
-function renderContentBlock(block) {
-  switch (block.type) {
-    case 'action': return `<div class="fp-action"><span class="fp-action-label">${block.label}</span><span class="fp-action-dots"></span><span class="fp-action-value">${block.value}</span></div>`;
-    case 'action-crew': return `<div class="fp-action"><span class="fp-action-label">${block.label}</span><span class="fp-action-dots"></span><span class="fp-action-value">${block.value}</span><span class="fp-crew-badge">${block.crew}</span></div>`;
-    case 'verify': return `<div class="fp-verify">${block.text}</div>`;
-    case 'condition': return `<div class="fp-condition">${block.text}</div>`;
-    case 'note': return `<div class="fp-note"><strong>Note:</strong> ${block.text}</div>`;
-    case 'caution': return `<div class="fp-caution"><strong>CAUTION:</strong> ${block.text}</div>`;
-    case 'warning': return `<div class="fp-warning"><strong>WARNING:</strong> ${block.text}</div>`;
-    case 'tail': return `<div class="fp-tail">${block.text}</div>`;
-    case 'separator': return `<hr class="fp-separator">`;
-    case 'image': return `<img class="fp-photo-thumb" src="${block.src}" onerror="this.src='icon-192.png'" data-full="${block.fullSrc || block.src}" style="max-width:100%; max-height:200px; border-radius:8px; cursor:pointer;">`;
-    case 'html': return `<div class="fp-html">${block.html}</div>`;
-    default: return '';
-  }
-}
-function renderFPList(phases) {
-  if (!phases.length) return '<p class="empty-message">Нет данных</p>';
-  return phases.map(phase => {
-    const icon = window.ICONS.plane;
-    const timeHtml = phase.time ? `<span class="fp-phase-time">${phase.time}</span>` : '';
-    const proceduresHtml = phase.procedures.map(proc => {
-      const pdfHtml = proc.pdfRef ? `<button class="fp-pdf-ref" data-pdf="${proc.pdfRef.file}" data-page="${proc.pdfRef.page}">${proc.pdfRef.label}</button>` : '';
-      const contentHtml = proc.content.map(c => renderContentBlock(c)).join('');
-      return `<div class="fp-procedure"><div class="fp-procedure-header"><span class="collapsible-title">${proc.title}</span>${pdfHtml}<span class="collapsible-chevron">${window.ICONS['chevron-down']}</span></div><div class="fp-procedure-content">${contentHtml}</div></div>`;
-    }).join('');
-    return `<div class="fp-phase"><div class="fp-phase-header">${icon}<span class="collapsible-title">${phase.title}</span>${timeHtml}<span class="collapsible-chevron">${window.ICONS['chevron-down']}</span></div><div class="fp-phase-content">${proceduresHtml}</div></div>`;
-  }).join('');
-}
-function renderFilteredFP(query) {
-  const container = document.getElementById('fpContainer');
-  if (!container) return;
-  let filtered = cachedProcedures;
-  if (query.trim()) {
-    const lower = query.toLowerCase();
-    filtered = cachedProcedures.map(phase => {
-      const newPhase = { ...phase, procedures: phase.procedures.filter(proc => {
-        if (proc.title.toLowerCase().includes(lower)) return true;
-        return proc.content.some(c => {
-          if (c.type === 'action' || c.type === 'action-crew') return c.label.toLowerCase().includes(lower) || c.value.toLowerCase().includes(lower);
-          if (c.type === 'verify' || c.type === 'condition' || c.type === 'note' || c.type === 'caution' || c.type === 'warning' || c.type === 'tail') return c.text.toLowerCase().includes(lower);
-          return false;
-        });
-      }) };
-      if (newPhase.procedures.length) return newPhase;
-      if (phase.title.toLowerCase().includes(lower)) return { ...phase, procedures: phase.procedures };
-      return null;
-    }).filter(p => p !== null);
-  }
-  const html = renderFPList(filtered);
-  window.app.hideSkeleton(container, html);
-  container.querySelectorAll('.fp-phase-header').forEach(header => {
-    header.addEventListener('click', () => header.closest('.fp-phase').classList.toggle('open'));
-  });
-  container.querySelectorAll('.fp-procedure-header').forEach(header => {
-    header.addEventListener('click', (e) => {
-      if (e.target.closest('.fp-pdf-ref')) return;
-      header.closest('.fp-procedure').classList.toggle('open');
-    });
-  });
-  container.querySelectorAll('.fp-pdf-ref').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      window.app.openPDFModal(btn.dataset.pdf, parseInt(btn.dataset.page) || 1);
-    });
-  });
-  container.querySelectorAll('.fp-photo-thumb').forEach(img => {
-    img.addEventListener('click', () => window.app.openPhotoSwipe(img.src, img.dataset.full || img.src));
-  });
-}
+var cachedFP = null;
+
 function initFlightProcedures() {
   renderFPHeader();
-  const container = document.getElementById('fpContainer');
+  var container = document.getElementById('fpContainer');
   if (!container) { console.error('Контейнер fpContainer не найден!'); return; }
-  window.app.showSkeleton(container, 'blocks');
-  if (cachedProcedures) {
-    renderFilteredFP('');
-    const input = document.getElementById('headerSearchInput');
-    if (input && !input.listenerAdded) {
-      input.addEventListener('input', (e) => renderFilteredFP(e.target.value));
-      input.listenerAdded = true;
-    }
+  if (!container.dataset.delegated) {
+    container.addEventListener('click', function(e) {
+      var pdfBtn = e.target.closest('.fp-pdf-ref');
+      if (pdfBtn) { app.openPDFModal(pdfBtn.dataset.pdf, parseInt(pdfBtn.dataset.page) || 1); return; }
+      var thumb = e.target.closest('.fp-photo-thumb');
+      if (thumb) { app.openPhotoSwipe(thumb.src, thumb.dataset.fullSrc || thumb.src); return; }
+      var procHeader = e.target.closest('.fp-procedure-header');
+      if (procHeader) { procHeader.closest('.fp-procedure').classList.toggle('open'); return; }
+      var phaseHeader = e.target.closest('.fp-phase-header');
+      if (phaseHeader) { phaseHeader.closest('.fp-phase').classList.toggle('open'); return; }
+    });
+    container.dataset.delegated = 'true';
+  }
+  app.showSkeleton(container, 'blocks');
+  fetch('modules/flightprocedures.json')
+    .then(function(response) { return response.json(); })
+    .then(function(data) {
+      cachedFP = data.phases || [];
+      renderFPList(cachedFP);
+      app.hideSkeleton(container, container.innerHTML);
+    })
+    .catch(function() {
+      app.showError(container, 'Не удалось загрузить лётные процедуры');
+    });
+}
+
+function renderFPHeader() {
+  var center = document.getElementById('headerCenter');
+  center.innerHTML = '<div class="hc-default">Лётные процедуры</div><div class="hc-search"><input type="search" id="headerSearchInput" placeholder="Поиск..." autocomplete="off"></div>';
+  var input = document.getElementById('headerSearchInput');
+  if (input) {
+    input.removeEventListener('input', fpSearchHandler);
+    input.addEventListener('input', fpSearchHandler);
+  }
+  showFPDefaultHeader();
+}
+
+function fpSearchHandler(e) {
+  if (!cachedFP) return;
+  var query = e.target.value.trim();
+  if (!query) {
+    renderFPList(cachedFP);
     return;
   }
-  fetch('modules/flightprocedures.json').then(res => res.json()).then(data => {
-    cachedProcedures = data.phases || [];
-    renderFilteredFP('');
-    const input = document.getElementById('headerSearchInput');
-    if (input && !input.listenerAdded) {
-      input.addEventListener('input', (e) => renderFilteredFP(e.target.value));
-      input.listenerAdded = true;
+  var lower = query.toLowerCase();
+  var filteredPhases = [];
+  for (var i = 0; i < cachedFP.length; i++) {
+    var phase = cachedFP[i];
+    var phaseMatch = phase.title.toLowerCase().indexOf(lower) !== -1;
+    var filteredProcs = [];
+    for (var j = 0; j < phase.procedures.length; j++) {
+      var proc = phase.procedures[j];
+      var procMatch = proc.title.toLowerCase().indexOf(lower) !== -1;
+      var contentMatch = false;
+      for (var k = 0; k < proc.content.length; k++) {
+        var block = proc.content[k];
+        if (block.type === 'action' || block.type === 'action-crew') {
+          if ((block.label && block.label.toLowerCase().indexOf(lower) !== -1) || (block.value && block.value.toLowerCase().indexOf(lower) !== -1)) contentMatch = true;
+        } else if (block.text && block.text.toLowerCase().indexOf(lower) !== -1) contentMatch = true;
+        if (contentMatch) break;
+      }
+      if (phaseMatch || procMatch || contentMatch) filteredProcs.push(proc);
     }
-  }).catch(() => {
-    window.app.showError(container, 'Не удалось загрузить лётные процедуры', () => initFlightProcedures());
-  });
+    if (filteredProcs.length) {
+      filteredPhases.push({ title: phase.title, time: phase.time, procedures: filteredProcs, id: phase.id });
+    }
+  }
+  renderFPList(filteredPhases);
 }
+
+function showFPDefaultHeader() {
+  var headerInner = document.querySelector('.header-inner');
+  if (headerInner) headerInner.classList.remove('search-active');
+  var input = document.getElementById('headerSearchInput');
+  if (input) input.value = '';
+  if (cachedFP) renderFPList(cachedFP);
+  var left = document.getElementById('headerLeft');
+  var right = document.getElementById('headerRight');
+  var def = document.querySelector('.hc-default');
+  var srch = document.querySelector('.hc-search');
+  left.innerHTML = '<button class="icon-btn" aria-label="Назад" onclick="app.navigateTo(\'main\')">' + window.ICONS.back + '</button>';
+  left.onclick = null;
+  if (def) def.classList.remove('hidden');
+  if (srch) srch.classList.remove('visible');
+  right.innerHTML = '<button class="icon-btn" aria-label="Поиск">' + window.ICONS.search + '</button>';
+  right.onclick = showFPSearchHeader;
+}
+
+function showFPSearchHeader() {
+  var headerInner = document.querySelector('.header-inner');
+  if (headerInner) headerInner.classList.add('search-active');
+  var left = document.getElementById('headerLeft');
+  var right = document.getElementById('headerRight');
+  var def = document.querySelector('.hc-default');
+  var srch = document.querySelector('.hc-search');
+  var input = document.getElementById('headerSearchInput');
+  left.innerHTML = '';
+  left.onclick = null;
+  if (def) def.classList.add('hidden');
+  if (srch) srch.classList.add('visible');
+  if (input) input.focus();
+  right.innerHTML = '<button class="icon-btn" aria-label="Закрыть">' + window.ICONS.close + '</button>';
+  right.onclick = showFPDefaultHeader;
+}
+
+function renderFPList(phases) {
+  var container = document.getElementById('fpContainer');
+  if (!container) return;
+  if (!phases.length) {
+    container.innerHTML = '<p class="empty-message">Ничего не найдено</p>';
+    return;
+  }
+  var html = '';
+  for (var p = 0; p < phases.length; p++) {
+    var phase = phases[p];
+    var timeHtml = phase.time ? '<span class="fp-phase-time">' + phase.time + '</span>' : '';
+    var proceduresHtml = '';
+    for (var r = 0; r < phase.procedures.length; r++) {
+      var proc = phase.procedures[r];
+      var pdfRefHtml = '';
+      if (proc.pdfRef) {
+        pdfRefHtml = '<button class="fp-pdf-ref" data-pdf="' + proc.pdfRef.file + '" data-page="' + (proc.pdfRef.page || 1) + '">' + proc.pdfRef.label + '</button>';
+      }
+      var contentHtml = '';
+      for (var c = 0; c < proc.content.length; c++) {
+        var block = proc.content[c];
+        contentHtml += renderFPContentBlock(block);
+      }
+      proceduresHtml += '<div class="fp-procedure"><div class="fp-procedure-header"><span class="collapsible-title">' + proc.title + '</span>' + pdfRefHtml + '<span class="collapsible-chevron">' + window.ICONS['chevron-down'] + '</span></div><div class="fp-procedure-content">' + contentHtml + '</div></div>';
+    }
+    html += '<div class="fp-phase"><div class="fp-phase-header"><span>' + window.ICONS.plane + '</span><span class="collapsible-title">' + phase.title + '</span>' + timeHtml + '<span class="collapsible-chevron">' + window.ICONS['chevron-down'] + '</span></div><div class="fp-phase-content">' + proceduresHtml + '</div></div>';
+  }
+  container.innerHTML = html;
+}
+
+function renderFPContentBlock(block) {
+  switch (block.type) {
+    case 'action':
+      return '<div class="fp-action"><span class="fp-action-label">' + block.label + '</span><span class="fp-action-dots"></span><span class="fp-action-value">' + block.value + '</span></div>';
+    case 'action-crew':
+      var badge = block.crew === 'C' ? 'C' : (block.crew === 'F' ? 'F' : (block.crew === 'CM' ? 'CM' : ''));
+      return '<div class="fp-action"><span class="fp-action-label">' + block.label + '</span><span class="fp-action-dots"></span><span class="fp-action-value">' + block.value + '</span><span class="fp-crew-badge">' + badge + '</span></div>';
+    case 'verify':
+      return '<div class="fp-verify">✓ ' + block.text + '</div>';
+    case 'condition':
+      return '<div class="fp-condition">' + block.text + '</div>';
+    case 'note':
+      return '<div class="fp-note"><strong>Note:</strong> ' + block.text + '</div>';
+    case 'caution':
+      return '<div class="fp-caution"><strong>CAUTION:</strong> ' + block.text + '</div>';
+    case 'warning':
+      return '<div class="fp-warning"><strong>WARNING:</strong> ' + block.text + '</div>';
+    case 'tail':
+      return '<div class="fp-tail">' + block.text + '</div>';
+    case 'separator':
+      return '<hr class="fp-separator">';
+    case 'image':
+      return '<img class="fp-photo-thumb" src="' + block.src + '" data-full-src="' + (block.fullSrc || block.src) + '" onerror="this.src=\'icon-192.png\'">';
+    case 'html':
+      return '<div class="fp-html">' + block.html + '</div>';
+    default:
+      return '';
+  }
+}
+
 window.initFlightProcedures = initFlightProcedures;
