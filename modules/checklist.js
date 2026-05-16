@@ -1,64 +1,67 @@
-// modules/checklist.js
-// Модуль чеклистов (SAFA / Customs) с аккордеоном, чекбоксами и сохранением состояния
+/* ═══════════════════════════════════════════
+   МОДУЛЬ: Чеклисты (Checklists)
+   ═══════════════════════════════════════════ */
 
 var cachedData = null;
-
-// Восстановление активного таба из localStorage
 var activeTab = (function() {
-  try {
-    return localStorage.getItem('checklistActiveTab') || 'safa';
-  } catch (ex) {
-    return 'safa';
-  }
+  try { return localStorage.getItem('checklistActiveTab') || 'safa'; } catch(ex) { return 'safa'; }
 })();
 
-// ---------------------- Вспомогательные функции ----------------------
 function formatNote(text) {
-  if (!text) return '';
   return text.replace(/\n/g, '<br>');
 }
 
 function renderItems(block) {
-  if (!block.items || !block.items.length) return '';
-  return block.items.map(function(item) {
+  var html = '';
+  for (var i = 0; i < block.items.length; i++) {
+    var item = block.items[i];
     var isRequired = (item.required !== false);
-    var noteHtml = item.note ? '<span class="item-note">' + formatNote(item.note) + '</span>' : '';
-    return '<label class="checklist-item' + (isRequired ? '' : ' checklist-item--optional') + '">' +
-      '<input type="checkbox"' +
-      ' data-block="' + block.id + '"' +
-      ' data-item="' + item.id + '"' +
-      ' data-required="' + (isRequired ? 'true' : 'false') + '">' +
-      '<span class="item-body">' +
-      '<span class="item-label">' + item.label + '</span>' +
-      (isRequired ? '' : '<span class="item-optional-badge">необязательно</span>') +
-      noteHtml +
-      '</span>' +
-      '</label>';
-  }).join('');
+    var noteHtml = item.note
+      ? '<span class="item-note">' + formatNote(item.note) + '</span>'
+      : '';
+    html += '<label class="checklist-item' + (isRequired ? '' : ' checklist-item--optional') + '">'
+      + '<input type="checkbox"'
+      + ' data-block="' + block.id + '"'
+      + ' data-item="' + item.id + '"'
+      + ' data-required="' + (isRequired ? 'true' : 'false') + '">'
+      + '<span class="item-body">'
+      + '<span class="item-label">' + item.label + '</span>'
+      + (isRequired ? '' : '<span class="item-optional-badge">\u043D\u0435\u043E\u0431\u044F\u0437\u0430\u0442\u0435\u043B\u044C\u043D\u043E</span>')
+      + noteHtml
+      + '</span>'
+      + '</label>';
+  }
+  return html;
 }
 
 function renderBlock(block) {
-  // block.note — отдельный элемент между заголовком и контентом, всегда виден
-  var blockNoteHtml = block.note ? '<div class="block-note">' + formatNote(block.note) + '</div>' : '';
-  return '<div class="checklist-block" data-block-id="' + block.id + '">' +
-    '<div class="checklist-block-header">' +
-    '<span class="status-badge" data-badge="' + block.id + '">NO</span>' +
-    '<span class="collapsible-title">' + block.title + '</span>' +
-    '<span class="collapsible-chevron">' + window.ICONS['chevron-down'] + '</span>' +
-    '</div>' +
-    blockNoteHtml +
-    '<div class="block-content" data-content="' + block.id + '">' +
-    renderItems(block) +
-    '</div>' +
-    '</div>';
+  var blockNoteHtml = block.note
+    ? '<div class="block-note">' + formatNote(block.note) + '</div>'
+    : '';
+  return '<div class="checklist-block" data-block-id="' + block.id + '">'
+    + '<div class="checklist-block-header">'
+    + '<span class="status-badge" data-badge="' + block.id + '">NO</span>'
+    + '<span class="collapsible-title">' + block.title + '</span>'
+    + '<span class="collapsible-chevron">' + window.ICONS['chevron-down'] + '</span>'
+    + '</div>'
+    + blockNoteHtml
+    + '<div class="block-content" data-content="' + block.id + '">'
+    + renderItems(block)
+    + '</div>'
+    + '</div>';
 }
 
 function renderAllBlocks(data) {
   var blocks = data[activeTab];
   if (!blocks || blocks.length === 0) {
-    return '<p style="padding: 32px 16px; text-align: center; color: var(--color-text-secondary);">Нет данных</p>';
+    return '<p style="padding: 32px 16px; text-align: center; color: var(--color-text-secondary);">'
+      + '\u041D\u0435\u0442 \u0434\u0430\u043D\u043D\u044B\u0445</p>';
   }
-  return blocks.map(renderBlock).join('');
+  var html = '';
+  for (var i = 0; i < blocks.length; i++) {
+    html += renderBlock(blocks[i]);
+  }
+  return html;
 }
 
 function updateBadge(blockId) {
@@ -91,16 +94,22 @@ function restoreCheckboxState(container) {
     var key = 'checklist_' + cb.dataset.block + '_' + cb.dataset.item;
     try {
       if (sessionStorage.getItem(key) === '1') cb.checked = true;
-    } catch (ex) {}
+    } catch(ex) {}
   }
   var blocks = container.querySelectorAll('.checklist-block');
   for (var j = 0; j < blocks.length; j++) {
-    var id = blocks[j].dataset.blockId;
-    if (id) updateBadge(id);
+    updateBadge(blocks[j].dataset.blockId);
   }
 }
 
-// ---------------------- Панель действий (Commits) ----------------------
+function renderChecklist(data) {
+  var container = document.getElementById('checklistsContainer');
+  if (!container || !data) return;
+  var html = renderAllBlocks(data);
+  app.hideSkeleton(container, html);
+  restoreCheckboxState(container);
+}
+
 function openCommitsPanel() {
   var panel = document.getElementById('commitsPanel');
   var overlay = document.getElementById('commitsOverlay');
@@ -114,74 +123,111 @@ function closeCommitsPanel() {
   if (panel) panel.classList.remove('open');
   if (overlay) overlay.classList.remove('open');
 }
-window.closeCommitsPanel = closeCommitsPanel;
 
-// ---------------------- Хедер модуля ----------------------
+function initCommitsPanelListeners() {
+  var overlay = document.getElementById('commitsOverlay');
+  var closeBtn = document.getElementById('commitsPanelClose');
+  var cameraBtn = document.getElementById('commitsCameraBtn');
+  var notesBtn = document.getElementById('commitsNotesBtn');
+  var docsBtn = document.getElementById('commitsDocsBtn');
+  var docsIcon = document.getElementById('commitDocsIcon');
+
+  if (docsIcon && window.ICONS) {
+    docsIcon.innerHTML = window.ICONS['file-text'] || '';
+  }
+
+  if (closeBtn && window.ICONS) {
+    closeBtn.innerHTML = window.ICONS.close || '';
+  }
+
+  if (cameraBtn && window.ICONS) {
+    cameraBtn.innerHTML = window.ICONS.camera + ' \u0421\u0434\u0435\u043B\u0430\u0442\u044C \u0444\u043E\u0442\u043E';
+  }
+
+  if (notesBtn && window.ICONS) {
+    notesBtn.innerHTML = window.ICONS['message-square'] + ' \u041A\u043E\u043C\u043C\u0435\u043D\u0442\u0430\u0440\u0438\u0439';
+  }
+
+  if (overlay) overlay.addEventListener('click', closeCommitsPanel);
+  if (closeBtn) closeBtn.addEventListener('click', closeCommitsPanel);
+
+  if (cameraBtn) {
+    cameraBtn.addEventListener('click', function() {
+      closeCommitsPanel();
+      window.app.openBottomPanel({ autoFocus: 'camera' });
+    });
+  }
+  if (notesBtn) {
+    notesBtn.addEventListener('click', function() {
+      closeCommitsPanel();
+      window.app.openBottomPanel({ autoFocus: 'notes' });
+    });
+  }
+  if (docsBtn) {
+    docsBtn.addEventListener('click', function() {
+      closeCommitsPanel();
+      window.app.openBottomPanel();
+    });
+  }
+}
+
+/* Инициализация слушателей commits-панели при загрузке модуля */
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCommitsPanelListeners);
+} else {
+  initCommitsPanelListeners();
+}
+
 function renderChecklistsHeader() {
   var left = document.getElementById('headerLeft');
   var center = document.getElementById('headerCenter');
   var right = document.getElementById('headerRight');
   if (!left || !center || !right) return;
 
-  left.innerHTML = '<button class="icon-btn" aria-label="Назад" onclick="app.navigateTo(\'main\')">' +
-    window.ICONS.back + '</button>';
+  left.innerHTML = '<button class="icon-btn" aria-label="\u041D\u0430\u0437\u0430\u0434" onclick="app.navigateTo(\'main\')">'
+    + window.ICONS.back + '</button>';
   left.onclick = null;
 
-  center.innerHTML = '<div class="tab-group" id="checklistTabGroup">' +
-    '<button class="tab-btn' + (activeTab === 'safa' ? ' active' : '') + '" data-tab="safa">SAFA</button>' +
-    '<button class="tab-btn' + (activeTab === 'customs' ? ' active' : '') + '" data-tab="customs">Customs</button>' +
-    '</div>';
+  center.innerHTML = '<div class="tab-group" id="checklistTabGroup">'
+    + '<button class="tab-btn' + (activeTab === 'safa' ? ' active' : '') + '" data-tab="safa">SAFA</button>'
+    + '<button class="tab-btn' + (activeTab === 'customs' ? ' active' : '') + '" data-tab="customs">Customs</button>'
+    + '</div>';
 
-  // Делегирование кликов на табы — защита от дубликатов
   if (!center.dataset.tabDelegated) {
     center.addEventListener('click', function(e) {
       var btn = e.target.closest('.tab-btn');
       if (!btn) return;
       var group = center.querySelector('.tab-group');
       if (group) {
-        group.querySelectorAll('.tab-btn').forEach(function(b) {
-          b.classList.remove('active');
-        });
+        var btns = group.querySelectorAll('.tab-btn');
+        for (var i = 0; i < btns.length; i++) {
+          btns[i].classList.remove('active');
+        }
       }
       btn.classList.add('active');
       activeTab = btn.dataset.tab;
-      try {
-        localStorage.setItem('checklistActiveTab', activeTab);
-      } catch (ex) {}
-      if (cachedData) {
-        renderChecklist(cachedData);
-      }
+      try { localStorage.setItem('checklistActiveTab', activeTab); } catch(ex) {}
+      renderChecklist(cachedData);
     });
     center.dataset.tabDelegated = 'true';
   }
 
-  right.innerHTML = '<button class="icon-btn" aria-label="Действия" onclick="openCommitsPanel()">' +
-    window.ICONS.plus + '</button>';
-  right.onclick = null;
+  right.innerHTML = '<button class="icon-btn" aria-label="\u0414\u0435\u0439\u0441\u0442\u0432\u0438\u044F">'
+    + window.ICONS.plus + '</button>';
+  right.onclick = openCommitsPanel;
 }
 
-function renderChecklist(data) {
-  var container = document.getElementById('checklistsContainer');
-  if (!container || !data) return;
-  var html = renderAllBlocks(data);
-  app.hideSkeleton(container, html);
-  restoreCheckboxState(container);
-}
-
-// ---------------------- Основная инициализация ----------------------
 function initChecklists() {
   renderChecklistsHeader();
 
   var container = document.getElementById('checklistsContainer');
   if (!container) {
-    console.error('Контейнер checklistsContainer не найден!');
+    console.error('\u041A\u043E\u043D\u0442\u0435\u0439\u043D\u0435\u0440 checklistsContainer \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D!');
     return;
   }
 
-  // Делегирование событий на контейнер (аккордеон + чекбоксы)
   if (!container.dataset.delegated) {
     container.addEventListener('click', function(e) {
-      // Раскрытие / закрытие блока
       var header = e.target.closest('.checklist-block-header');
       if (header) {
         var block = header.closest('.checklist-block');
@@ -197,16 +243,16 @@ function initChecklists() {
       var itemId = cb.dataset.item;
       try {
         sessionStorage.setItem('checklist_' + blockId + '_' + itemId, cb.checked ? '1' : '0');
-      } catch (ex) {}
+      } catch(ex) {}
       updateBadge(blockId);
     });
 
     container.dataset.delegated = 'true';
   }
 
-  // Если данные уже загружены — сразу рендерим
   if (cachedData) {
     renderChecklist(cachedData);
+    restoreCheckboxState(container);
     return;
   }
 
@@ -224,9 +270,6 @@ function initChecklists() {
       restoreCheckboxState(container);
     })
     .catch(function() {
-      app.showError(container, 'Не удалось загрузить чеклисты');
+      app.showError(container, '\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0447\u0435\u043A\u043B\u0438\u0441\u0442\u044B');
     });
 }
-
-// Глобальный вызов для роутинга
-window.initChecklists = initChecklists;
