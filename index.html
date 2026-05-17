@@ -2,41 +2,33 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="PilotTool">
   <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <title>Pilot's Tool</title>
+  <!-- PhotoSwipe core CSS -->
   <link rel="stylesheet" href="libs/photoswipe/photoswipe.css">
   <link rel="stylesheet" href="libs/photoswipe/default-skin/default-skin.css">
+  <!-- main styles -->
   <link rel="stylesheet" href="style.css">
-  <title>Pilot's Tool</title>
 </head>
 <body>
-
-  <!-- Cache progress overlay (inline styles — shown before style.css loads) -->
-  <div id="cacheProgressOverlay" style="
-    display: none;
-    position: fixed; inset: 0; z-index: 9999;
-    background: #CD202C;
-    flex-direction: column;
-    align-items: center; justify-content: center;
-    color: #fff; font-family: sans-serif;
-  ">
+  <!-- Progress bar overlay (первым элементом после body) -->
+  <div id="cacheProgressOverlay" style="display: none; position: fixed; inset: 0; z-index: 9999; background: #CD202C; flex-direction: column; align-items: center; justify-content: center; color: #fff; font-family: sans-serif;">
     <div style="font-size: 2rem; margin-bottom: 16px;">✈️</div>
     <p style="margin-bottom: 16px; font-size: 1rem;">Подготовка к работе offline...</p>
     <div style="width: 240px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 2px;">
-      <div id="cacheProgressBar" style="
-        height: 4px; width: 0%; background: #fff;
-        border-radius: 2px; transition: width 0.2s ease;
-      "></div>
+      <div id="cacheProgressBar" style="height: 4px; width: 0%; background: #fff; border-radius: 2px; transition: width 0.2s ease;"></div>
     </div>
     <p id="cacheProgressText" style="margin-top: 12px; font-size: 0.875rem; opacity: 0.8;">0%</p>
   </div>
 
   <div id="app">
-
-    <!-- HEADER -->
+    <!-- Хедер (фиксированный) -->
     <header class="header" id="appHeader">
       <div class="header-inner">
         <div id="headerLeft"></div>
@@ -45,23 +37,19 @@
       </div>
     </header>
 
-    <!-- MENU OVERLAY -->
-    <div id="menuOverlay" class="menu-overlay" onclick="app.closeMenu()"></div>
-
-    <!-- SIDE MENU -->
+    <!-- Боковое меню -->
+    <div id="menuOverlay" class="menu-overlay" onclick="window.app.closeMenu()"></div>
     <nav id="sideMenu" class="side-menu">
-
       <div class="menu-banner">
         <span class="menu-banner-icon" id="menuBannerIcon"></span>
         <div class="menu-banner-info">
           <span class="menu-banner-title">Pilot's Tool</span>
           <div class="menu-banner-meta">
-            <span class="menu-banner-version">v2.1</span>
+            <span class="menu-banner-version">v2.2</span>
             <span class="menu-banner-network" id="menuNetworkStatus">● Онлайн</span>
           </div>
         </div>
       </div>
-
       <ul class="menu-list">
         <li class="menu-item" data-nav="phonebook">
           <span class="menu-icon"></span>Телефонный справочник
@@ -75,6 +63,9 @@
         <li class="menu-item" data-nav="flightprocedures">
           <span class="menu-icon"></span>Лётные процедуры
         </li>
+        <li class="menu-item" data-nav="notes">
+          <span class="menu-icon" id="menuIconNotes"></span>Рукописные заметки
+        </li>
         <li class="menu-item" data-placeholder="links">
           <span class="menu-icon"></span>Ссылки
         </li>
@@ -82,9 +73,7 @@
           <span class="menu-icon"></span>FAQ
         </li>
       </ul>
-
       <div class="menu-divider"></div>
-
       <ul class="menu-list menu-list--controls">
         <li class="menu-item" id="themeToggle">
           <span class="menu-icon" id="themeIcon"></span>
@@ -94,7 +83,6 @@
           <span class="menu-icon"></span>Установить приложение
         </li>
       </ul>
-
       <div id="offlineStatus" class="menu-offline-status">
         ⬇️ Загрузка ресурсов...
         <div id="updateBadge" class="update-badge update-badge-hidden">
@@ -102,38 +90,79 @@
           <span class="update-badge-text"></span>
         </div>
       </div>
-
     </nav>
 
-    <!-- MAIN SCREEN -->
+    <!-- Основные экраны -->
+    <!-- Главный экран -->
     <div id="mainScreen" class="screen">
       <div class="main-bg"></div>
       <div class="main-content">
-        <div class="main-quote">Лучше тупой карандаш, чем острая память!</div>
+        <div class="main-quote" id="mainQuote">Лучше тупой карандаш, чем острая память!</div>
       </div>
+      <button id="notesQuickBtn" class="notes-quick-btn" aria-label="Рукописные заметки"></button>
     </div>
 
-    <!-- PHONEBOOK SCREEN -->
+    <!-- Phonebook экран -->
     <div id="phonebookScreen" class="screen">
       <div class="phonebook-container" id="phonebookContainer"></div>
     </div>
 
-    <!-- CHECKLISTS SCREEN -->
+    <!-- Checklists экран -->
     <div id="checklistsScreen" class="screen">
       <div class="checklists-container" id="checklistsContainer"></div>
     </div>
 
-    <!-- KRS SCREEN -->
+    <!-- KRS экран -->
     <div id="krsScreen" class="screen">
       <div class="krs-container" id="krsContainer"></div>
     </div>
 
-    <!-- FLIGHT PROCEDURES SCREEN -->
+    <!-- Flight Procedures экран -->
     <div id="flightproceduresScreen" class="screen">
       <div class="fp-container" id="fpContainer"></div>
     </div>
 
-    <!-- COMMITS PANEL -->
+    <!-- Notes экран -->
+    <div id="notesScreen" class="screen">
+      <div class="notes-container" id="notesContainer"></div>
+    </div>
+
+    <!-- Bottom Panel (Документы рейса) -->
+    <div id="bottomPanelOverlay" class="bottom-panel-overlay"></div>
+    <div id="bottomPanel" class="bottom-panel">
+      <div class="bottom-panel-header">
+        <button class="bottom-panel-clear" id="bottomPanelClearBtn">Очистить</button>
+        <span class="bottom-panel-title">Документы рейса</span>
+        <button class="icon-btn bottom-panel-close" id="bottomPanelCloseBtn" aria-label="Закрыть"></button>
+      </div>
+      <div class="bottom-panel-body" id="bottomPanelBody">
+        <div class="bottom-panel-section">
+          <div class="bottom-panel-section-header">
+            <span class="bottom-panel-section-title">Фото</span>
+            <button class="icon-btn bottom-panel-add-photo" id="bottomPanelAddPhotoBtn" aria-label="Добавить фото"></button>
+          </div>
+          <div class="bottom-panel-photos" id="bottomPanelPhotos"></div>
+          <div class="bottom-panel-photos-empty" id="bottomPanelPhotosEmpty">Нет прикреплённых фото</div>
+        </div>
+        <div class="bottom-panel-section">
+          <div class="bottom-panel-section-header">
+            <span class="bottom-panel-section-title">Комментарии</span>
+          </div>
+          <div class="bottom-panel-comments">
+            <div class="bottom-panel-comments-header">
+              <span class="bottom-panel-comments-title">Комментарии к рейсу</span>
+              <button id="bottomPanelAddCommentBtn" class="icon-btn">+</button>
+            </div>
+            <div id="bottomPanelCommentsList" class="bottom-panel-comments-list">
+              <!-- сюда динамически вставляются комментарии -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <input type="file" id="bottomPanelFileInput" accept="image/*">
+
+    <!-- Коммиты панель (чеклисты) -->
     <div class="commits-overlay" id="commitsOverlay"></div>
     <div class="commits-panel" id="commitsPanel">
       <div class="commits-panel-header">
@@ -142,10 +171,12 @@
       </div>
       <div class="commits-panel-body">
         <button class="commits-action-item" id="commitsCameraBtn">
-          📸 Сделать фото
+          <span class="commits-camera-icon" id="commitCameraIcon"></span>
+          Сделать фото
         </button>
         <button class="commits-action-item" id="commitsNotesBtn">
-          💬 Комментарий
+          <span class="commits-notes-icon" id="commitNotesIcon"></span>
+          Комментарий
         </button>
         <button class="commits-action-item" id="commitsDocsBtn">
           <span class="commits-docs-icon" id="commitDocsIcon"></span>
@@ -154,78 +185,57 @@
       </div>
     </div>
 
-    <!-- BOTTOM PANEL -->
-    <div id="bottomPanelOverlay" class="bottom-panel-overlay"></div>
-
-    <div id="bottomPanel" class="bottom-panel">
-      <div class="bottom-panel-header">
-        <button class="bottom-panel-clear" id="bottomPanelClearBtn">Очистить</button>
-        <span class="bottom-panel-title">Документы рейса</span>
-        <button class="icon-btn bottom-panel-close" id="bottomPanelCloseBtn"
-                aria-label="Закрыть"></button>
-      </div>
-      <div class="bottom-panel-body" id="bottomPanelBody">
-        <div class="bottom-panel-section">
-          <div class="bottom-panel-section-header">
-            <span class="bottom-panel-section-title">Фото</span>
-            <button class="icon-btn bottom-panel-add-photo" id="bottomPanelAddPhotoBtn"
-                    aria-label="Добавить фото"></button>
-          </div>
-          <div class="bottom-panel-photos" id="bottomPanelPhotos"></div>
-          <div class="bottom-panel-photos-empty" id="bottomPanelPhotosEmpty">
-            Нет прикреплённых фото
-          </div>
+    <!-- Модальное окно комментариев (чеклисты / bottom panel) -->
+    <div id="commentModalOverlay" class="comment-modal-overlay">
+      <div class="comment-modal">
+        <div class="comment-modal-header">
+          <span>Комментарий к рейсу</span>
+          <button class="comment-modal-close" id="commentModalClose">&times;</button>
         </div>
-        <div class="bottom-panel-section">
-          <div class="bottom-panel-section-header">
-            <span class="bottom-panel-section-title">Заметки</span>
-          </div>
-          <textarea class="bottom-panel-notes" id="bottomPanelNotes"
-                    placeholder="Добавить заметку..."></textarea>
+        <textarea id="commentInput" placeholder="Введите текст комментария..."></textarea>
+        <div class="comment-modal-actions">
+          <button id="commentSaveBtn" class="comment-save-btn">Сохранить</button>
+          <button id="commentCancelBtn" class="comment-cancel-btn">Отмена</button>
         </div>
       </div>
     </div>
 
-    <!-- GLOBAL TOAST -->
+    <!-- Глобальный Toast -->
     <div id="globalToast" class="global-toast"></div>
 
-    <!-- HIDDEN FILE INPUT -->
-    <input type="file" id="bottomPanelFileInput" accept="image/*">
-
-  </div><!-- /app -->
-
-  <!-- PhotoSwipe Template -->
-  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="pswp__bg"></div>
-    <div class="pswp__scroll-wrap">
-      <div class="pswp__container">
-        <div class="pswp__item"></div>
-        <div class="pswp__item"></div>
-        <div class="pswp__item"></div>
-      </div>
-      <div class="pswp__ui pswp__ui--hidden">
-        <div class="pswp__top-bar">
-          <div class="pswp__counter"></div>
-          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-          <div class="pswp__preloader"></div>
+    <!-- PhotoSwipe шаблон (обязательный) -->
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="pswp__bg"></div>
+      <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+          <div class="pswp__item"></div>
+          <div class="pswp__item"></div>
+          <div class="pswp__item"></div>
         </div>
-        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-          <div class="pswp__share-tooltip"></div>
-        </div>
-        <button class="pswp__button pswp__button--arrow--left" title="Previous"></button>
-        <button class="pswp__button pswp__button--arrow--right" title="Next"></button>
-        <div class="pswp__caption">
-          <div class="pswp__caption__center"></div>
+        <div class="pswp__ui pswp__ui--hidden">
+          <div class="pswp__top-bar">
+            <div class="pswp__counter"></div>
+            <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+            <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+            <div class="pswp__preloader"></div>
+          </div>
+          <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+            <div class="pswp__share-tooltip"></div>
+          </div>
+          <button class="pswp__button pswp__button--arrow--left" title="Previous"></button>
+          <button class="pswp__button pswp__button--arrow--right" title="Next"></button>
+          <div class="pswp__caption">
+            <div class="pswp__caption__center"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Scripts (strict order from 0_SYSTEM.txt) -->
+  <!-- Скрипты в строгом порядке согласно 0_SYSTEM.txt -->
   <script src="icons.js"></script>
   <script src="libs/pdfjs/pdf.min.js"></script>
-  <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'libs/pdfjs/pdf.worker.min.js';</script>
+  <script src="libs/pdfjs/pdf.worker.min.js"></script>
   <script src="libs/photoswipe/photoswipe.min.js"></script>
   <script src="libs/photoswipe/photoswipe-ui-default.min.js"></script>
   <script src="app.js"></script>
@@ -233,7 +243,12 @@
   <script src="modules/checklist.js"></script>
   <script src="modules/krs.js"></script>
   <script src="modules/flightprocedures.js"></script>
-  <script>if (window.app && typeof window.app.initServiceWorker === 'function') { window.app.initServiceWorker(); }</script>
-
+  <script src="modules/notes.js"></script>
+  <script>
+    // Инициализация Service Worker после загрузки всех модулей
+    if (window.app && typeof window.app.initServiceWorker === 'function') {
+      window.app.initServiceWorker();
+    }
+  </script>
 </body>
 </html>
