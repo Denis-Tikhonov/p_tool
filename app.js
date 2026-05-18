@@ -1,11 +1,15 @@
-// app.js – полный файл глобальных утилит (согласно 3B_GLOBAL_LAYOUT_JS.txt)
 window.app = {};
 
-// -------------------------------
-// S1_JS: Хедер – navigateTo, resetHeader, renderMainHeader
-// -------------------------------
+/* ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ========== */
+var FLIGHT_META_KEY   = 'flight_docs_meta';
+var FLIGHT_NOTES_KEY  = 'flight_docs_notes';
+var FLIGHT_MAX_PHOTOS = 12;
+var _toastTimer = null;
+var _fullPhotosCache = null;
+
+/* ========== НАВИГАЦИЯ И ХЕДЕР ========== */
 window.app.navigateTo = function(screenName) {
-  app.resetHeader();
+  window.app.resetHeader();
 
   document.querySelectorAll('.screen').forEach(function(s) {
     s.classList.remove('active');
@@ -14,7 +18,7 @@ window.app.navigateTo = function(screenName) {
   var screen = document.getElementById(screenName + 'Screen');
   if (screen) screen.classList.add('active');
 
-  app.closeMenu();
+  window.app.closeMenu();
 
   document.querySelectorAll('.menu-item[data-nav]').forEach(function(item) {
     item.classList.remove('menu-item--active');
@@ -23,55 +27,48 @@ window.app.navigateTo = function(screenName) {
     }
   });
 
-  if (screenName === 'main') app.renderMainHeader();
-  if (screenName === 'phonebook' && typeof initPhonebook === 'function') initPhonebook();
-  if (screenName === 'checklists' && typeof initChecklists === 'function') initChecklists();
-  if (screenName === 'krs' && typeof initKRS === 'function') initKRS();
-  if (screenName === 'flightprocedures' && typeof initFlightProcedures === 'function') initFlightProcedures();
-  if (screenName === 'notes' && typeof initNotes === 'function') initNotes();
+  if (screenName === 'main')             window.app.renderMainHeader();
+  if (screenName === 'phonebook')        initPhonebook();
+  if (screenName === 'checklists')       initChecklists();
+  if (screenName === 'krs')              initKRS();
+  if (screenName === 'flightprocedures') initFlightProcedures();
+  if (screenName === 'notes')            initNotes();
 };
 
 window.app.resetHeader = function() {
-  var left = document.getElementById('headerLeft');
+  var left   = document.getElementById('headerLeft');
   var center = document.getElementById('headerCenter');
-  var right = document.getElementById('headerRight');
-  if (left) {
-    left.innerHTML = '';
-    left.onclick = null;
-  }
+  var right  = document.getElementById('headerRight');
+  if (left)   { left.innerHTML = '';   left.onclick = null; }
   if (center) {
     center.innerHTML = '';
     delete center.dataset.tabDelegated;
   }
-  if (right) {
-    right.innerHTML = '';
-    right.onclick = null;
-  }
+  if (right)  { right.innerHTML = '';  right.onclick = null; }
 };
 
 window.app.renderMainHeader = function() {
-  var left = document.getElementById('headerLeft');
+  var left   = document.getElementById('headerLeft');
   var center = document.getElementById('headerCenter');
-  var right = document.getElementById('headerRight');
+  var right  = document.getElementById('headerRight');
   if (!left || !center || !right) return;
 
-  left.innerHTML = '<button id="menuBtn" class="icon-btn" aria-label="Меню" onclick="app.toggleMenu()">' + window.ICONS.menu + '</button>';
+  left.innerHTML = '<button id="menuBtn" class="icon-btn" aria-label="Меню" onclick="app.toggleMenu()">'
+    + window.ICONS.menu + '</button>';
   left.onclick = null;
 
   center.innerHTML = '<div class="hc-default">Pilot\'s Tool</div>';
-
   right.innerHTML = '';
   right.onclick = null;
 
-  app.renderMainQuote();
+  window.app.renderMainQuote();
 };
 
-// Цитаты главного экрана
 window.app.renderMainQuote = function() {
   var el = document.getElementById('mainQuote');
   if (!el) return;
 
-  var STORAGE_KEY_IDX = 'mainQuoteIndex';
+  var STORAGE_KEY_IDX  = 'mainQuoteIndex';
   var STORAGE_KEY_DATA = 'mainQuoteData';
 
   function applyQuote(sayings) {
@@ -87,9 +84,7 @@ window.app.renderMainQuote = function() {
   try {
     var rawCache = localStorage.getItem(STORAGE_KEY_DATA);
     if (rawCache) cached = JSON.parse(rawCache);
-  } catch (e) {
-    cached = null;
-  }
+  } catch(e) { cached = null; }
 
   if (cached && cached.length) {
     applyQuote(cached);
@@ -97,132 +92,41 @@ window.app.renderMainQuote = function() {
   }
 
   fetch('modules/aviation_sayings.json')
-    .then(function(r) {
-      return r.json();
-    })
+    .then(function(r) { return r.json(); })
     .then(function(data) {
       var sayings = (data && data.sayings) ? data.sayings : (Array.isArray(data) ? data : []);
       if (!sayings.length) return;
-      try {
-        localStorage.setItem(STORAGE_KEY_DATA, JSON.stringify(sayings));
-      } catch (e) {}
+      try { localStorage.setItem(STORAGE_KEY_DATA, JSON.stringify(sayings)); } catch(e) {}
       applyQuote(sayings);
     })
-    .catch(function() {});
+    .catch(function() { /* оставить fallback-текст */ });
 };
 
-// Перемещаемая кнопка заметок (вызывается в DOMContentLoaded)
-function initNotesQuickBtn() {
-  var btn = document.getElementById('notesQuickBtn');
-  if (!btn) return;
-
-  if (window.ICONS && window.ICONS['edit-3']) {
-    btn.innerHTML = window.ICONS['edit-3'];
+window.app.initMarquee = function(container) {
+  var titles = container.querySelectorAll('.collapsible-title');
+  var i;
+  for (i = 0; i < titles.length; i++) {
+    (function(title) {
+      var inner = title.querySelector('.marquee-inner');
+      if (!inner) return;
+      if (inner.scrollWidth > title.clientWidth) {
+        inner.classList.add('is-overflowing');
+      } else {
+        inner.classList.remove('is-overflowing');
+      }
+    })(titles[i]);
   }
+};
 
-  var saved = null;
-  try {
-    var raw = localStorage.getItem('notesQuickBtnPos');
-    if (raw) saved = JSON.parse(raw);
-  } catch (e) {}
-
-  if (saved && typeof saved.right === 'number' && typeof saved.bottom === 'number') {
-    btn.style.left = 'auto';
-    btn.style.top = 'auto';
-    btn.style.right = saved.right + 'px';
-    btn.style.bottom = saved.bottom + 'px';
-  }
-
-  var dragging = false;
-  var startX = 0;
-  var startY = 0;
-  var startRight = 0;
-  var startBottom = 0;
-  var moved = false;
-
-  btn.addEventListener('pointerdown', function(e) {
-    if (e.button !== undefined && e.button !== 0) return;
-    dragging = true;
-    moved = false;
-    btn.setPointerCapture(e.pointerId);
-    btn.classList.add('dragging');
-
-    var rect = btn.getBoundingClientRect();
-    startX = e.clientX;
-    startY = e.clientY;
-    startRight = window.innerWidth - rect.right;
-    startBottom = window.innerHeight - rect.bottom;
-
-    btn.style.left = 'auto';
-    btn.style.top = 'auto';
-    btn.style.right = startRight + 'px';
-    btn.style.bottom = startBottom + 'px';
-
-    e.preventDefault();
-  }, { passive: false });
-
-  btn.addEventListener('pointermove', function(e) {
-    if (!dragging) return;
-
-    var dx = e.clientX - startX;
-    var dy = e.clientY - startY;
-
-    if (Math.abs(dx) > 6 || Math.abs(dy) > 6) {
-      moved = true;
-    }
-
-    if (!moved) return;
-
-    var newRight = startRight - dx;
-    var newBottom = startBottom - dy;
-
-    var maxRight = window.innerWidth - btn.offsetWidth - 8;
-    var maxBottom = window.innerHeight - btn.offsetHeight - 8;
-    newRight = Math.max(8, Math.min(newRight, maxRight));
-    newBottom = Math.max(8, Math.min(newBottom, maxBottom));
-
-    btn.style.right = newRight + 'px';
-    btn.style.bottom = newBottom + 'px';
-
-    e.preventDefault();
-  }, { passive: false });
-
-  btn.addEventListener('pointerup', function(e) {
-    if (!dragging) return;
-    dragging = false;
-    btn.classList.remove('dragging');
-    btn.releasePointerCapture(e.pointerId);
-
-    if (moved) {
-      try {
-        localStorage.setItem('notesQuickBtnPos', JSON.stringify({
-          right: parseFloat(btn.style.right),
-          bottom: parseFloat(btn.style.bottom)
-        }));
-      } catch (e2) {}
-    } else {
-      window.app.navigateTo('notes');
-    }
-  });
-
-  btn.addEventListener('pointercancel', function() {
-    dragging = false;
-    btn.classList.remove('dragging');
-  });
-}
-
-// -------------------------------
-// S2_JS: Меню – глобальные функции
-// -------------------------------
+/* ========== МЕНЮ ========== */
 function initMenuIcons() {
   var iconMap = {
-    'phonebook': window.ICONS.phone,
-    'checklists': window.ICONS.checklist,
-    'krs': window.ICONS['file-text'],
+    'phonebook':        window.ICONS.phone,
+    'checklists':       window.ICONS.checklist,
+    'krs':              window.ICONS['file-text'],
     'flightprocedures': window.ICONS.plane,
-    'links': window.ICONS.link,
-    'faq': window.ICONS['help-circle'],
-    'notes': window.ICONS['edit-3']
+    'faq':              window.ICONS['help-circle'],
+    'notes':            window.ICONS['edit-3'],
   };
 
   document.querySelectorAll('.menu-item[data-nav]').forEach(function(item) {
@@ -235,8 +139,11 @@ function initMenuIcons() {
     if (icon) icon.innerHTML = iconMap[item.dataset.placeholder] || '';
   });
 
-  var installIcon = document.querySelector('#installApp .menu-icon');
-  if (installIcon) installIcon.innerHTML = window.ICONS.download;
+  var offlineIcon = document.getElementById('offlineStatusIcon');
+  if (offlineIcon) offlineIcon.innerHTML = window.ICONS.download || '';
+
+  var updateBadgeIcon = document.getElementById('updateBadgeIcon');
+  if (updateBadgeIcon) updateBadgeIcon.innerHTML = window.ICONS.download || '';
 
   var bannerIcon = document.getElementById('menuBannerIcon');
   if (bannerIcon) bannerIcon.innerHTML = window.ICONS.plane;
@@ -244,13 +151,13 @@ function initMenuIcons() {
   var commitDocsIcon = document.getElementById('commitDocsIcon');
   if (commitDocsIcon) commitDocsIcon.innerHTML = window.ICONS['file-text'];
 
-  app.updateThemeIcon();
+  window.app.updateThemeIcon();
 }
 
 window.app.toggleMenu = function() {
-  var menu = document.getElementById('sideMenu');
+  var menu    = document.getElementById('sideMenu');
   var overlay = document.getElementById('menuOverlay');
-  var btn = document.getElementById('menuBtn');
+  var btn     = document.getElementById('menuBtn');
   if (!menu || !overlay) return;
 
   var isOpen = menu.classList.contains('open');
@@ -269,10 +176,10 @@ window.app.toggleMenu = function() {
 };
 
 window.app.closeMenu = function() {
-  var menu = document.getElementById('sideMenu');
+  var menu    = document.getElementById('sideMenu');
   var overlay = document.getElementById('menuOverlay');
-  var btn = document.getElementById('menuBtn');
-  if (menu) menu.classList.remove('open');
+  var btn     = document.getElementById('menuBtn');
+  if (menu)    menu.classList.remove('open');
   if (overlay) overlay.classList.remove('open');
   if (btn) {
     btn.classList.remove('menu-btn-open');
@@ -283,23 +190,28 @@ window.app.closeMenu = function() {
 window.app.toggleTheme = function() {
   var isDark = document.body.classList.toggle('dark-theme');
   localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  app.updateThemeIcon();
+  window.app.updateThemeIcon();
 };
 
 window.app.updateThemeIcon = function() {
-  var themeIcon = document.getElementById('themeIcon');
+  var themeIcon  = document.getElementById('themeIcon');
   var themeLabel = document.getElementById('themeLabel');
   var isDark = document.body.classList.contains('dark-theme');
-  if (themeIcon) themeIcon.innerHTML = isDark ? window.ICONS.sun : window.ICONS.moon;
+  if (themeIcon)  themeIcon.innerHTML  = isDark ? window.ICONS.sun  : window.ICONS.moon;
   if (themeLabel) themeLabel.textContent = isDark ? 'Дневной режим' : 'Ночной режим';
 };
 
 window.app.updateOfflineStatus = function(ready) {
-  var el = document.getElementById('offlineStatus');
-  if (!el) return;
-  var badge = document.getElementById('updateBadge');
-  el.textContent = ready ? '✅ Приложение готово к работе offline' : '⬇️ Загрузка ресурсов...';
-  if (badge) el.appendChild(badge);
+  var iconEl = document.getElementById('offlineStatusIcon');
+  var textEl = document.getElementById('offlineStatusText');
+  if (!iconEl || !textEl) return;
+  if (ready) {
+    iconEl.innerHTML = window.ICONS['check-circle'] || '';
+    textEl.textContent = 'Приложение готово к работе offline';
+  } else {
+    iconEl.innerHTML = window.ICONS.download || '';
+    textEl.textContent = 'Загрузка ресурсов...';
+  }
 };
 
 window.app.showUpdateBadge = function(moduleName) {
@@ -309,25 +221,15 @@ window.app.showUpdateBadge = function(moduleName) {
   var textEl = badge.querySelector('.update-badge-text');
   if (textEl) textEl.textContent = 'Обновлено: ' + moduleName;
 
+  badge.classList.remove('update-badge-visible');
   badge.classList.remove('update-badge-hidden');
+
+  void badge.offsetWidth;
+
   badge.classList.add('update-badge-visible');
-
-  if (window._updateBadgeTimer) clearTimeout(window._updateBadgeTimer);
-
-  window._updateBadgeTimer = setTimeout(function() {
-    badge.classList.remove('update-badge-visible');
-    badge.classList.add('update-badge-hidden');
-    window._updateBadgeTimer = null;
-  }, 8000);
 };
 
-// -------------------------------
-// S2.5_JS: Bottom Panel – глобальные функции
-// -------------------------------
-var FLIGHT_META_KEY = 'flight_docs_meta';
-var FLIGHT_NOTES_KEY = 'flight_docs_notes';
-var FLIGHT_MAX_PHOTOS = 12;
-
+/* ========== BOTTOM PANEL — INDEXEDDB ========== */
 window.app.initFlightDB = function() {
   return new Promise(function(resolve, reject) {
     var request = indexedDB.open('pilot-tool-fs', 2);
@@ -395,19 +297,12 @@ window.app.clearPhotosDB = function() {
   });
 };
 
+/* ========== BOTTOM PANEL — LOCALSTORAGE ========== */
 function getFlightMeta() {
-  try {
-    var raw = localStorage.getItem(FLIGHT_META_KEY);
-    return raw ? JSON.parse(raw) : [];
-  } catch (e) {
-    return [];
-  }
+  try { var raw = localStorage.getItem(FLIGHT_META_KEY); return raw ? JSON.parse(raw) : []; } catch(e) { return []; }
 }
-function saveFlightMeta(meta) {
-  try {
-    localStorage.setItem(FLIGHT_META_KEY, JSON.stringify(meta));
-  } catch (e) {}
-}
+function saveFlightMeta(meta) { try { localStorage.setItem(FLIGHT_META_KEY, JSON.stringify(meta)); } catch(e) {} }
+
 function getFlightComments() {
   try {
     var raw = localStorage.getItem(FLIGHT_NOTES_KEY);
@@ -418,15 +313,15 @@ function getFlightComments() {
     var parsed = JSON.parse(raw);
     if (Array.isArray(parsed)) return parsed;
     return [];
-  } catch (e) {
-    return [];
-  }
+  } catch(e) { return []; }
 }
+
 function saveFlightComments(commentsArray) {
   try {
     localStorage.setItem(FLIGHT_NOTES_KEY, JSON.stringify(commentsArray));
-  } catch (e) {}
+  } catch(e) {}
 }
+
 function addFlightComment(newComment) {
   if (!newComment || newComment.trim() === '') return;
   var comments = getFlightComments();
@@ -435,7 +330,32 @@ function addFlightComment(newComment) {
   renderCommentsList();
 }
 
-var _toastTimer = null;
+function renderCommentsList() {
+  var container = document.getElementById('bottomPanelCommentsList');
+  if (!container) return;
+  var comments = getFlightComments();
+  if (comments.length === 0) {
+    container.innerHTML = '<div class="comments-empty">Нет комментариев</div>';
+    return;
+  }
+  var html = '';
+  for (var i = 0; i < comments.length; i++) {
+    var safeText = comments[i].replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    }).replace(/\n/g, '<br>');
+    html += '<div class="comment-item" data-index="' + i + '">' +
+      '<span class="comment-text">' + safeText + '</span>' +
+      '<button class="comment-delete" data-index="' + i + '" aria-label="Удалить комментарий">' + 
+      (window.ICONS.close || '✕') + '</button>' +
+      '</div>';
+  }
+  container.innerHTML = html;
+}
+
+/* ========== BOTTOM PANEL — ТОСТ ========== */
 window.app.showToast = function(message) {
   var toast = document.getElementById('globalToast');
   if (!toast) return;
@@ -448,6 +368,7 @@ window.app.showToast = function(message) {
   }, 3000);
 };
 
+/* ========== BOTTOM PANEL — ПРЕВЬЮ ========== */
 function createThumbnail(base64Data, maxWidth, quality) {
   return new Promise(function(resolve) {
     var img = new Image();
@@ -470,7 +391,6 @@ function createThumbnail(base64Data, maxWidth, quality) {
   });
 }
 
-var _fullPhotosCache = null;
 async function loadFullPhotosCache() {
   if (_fullPhotosCache) return;
   _fullPhotosCache = {};
@@ -479,16 +399,17 @@ async function loadFullPhotosCache() {
     try {
       var fullData = await window.app.getPhotoFromDB(meta[i].id);
       if (fullData) _fullPhotosCache[meta[i].id] = fullData;
-    } catch (e) {}
+    } catch(e) {}
   }
 }
+
 function clearFullPhotosCache() {
   _fullPhotosCache = null;
 }
 
 function renderBottomPanelPhotos() {
   var container = document.getElementById('bottomPanelPhotos');
-  var emptyMsg = document.getElementById('bottomPanelPhotosEmpty');
+  var emptyMsg  = document.getElementById('bottomPanelPhotosEmpty');
   if (!container) return;
   var meta = getFlightMeta();
   if (meta.length === 0) {
@@ -500,41 +421,26 @@ function renderBottomPanelPhotos() {
   var html = '';
   for (var i = 0; i < meta.length; i++) {
     var m = meta[i];
-    var fullSrc = (_fullPhotosCache && _fullPhotosCache[m.id]) ? _fullPhotosCache[m.id] : m.thumb;
-    html += '<div class="bottom-panel-photo-item" data-photo-id="' + m.id + '">' +
-      '<img class="bottom-panel-photo-thumb" src="' + m.thumb + '" data-full-src="' + fullSrc + '" alt="Фото документа" onerror="this.src=\'icon-192.png\'">' +
-      '<button class="bottom-panel-photo-delete" data-photo-id="' + m.id + '" aria-label="Удалить фото">' + window.ICONS.close + '</button>' +
-      '</div>';
+    var fullSrc = (_fullPhotosCache && _fullPhotosCache[m.id])
+      ? _fullPhotosCache[m.id]
+      : m.thumb;
+    html += '<div class="bottom-panel-photo-item" data-photo-id="' + m.id + '">'
+      + '<img class="bottom-panel-photo-thumb" '
+      + 'src="' + m.thumb + '" '
+      + 'data-full-src="' + fullSrc + '" '
+      + 'alt="Фото документа" '
+      + 'onerror="this.src=\'icon-192.png\'">'
+      + '<button class="bottom-panel-photo-delete" data-photo-id="' + m.id + '" '
+      + 'aria-label="Удалить фото">'
+      + window.ICONS.close + '</button>'
+      + '</div>';
   }
   container.innerHTML = html;
 }
 
-function renderCommentsList() {
-  var container = document.getElementById('bottomPanelCommentsList');
-  if (!container) return;
-  var comments = getFlightComments();
-  if (comments.length === 0) {
-    container.innerHTML = '<div class="comments-empty">Нет комментариев</div>';
-    return;
-  }
-  var html = '';
-  for (var i = 0; i < comments.length; i++) {
-    var safeText = comments[i].replace(/[&<>]/g, function(m) {
-      if (m === '&') return '&amp;';
-      if (m === '<') return '&lt;';
-      if (m === '>') return '&gt;';
-      return m;
-    }).replace(/\n/g, '<br>');
-    html += '<div class="comment-item" data-index="' + i + '">' +
-      '<span class="comment-text">' + safeText + '</span>' +
-      '<button class="comment-delete" data-index="' + i + '" aria-label="Удалить комментарий">' + (window.ICONS.close || '✕') + '</button>' +
-      '</div>';
-  }
-  container.innerHTML = html;
-}
-
+/* ========== BOTTOM PANEL — ОСНОВНЫЕ ФУНКЦИИ ========== */
 window.app.openBottomPanel = async function(options) {
-  var panel = document.getElementById('bottomPanel');
+  var panel   = document.getElementById('bottomPanel');
   var overlay = document.getElementById('bottomPanelOverlay');
   var closeBtn = document.getElementById('bottomPanelCloseBtn');
   if (!panel) return;
@@ -548,10 +454,11 @@ window.app.openBottomPanel = async function(options) {
     addBtn.innerHTML = window.ICONS.image || window.ICONS.plus;
   }
 
-  panel.classList.add('open');
+  if (panel) panel.classList.add('open');
   if (overlay) overlay.classList.add('open');
 
   renderCommentsList();
+
   await loadFullPhotosCache();
   renderBottomPanelPhotos();
 
@@ -574,9 +481,9 @@ window.app.openBottomPanel = async function(options) {
 };
 
 window.app.closeBottomPanel = function() {
-  var panel = document.getElementById('bottomPanel');
+  var panel   = document.getElementById('bottomPanel');
   var overlay = document.getElementById('bottomPanelOverlay');
-  if (panel) panel.classList.remove('open');
+  if (panel)   panel.classList.remove('open');
   if (overlay) overlay.classList.remove('open');
   clearFullPhotosCache();
 
@@ -614,10 +521,8 @@ window.app.clearBottomPanelData = function() {
     clearBtn.dataset.confirmPending = 'true';
     clearBtn.textContent = 'Точно очистить?';
     window._clearConfirmTimer = setTimeout(function() {
-      if (clearBtn) {
-        clearBtn.textContent = 'Очистить';
-        clearBtn.dataset.confirmPending = '';
-      }
+      clearBtn.textContent = 'Очистить';
+      clearBtn.dataset.confirmPending = '';
       window._clearConfirmTimer = null;
     }, 3000);
   }
@@ -663,16 +568,14 @@ async function handlePhotoSelected(file) {
       saveFlightMeta(meta);
       if (_fullPhotosCache) _fullPhotosCache[newId] = fullBase64;
       renderBottomPanelPhotos();
-    } catch (err) {
+    } catch(err) {
       window.app.showToast('Ошибка сохранения фото');
     }
   };
   reader.readAsDataURL(file);
 }
 
-// -------------------------------
-// S5_JS: PhotoSwipe
-// -------------------------------
+/* ========== PHOTOSWIPE ========== */
 window.app.openPhotoSwipe = function(thumbEl, container) {
   var fullSrcFallback = thumbEl.dataset.fullSrc || thumbEl.src;
 
@@ -698,17 +601,14 @@ window.app.openPhotoSwipe = function(thumbEl, container) {
 
   var clickedIndex = 0;
   for (var j = 0; j < thumbs.length; j++) {
-    if (thumbs[j] === thumbEl) {
-      clickedIndex = j;
-      break;
-    }
+    if (thumbs[j] === thumbEl) { clickedIndex = j; break; }
   }
 
   var items = [];
   for (var k = 0; k < thumbs.length; k++) {
     var img = thumbs[k];
     var isBottomPanelPhoto = img.classList.contains('bottom-panel-photo-thumb');
-    var w = isBottomPanelPhoto ? 0 : (img.naturalWidth || screen.width);
+    var w = isBottomPanelPhoto ? 0 : (img.naturalWidth  || screen.width);
     var h = isBottomPanelPhoto ? 0 : (img.naturalHeight || screen.height);
     items.push({
       src: img.dataset.fullSrc || img.src,
@@ -728,15 +628,15 @@ window.app.openPhotoSwipe = function(thumbEl, container) {
   };
 
   var options = {
-    index: clickedIndex,
-    bgOpacity: 0.92,
-    showHideOpacity: true,
-    tapToClose: true,
-    clickToCloseNonZoomable: true,
-    pinchToClose: true,
-    closeOnScroll: false,
-    history: false,
-    getThumbBoundsFn: getThumbBoundsFn
+    index:                    clickedIndex,
+    bgOpacity:                0.92,
+    showHideOpacity:          true,
+    tapToClose:               true,
+    clickToCloseNonZoomable:  true,
+    pinchToClose:             true,
+    closeOnScroll:            false,
+    history:                  false,
+    getThumbBoundsFn:         getThumbBoundsFn
   };
 
   var pswpEl = document.querySelector('.pswp');
@@ -757,14 +657,9 @@ window.app.openPhotoSwipe = function(thumbEl, container) {
   gallery.init();
 };
 
-// -------------------------------
-// S6_JS: PDF модальное окно
-// -------------------------------
+/* ========== PDF МОДАЛЬНОЕ ОКНО ========== */
 window.app.openPDFModal = function(url, startPage) {
-  if (!window.pdfjsLib) {
-    window.open(url, '_blank');
-    return;
-  }
+  if (!window.pdfjsLib) { window.open(url, '_blank'); return; }
 
   var overlay = document.createElement('div');
   overlay.className = 'pdf-modal-overlay';
@@ -801,7 +696,7 @@ window.app.openPDFModal = function(url, startPage) {
   toolbar.appendChild(btnClose);
 
   var canvas = document.createElement('canvas');
-  canvas.id = 'pdfCanvas';
+  canvas.id  = 'pdfCanvas';
 
   content.appendChild(toolbar);
   content.appendChild(canvas);
@@ -813,7 +708,7 @@ window.app.openPDFModal = function(url, startPage) {
   content.addEventListener('click', function(e) { e.stopPropagation(); });
   btnClose.addEventListener('click', closeFn);
 
-  var pdfDoc = null;
+  var pdfDoc    = null;
   var currentPage = startPage || 1;
   var rendering = false;
 
@@ -829,7 +724,7 @@ window.app.openPDFModal = function(url, startPage) {
       var scale = desiredWidth / viewport.width;
       var scaledViewport = page.getViewport({ scale: scale });
 
-      canvas.width = scaledViewport.width;
+      canvas.width  = scaledViewport.width;
       canvas.height = scaledViewport.height;
 
       page.render({
@@ -846,16 +741,10 @@ window.app.openPDFModal = function(url, startPage) {
   };
 
   btnPrev.addEventListener('click', function() {
-    if (currentPage > 1) {
-      currentPage--;
-      renderPage(currentPage);
-    }
+    if (currentPage > 1) { currentPage--; renderPage(currentPage); }
   });
   btnNext.addEventListener('click', function() {
-    if (pdfDoc && currentPage < pdfDoc.numPages) {
-      currentPage++;
-      renderPage(currentPage);
-    }
+    if (pdfDoc && currentPage < pdfDoc.numPages) { currentPage++; renderPage(currentPage); }
   });
 
   var touchStartX = 0;
@@ -865,14 +754,8 @@ window.app.openPDFModal = function(url, startPage) {
   canvas.addEventListener('touchend', function(e) {
     var dx = e.changedTouches[0].clientX - touchStartX;
     if (Math.abs(dx) > 50) {
-      if (dx < 0 && currentPage < pdfDoc.numPages) {
-        currentPage++;
-        renderPage(currentPage);
-      }
-      if (dx > 0 && currentPage > 1) {
-        currentPage--;
-        renderPage(currentPage);
-      }
+      if (dx < 0 && currentPage < pdfDoc.numPages) { currentPage++; renderPage(currentPage); }
+      if (dx > 0 && currentPage > 1)              { currentPage--; renderPage(currentPage); }
     }
   }, { passive: true });
 
@@ -886,9 +769,47 @@ window.app.openPDFModal = function(url, startPage) {
   });
 };
 
-// -------------------------------
-// Глобальные утилиты app.showSkeleton, hideSkeleton, showError
-// -------------------------------
+/* ========== МОДАЛЬНОЕ ОКНО КОММЕНТАРИЕВ ========== */
+function openCommentModal() {
+  var modal = document.getElementById('commentModalOverlay');
+  var input = document.getElementById('commentInput');
+  if (!modal || !input) return;
+  input.value = '';
+  modal.classList.add('open');
+  input.focus();
+}
+
+function closeCommentModal() {
+  var modal = document.getElementById('commentModalOverlay');
+  if (modal) modal.classList.remove('open');
+}
+
+function saveCommentFromModal() {
+  var input = document.getElementById('commentInput');
+  var newComment = input.value;
+  if (newComment && newComment.trim() !== '') {
+    addFlightComment(newComment);
+    window.app.showToast('Комментарий добавлен');
+  }
+  closeCommentModal();
+}
+
+function initCommentModal() {
+  var overlay = document.getElementById('commentModalOverlay');
+  if (!overlay) return;
+  var closeBtn = document.getElementById('commentModalClose');
+  var saveBtn = document.getElementById('commentSaveBtn');
+  var cancelBtn = document.getElementById('commentCancelBtn');
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeCommentModal();
+  });
+  if (closeBtn)  closeBtn.addEventListener('click', closeCommentModal);
+  if (cancelBtn) cancelBtn.addEventListener('click', closeCommentModal);
+  if (saveBtn)   saveBtn.addEventListener('click', saveCommentFromModal);
+}
+
+/* ========== SKELETON / ERROR ========== */
 window.app.showSkeleton = function(container, type) {
   if (!container) return;
   var COUNT = type === 'list' ? 6 : 4;
@@ -924,9 +845,109 @@ window.app.showError = function(container, text, retryFn) {
   }
 };
 
-// -------------------------------
-// PWA: initServiceWorker, showInstallPrompt
-// -------------------------------
+/* ========== NOTES QUICK BUTTON (ГЛАВНЫЙ ЭКРАН) ========== */
+function initNotesQuickBtn() {
+  var btn = document.getElementById('notesQuickBtn');
+  if (!btn) return;
+
+  if (window.ICONS && window.ICONS['edit-3']) {
+    btn.innerHTML = window.ICONS['edit-3'];
+  }
+
+  var saved = null;
+  try {
+    var raw = localStorage.getItem('notesQuickBtnPos');
+    if (raw) saved = JSON.parse(raw);
+  } catch(e) {}
+
+  if (saved && typeof saved.right === 'number' && typeof saved.bottom === 'number') {
+    btn.style.left   = 'auto';
+    btn.style.top    = 'auto';
+    btn.style.right  = saved.right  + 'px';
+    btn.style.bottom = saved.bottom + 'px';
+  }
+
+  var dragging    = false;
+  var startX      = 0;
+  var startY      = 0;
+  var startRight  = 0;
+  var startBottom = 0;
+  var moved       = false;
+
+  btn.addEventListener('pointerdown', function(e) {
+    if (e.button !== undefined && e.button !== 0) return;
+
+    dragging  = true;
+    moved     = false;
+    btn.setPointerCapture(e.pointerId);
+    btn.classList.add('dragging');
+
+    var rect = btn.getBoundingClientRect();
+    startX      = e.clientX;
+    startY      = e.clientY;
+    startRight  = window.innerWidth  - rect.right;
+    startBottom = window.innerHeight - rect.bottom;
+
+    btn.style.left = 'auto';
+    btn.style.top  = 'auto';
+    btn.style.right  = startRight  + 'px';
+    btn.style.bottom = startBottom + 'px';
+
+    e.preventDefault();
+  }, { passive: false });
+
+  btn.addEventListener('pointermove', function(e) {
+    if (!dragging) return;
+
+    var dx = e.clientX - startX;
+    var dy = e.clientY - startY;
+
+    if (Math.abs(dx) > 6 || Math.abs(dy) > 6) {
+      moved = true;
+    }
+
+    if (!moved) return;
+
+    var newRight  = startRight  - dx;
+    var newBottom = startBottom - dy;
+
+    var maxRight  = window.innerWidth  - btn.offsetWidth  - 8;
+    var maxBottom = window.innerHeight - btn.offsetHeight - 8;
+    newRight  = Math.max(8, Math.min(newRight,  maxRight));
+    newBottom = Math.max(8, Math.min(newBottom, maxBottom));
+
+    btn.style.right  = newRight  + 'px';
+    btn.style.bottom = newBottom + 'px';
+
+    e.preventDefault();
+  }, { passive: false });
+
+  btn.addEventListener('pointerup', function(e) {
+    if (!dragging) return;
+    dragging = false;
+    btn.classList.remove('dragging');
+    btn.releasePointerCapture(e.pointerId);
+
+    if (moved) {
+      try {
+        localStorage.setItem('notesQuickBtnPos', JSON.stringify({
+          right:  parseFloat(btn.style.right),
+          bottom: parseFloat(btn.style.bottom)
+        }));
+      } catch(e2) {}
+    } else {
+      window._notesOpenDraw = true;
+      window.app.navigateTo('notes');
+    }
+  });
+
+  btn.addEventListener('pointercancel', function() {
+    dragging = false;
+    btn.classList.remove('dragging');
+  });
+}
+
+/* ========== SERVICE WORKER ========== */
 window.app.initServiceWorker = function() {
   if (!('serviceWorker' in navigator)) return;
 
@@ -936,28 +957,28 @@ window.app.initServiceWorker = function() {
     var data = event.data;
 
     if (data.type === 'CACHE_PROGRESS') {
-      var bar = document.getElementById('cacheProgressBar');
+      var bar  = document.getElementById('cacheProgressBar');
       var text = document.getElementById('cacheProgressText');
-      var pct = Math.round(data.progress * 100);
-      if (bar) bar.style.width = pct + '%';
+      var pct  = Math.round(data.progress * 100);
+      if (bar)  bar.style.width = pct + '%';
       if (text) text.textContent = pct + '%';
     }
 
     if (data.type === 'CACHE_DONE') {
-      var bar = document.getElementById('cacheProgressBar');
-      var text = document.getElementById('cacheProgressText');
+      var bar     = document.getElementById('cacheProgressBar');
+      var text    = document.getElementById('cacheProgressText');
       var overlay = document.getElementById('cacheProgressOverlay');
-      if (bar) bar.style.width = '100%';
+      if (bar)  bar.style.width = '100%';
       if (text) text.textContent = '100%';
       localStorage.setItem('offlineReady', 'true');
-      app.updateOfflineStatus(true);
+      window.app.updateOfflineStatus(true);
       setTimeout(function() {
         if (overlay) overlay.style.display = 'none';
       }, 600);
     }
 
     if (data.type === 'JSON_UPDATED') {
-      app.showUpdateBadge(data.module);
+      window.app.showUpdateBadge(data.module);
     }
   };
 
@@ -971,64 +992,7 @@ window.app.initServiceWorker = function() {
   });
 };
 
-var deferredInstallPrompt = null;
-window.addEventListener('beforeinstallprompt', function(e) {
-  e.preventDefault();
-  deferredInstallPrompt = e;
-});
-window.addEventListener('appinstalled', function() {
-  deferredInstallPrompt = null;
-});
-window.app.showInstallPrompt = function() {
-  if (deferredInstallPrompt) {
-    deferredInstallPrompt.prompt();
-  } else {
-    alert('Приложение уже установлено или браузер не поддерживает установку');
-  }
-};
-
-// -------------------------------
-// Модальное окно комментариев (глобальное)
-// -------------------------------
-function openCommentModal() {
-  var modal = document.getElementById('commentModalOverlay');
-  var input = document.getElementById('commentInput');
-  if (!modal || !input) return;
-  input.value = '';
-  modal.classList.add('open');
-  input.focus();
-}
-function closeCommentModal() {
-  var modal = document.getElementById('commentModalOverlay');
-  if (modal) modal.classList.remove('open');
-}
-function saveCommentFromModal() {
-  var input = document.getElementById('commentInput');
-  var newComment = input.value;
-  if (newComment && newComment.trim() !== '') {
-    addFlightComment(newComment);
-    window.app.showToast('Комментарий добавлен');
-  }
-  closeCommentModal();
-}
-function initCommentModal() {
-  var overlay = document.getElementById('commentModalOverlay');
-  if (!overlay) return;
-  var closeBtn = document.getElementById('commentModalClose');
-  var saveBtn = document.getElementById('commentSaveBtn');
-  var cancelBtn = document.getElementById('commentCancelBtn');
-
-  overlay.addEventListener('click', function(e) {
-    if (e.target === overlay) closeCommentModal();
-  });
-  if (closeBtn) closeBtn.addEventListener('click', closeCommentModal);
-  if (cancelBtn) cancelBtn.addEventListener('click', closeCommentModal);
-  if (saveBtn) saveBtn.addEventListener('click', saveCommentFromModal);
-}
-
-// -------------------------------
-// DOMContentLoaded
-// -------------------------------
+/* ========== DOMContentLoaded ========== */
 document.addEventListener('DOMContentLoaded', function() {
   if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-theme');
@@ -1039,91 +1003,72 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.menu-item[data-placeholder]').forEach(function(item) {
     item.addEventListener('click', function() {
       alert('Раздел в разработке');
-      app.closeMenu();
+      window.app.closeMenu();
     });
   });
 
   var themeToggle = document.getElementById('themeToggle');
   if (themeToggle) {
     themeToggle.addEventListener('click', function() {
-      app.toggleTheme();
-      app.closeMenu();
-    });
-  }
-
-  var installApp = document.getElementById('installApp');
-  if (installApp) {
-    installApp.addEventListener('click', function() {
-      if (window.app && typeof window.app.showInstallPrompt === 'function') {
-        window.app.showInstallPrompt();
-      }
-      app.closeMenu();
+      window.app.toggleTheme();
+      window.app.closeMenu();
     });
   }
 
   document.querySelectorAll('.menu-item[data-nav]').forEach(function(item) {
     item.addEventListener('click', function() {
-      app.navigateTo(item.dataset.nav);
+      window.app.navigateTo(item.dataset.nav);
     });
   });
 
   if (localStorage.getItem('offlineReady') === 'true') {
-    app.updateOfflineStatus(true);
+    window.app.updateOfflineStatus(true);
   }
 
   window.addEventListener('online', function() {
     var el = document.getElementById('menuNetworkStatus');
-    if (el) {
-      el.textContent = '● Онлайн';
-      el.style.color = '';
-    }
+    if (el) { el.textContent = '● Онлайн'; el.style.color = ''; }
   });
   window.addEventListener('offline', function() {
     var el = document.getElementById('menuNetworkStatus');
-    if (el) {
-      el.textContent = '● Офлайн';
-      el.style.color = 'rgba(255,255,255,0.4)';
-    }
+    if (el) { el.textContent = '● Офлайн'; el.style.color = 'rgba(255,255,255,0.4)'; }
   });
 
-  // Bottom Panel слушатели
   var bpOverlay = document.getElementById('bottomPanelOverlay');
   if (bpOverlay) {
     bpOverlay.addEventListener('click', function() {
       window.app.closeBottomPanel();
     });
   }
+
   var bpCloseBtn = document.getElementById('bottomPanelCloseBtn');
   if (bpCloseBtn) {
     bpCloseBtn.addEventListener('click', function() {
       window.app.closeBottomPanel();
     });
   }
+
   var bpClearBtn = document.getElementById('bottomPanelClearBtn');
   if (bpClearBtn) {
     bpClearBtn.addEventListener('click', function() {
       window.app.clearBottomPanelData();
     });
   }
+
   var bpAddPhotoBtn = document.getElementById('bottomPanelAddPhotoBtn');
   if (bpAddPhotoBtn) {
     bpAddPhotoBtn.addEventListener('click', function() {
       window.app.addBottomPanelPhoto();
     });
   }
+
   var bpBody = document.getElementById('bottomPanelBody');
   if (bpBody && !bpBody.dataset.delegated) {
     bpBody.addEventListener('click', function(e) {
       var thumb = e.target.closest('.bottom-panel-photo-thumb');
-      if (thumb) {
-        window.app.openPhotoSwipe(thumb, document.getElementById('bottomPanelPhotos'));
-        return;
-      }
+      if (thumb) { window.app.openPhotoSwipe(thumb, document.getElementById('bottomPanelPhotos')); return; }
       var delPhotoBtn = e.target.closest('.bottom-panel-photo-delete');
-      if (delPhotoBtn) {
-        window.app.deleteBottomPanelPhoto(delPhotoBtn.dataset.photoId);
-        return;
-      }
+      if (delPhotoBtn) { window.app.deleteBottomPanelPhoto(delPhotoBtn.dataset.photoId); return; }
       var delCommentBtn = e.target.closest('.comment-delete');
       if (delCommentBtn) {
         var index = parseInt(delCommentBtn.dataset.index, 10);
@@ -1166,6 +1111,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   initNotesQuickBtn();
+
   initCommentModal();
 
   window.app.navigateTo('main');

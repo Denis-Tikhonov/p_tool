@@ -1,10 +1,9 @@
-// sw.js – полный Service Worker (согласно 2_PWA.txt)
 const CACHE_NAME = 'pilot-tool-v2';
 
 const JSON_MODULE_NAMES = {
-  'modules/phonebook.json': 'Телефонный справочник',
-  'modules/checklist.json': 'Чеклисты',
-  'modules/krs.json': 'Указания КРС',
+  'modules/phonebook.json':        'Телефонный справочник',
+  'modules/checklist.json':        'Чеклисты',
+  'modules/krs.json':              'Указания КРС',
   'modules/flightprocedures.json': 'Лётные процедуры',
   'modules/aviation_sayings.json': 'Авиационные цитаты',
 };
