@@ -1,10 +1,18 @@
 {
   "phases": [
     {
+      "type": "divider",
+      "label": "NORMAL PROCEDURES"
+    },
+    {
       "id": "phase_preflight",
       "title": "Подготовка к вылету",
       "time": "40 мин до TOBT",
       "procedures": [
+        {
+          "type": "section",
+          "label": "Normal Procedures"
+        },
         {
           "id": "proc_electrical_up",
           "title": "Electrical Power Up",
@@ -15,7 +23,6 @@
             { "type": "tail", "text": "VP-BDP – VQ-BDC, VQ-BVY" },
             { "type": "note", "text": "Do not move the airplane until ISFD alignment is complete." },
             { "type": "action", "label": "STANDBY POWER switch", "value": "Guard closed" },
-            { "type": "action", "label": "ALTERNATE FLAPS master switch", "value": "Guard closed" },
             { "type": "separator" },
             { "type": "condition", "text": "If APU power is needed:" },
             { "type": "action", "label": "TEST switch", "value": "Hold to FAULT/INOP" },
@@ -33,11 +40,48 @@
             { "type": "separator" },
             { "type": "action", "label": "Oxygen pressure", "value": "Check" },
             { "type": "image", "src": "modules/flightprocedures/oxy_chart.jpg", "fullSrc": "modules/flightprocedures/oxy_chart_full.jpg" },
-            { "type": "action", "label": "Hydraulic quantity", "value": "min 76% / after Daily Check 92%" },
             { "type": "action", "label": "Engine oil quantity", "value": "min 60% / 12 US qt" }
+          ]
+        },
+        {
+          "id": "proc_after_loadsheet",
+          "title": "After Loadsheet",
+          "content": [
+            {
+              "type": "table",
+              "content_html": "<table><thead><tr><th>Captain</th><th>First Officer</th></tr></thead><tbody><tr><td colspan='2'><strong>Loadsheet data — Check</strong><br>Check that following data are correct: flight route, flight number, A/C registration number, number of crew members, actual date and time of issue.</td></tr><tr><td><strong>ZFW — Call</strong><br>Call actual ZFW from loadsheet.</td><td>Enter actual ZFW into CDU<br><strong>ZFW — Enter</strong></td></tr></tbody></table>"
+            },
+            {
+              "type": "caution",
+              "text": "DO NOT ENTER THE ZFW INTO THE GW BOXES. THE FMC WILL CALCULATE PERFORMANCE DATA WITH SIGNIFICANT ERRORS."
+            },
+            {
+              "type": "verify",
+              "text": "Verify the FUEL on the CDU, Loadsheet (account for taxi fuel), OFP and UPPER DU agree."
+            },
+            {
+              "type": "verify",
+              "text": "Verify that the fuel is sufficient for flight."
+            },
+            {
+              "type": "table",
+              "content_html": "<table><thead><tr><th>Captain</th><th>First Officer</th></tr></thead><tbody><tr><td><strong>Gross Weight — Check</strong><br>Compare the called gross weight with gross weight from the loadsheet.<br>Check that actual weight is equal or less than maximum takeoff weight.</td><td>Call actual gross weight from CDU.<br><strong>Gross Weight — Call</strong></td></tr></tbody></table>"
+            },
+            {
+              "type": "verify",
+              "text": "Verify that the actual payload reported by the flight attendant is in agreement with the loadsheet."
+            },
+            {
+              "type": "table",
+              "content_html": "<table><thead><tr><th>Captain</th><th>First Officer</th></tr></thead><tbody><tr><td><strong>CRZ CG — Call</strong><br>Call minimum of TOMAC and ZFMAC.</td><td><strong>CRZ CG — Enter</strong></td></tr></tbody></table>"
+            }
           ]
         }
       ]
+    },
+    {
+      "type": "divider",
+      "label": "POSTFLIGHT PROCEDURES"
     },
     {
       "id": "phase_exterior",
@@ -50,10 +94,51 @@
           "content": [
             { "type": "condition", "text": "Before each flight the Captain and maintenance crew must verify that the airplane is satisfactory for flight." },
             { "type": "image", "src": "modules/flightprocedures/ext_walk.jpg", "fullSrc": "modules/flightprocedures/ext_walk_full.jpg" },
-            { "type": "action", "label": "Left Forward Fuselage — Probes, ports, vents", "value": "Check" },
-            { "type": "verify", "text": "Probes, vents, and static ports are clear and not damaged." },
             { "type": "action", "label": "Doors and access panels", "value": "Latched" },
             { "type": "caution", "text": "Thin hoarfrost is acceptable on the upper fuselage surface provided all vents and ports are clear." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase_before_takeoff",
+      "title": "Перед взлётом",
+      "procedures": [
+        {
+          "id": "proc_takeoff_briefing",
+          "title": "Takeoff Briefing",
+          "pdfRef": { "label": "РПП Б", "file": "modules/flightprocedures/AOMB.pdf", "page": 108 },
+          "content": [
+            { "type": "action-crew", "label": "Call: PREFLIGHT PROCEDURE", "value": "", "crew": "C" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divider",
+      "label": "MANEUVERS"
+    },
+    {
+      "id": "phase_maneuvers",
+      "title": "Манёвры",
+      "procedures": [
+        {
+          "id": "proc_stall_recovery",
+          "title": "Stall Recovery",
+          "content": [
+            {
+              "type": "table",
+              "title": "Stall Recovery — Pilot Flying / Pilot Monitoring",
+              "src": "modules/flightprocedures/tables/maneuvers_stall.html"
+            },
+            {
+              "type": "warning",
+              "text": "* If the control column does not provide the needed response, stabilizer trim may be needed. Excessive use of pitch trim can aggravate the condition, or can result in loss of control or in high structural loads."
+            },
+            {
+              "type": "warning",
+              "text": "** Excessive use of pitch trim or rudder can aggravate the condition, or can result in loss of control or in high structural loads."
+            }
           ]
         }
       ]
