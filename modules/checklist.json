@@ -3,7 +3,7 @@
         { "type": "divider", "label": "<i>В брифинге</i>" },
         {
             "id": "p_docs",
-            "title": "1. ЛИЧНЫЕ ДОКУМЕНТЫЭКИПАЖА",
+            "title": "1. ЛИЧНЫЕ ДОКУМЕНТЫ ЭКИПАЖА",
             "note": "Проверить наличие и срок действия: (✔ проверить Customs для международного рейса!)",
             "items": [
                 { "id": "crew", 
@@ -39,41 +39,37 @@
                   "note": "КВС: ⬩ подписывает;\nF/O: ⬩ заполняет фактическое время начала полётной смены.",
                   "required": true },
                 { "id": "brief3",
-                  "label": "EFB",
-                  "note": "⬩ OPT;\n⬩ SkyBag;\n⬩ Documents;.",
-                  "required": true },
-                { "id": "brief4",
                   "label": "Техническое состояние ВС",
                   "note": "⬩ наличие ограничений MEL/CDL; ⬩ Minimum Equipment List; ⬩ Configuration Deviation List.",
                   "required": true },
-                { "id": "brief5", "label": "NOTAM по маршруту полёта (не только по аэродромам)", "required": true },
-                { "id": "brief6", "label": "Метеоинформация", "required": true },
-                { "id": "brief7",
+                { "id": "brief4", "label": "NOTAM по маршруту полёта (не только по аэродромам)", "required": true },
+                { "id": "brief5", "label": "Метеоинформация", "required": true },
+                { "id": "brief6",
                   "label": "Flight Plan",
                   "note": "⬩ Letter Y в плане полёта (если требуется); ⬩ маршрут; ⬩ запасные.",
                   "required": true },
-                { "id": "brief8",
+                { "id": "brief7",
                   "label": "Загрузка ВС",
                   "note": "⬩ Багаж экипажа;\n⬩ Коммерческая загрузка;\n⬩ Опасные грузы.",
                   "required": true },
-                { "id": "brief9",
+                { "id": "brief8",
                   "label": "Operational Flight Plan (OFP)",
                   "note": "КВС: ⬩ подписывает;\nF/O ⬩ проверяет равильность расчёта (- маршрут;- эшелоны;.",
                   "required": true },
-                { "id": "brief10",
+                { "id": "brief9",
                   "label": "Правильность расчёта топлива",
                   "note": "Trip fuel (топливо на маршрут)\nContingency fuel (резерв на непредвиденные обстоятельства)/nAlternate fuel (топливо на запасной)\nFinal reserve fuel (конечный резерв — 30 мин для HELS или 45 мин для PBN)\nExtra fuel (дополнительное топливо)\nTaxi fuel (топливо на руление)\nETOPS fuel (при необходимости).",
                   "required": true },
-                { "id": "brief11", "label": "OFP подписан КВС", "required": true },
-                { "id": "brief12",
+                { "id": "brief10", "label": "OFP подписан КВС", "required": true },
+                { "id": "brief11",
                   "label": "Trip Info",
                   "note": "КВС: ⬩ подписывает;\nF/O: ⬩ заполняет.",
                   "required": true },
-                { "id": "brief13",
+                { "id": "brief12",
                   "label": "Dispatch Release",
                   "note": "КВС: ⬩ подписывает.",
                   "required": true },
-                { "id": "brief14",
+                { "id": "brief13",
                   "label": "Мед. контроль",
                   "note": "КВС вправе - допустить членов экипажа (не только летного) к полёту, если предполётный контроль не проводится (запись в ПЗ)\n- подтвердить отсутствие признаков недееспособности.",
                   "required": true }
@@ -93,6 +89,7 @@
                 { "id": "serv7", "label": "Представители АК", "required": true }
             ]
         },
+        { "type": "divider", "label": "<i>На борту ВС</i>" },
         {
             "id": "ac_docs",
             "title": "4. ДОКУМЕНТАЦИЯ ВС",
@@ -179,8 +176,12 @@
                 { "id": "efb3", "label": "Наличие зарядного устройства", "required": true },
                 { "id": "efb4", "label": "Обновлённый контент EFB", "required": true },
                 { "id": "efb5", "label": "Обновлены Jeppesen FD Pro и Documents", "required": true },
-                { "id": "efb6", "label": "Актуальная база данных FMS", "required": true },
-                { "id": "efb7", "label": "Актуальный AIRAC cycle", "required": true }
+                { "id": "efb6",
+                  "label": "EFB",
+                  "note": "⬩ OPT;\n⬩ SkyBag;\n⬩ Documents;.",
+                  "required": true },
+                { "id": "efb7", "label": "Актуальная база данных FMS", "required": true },
+                { "id": "efb8", "label": "Актуальный AIRAC cycle", "required": true }
             ]
         },
         {
@@ -267,9 +268,10 @@
                 { "id": "after_flight4", "label": "Кабина пилотов приведена в порядок", "required": true }
             ]
         },
+        { "type": "divider", "label": "<i>Дополнительно ознакомиться</i>" },
         {
             "id": "procedure",
-            "title": "16. Процедура при прибытии инспекторов SAFA",
+            "title": "Процедура при прибытии инспекторов SAFA",
             "items": [
                 { "id": "procedure1",
                   "label": "Ознакомлен",
@@ -279,7 +281,7 @@
         },
         {
             "id": "notes",
-            "title": "17. Категории замечаний SAFA",
+            "title": "Категории замечаний SAFA",
             "items": [
                 { "id": "notes2",
                   "label": "Ознакомлен",
@@ -289,7 +291,7 @@
         },
         {
             "id": "after_check",
-            "title": "18. Действия после проверки",
+            "title": "Действия после проверки",
             "items": [
                 { "id": "after_check1",
                   "label": "Ознакомлен",

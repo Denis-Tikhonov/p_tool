@@ -1,5 +1,5 @@
-/* sw.js */
-const CACHE_NAME = 'pilot-tool-v2';
+// sw.js
+const CACHE_NAME = 'pilot-tool-v3';
 const JSON_MODULE_NAMES = {
   'modules/phonebook.json': 'Телефонный справочник',
   'modules/checklist.json': 'Чеклисты',
@@ -7,14 +7,17 @@ const JSON_MODULE_NAMES = {
   'modules/flightprocedures.json': 'Лётные процедуры',
   'modules/aviation_sayings.json': 'Авиационные цитаты',
 };
-
 const STATIC_ASSETS = [
   './', './index.html', './style.css', './app.js', './background.jpg', './manifest.json',
-  './icons/favicon.ico', './icons/favicon-16.png', './icons/favicon-32.png', './icons/apple-touch-icon.png',
-  './icons/android-chrome-192.png', './icons/android-chrome-512.png', './icons.js',
-  './fonts/Roboto-Regular.woff2', './fonts/Roboto-Medium.woff2', './fonts/Roboto-Bold.woff2', './fonts/Caveat-Bold.woff2',
-  './modules/phonebook.js', './modules/checklist.js', './modules/krs.js', './modules/flightprocedures.js', './modules/notes.js',
-  './modules/phonebook.json', './modules/checklist.json', './modules/krs.json', './modules/flightprocedures.json', './modules/aviation_sayings.json',
+  './icons/favicon.ico', './icons/favicon-16.png', './icons/favicon-32.png',
+  './icons/apple-touch-icon.png', './icons/android-chrome-192.png', './icons/android-chrome-512.png',
+  './icons.js',
+  './fonts/Roboto-Regular.woff2', './fonts/Roboto-Medium.woff2', './fonts/Roboto-Bold.woff2',
+  './fonts/Caveat-Bold.woff2',
+  './modules/phonebook.js', './modules/checklist.js', './modules/krs.js',
+  './modules/flightprocedures.js', './modules/notes.js',
+  './modules/phonebook.json', './modules/checklist.json', './modules/krs.json',
+  './modules/flightprocedures.json', './modules/aviation_sayings.json',
   './modules/flightprocedures/AOMA.pdf', './modules/flightprocedures/AOMB.pdf',
   './modules/flightprocedures/oxy_chart.jpg', './modules/flightprocedures/oxy_chart_full.jpg',
   './modules/flightprocedures/ext_walk.jpg', './modules/flightprocedures/ext_walk_full.jpg',
@@ -26,9 +29,7 @@ const STATIC_ASSETS = [
   './libs/photoswipe/default-skin/preloader.gif',
   './libs/pdfjs/pdf.min.js', './libs/pdfjs/pdf.worker.min.js',
 ];
-
 const progressChannel = new BroadcastChannel('sw-progress');
-
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
@@ -36,8 +37,7 @@ self.addEventListener('install', (event) => {
       const total = STATIC_ASSETS.length;
       await Promise.allSettled(
         STATIC_ASSETS.map(url =>
-          cache.add(url)
-            .catch(err => console.warn('SW: не удалось кэшировать:', url, err))
+          cache.add(url).catch(err => console.warn('SW: не удалось кэшировать:', url, err))
             .finally(() => {
               cached++;
               progressChannel.postMessage({ type: 'CACHE_PROGRESS', progress: cached / total, cached, total });
@@ -48,13 +48,12 @@ self.addEventListener('install', (event) => {
     }).then(() => self.skipWaiting())
   );
 });
-
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))).then(() => self.clients.claim())
+    caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())
   );
 });
-
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
@@ -73,7 +72,7 @@ self.addEventListener('fetch', (event) => {
             try {
               const [newBlob, oldBlob] = await Promise.all([response.clone().blob(), cached.clone().blob()]);
               changed = (newBlob.size !== oldBlob.size);
-            } catch (e) { changed = false; }
+            } catch(e) { changed = false; }
           } else { changed = false; }
           await cache.put(event.request, response.clone());
           if (changed) {

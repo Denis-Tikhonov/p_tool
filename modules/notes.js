@@ -1,6 +1,5 @@
-/* modules/notes.js */
+// modules/notes.js
 var _notesView = 'list';
-var _notesActiveCanvas = null;
 
 function notesOpenDB() {
   return new Promise(function(resolve, reject) {
@@ -58,32 +57,35 @@ function notesClearAllDB() {
     });
   });
 }
+
 function showNotesListHeader() {
   var left = document.getElementById('headerLeft');
   var center = document.getElementById('headerCenter');
   var right = document.getElementById('headerRight');
-  left.innerHTML = '<button class="icon-btn" aria-label="Назад">' + window.ICONS.back + '</button>';
-  left.onclick = function() { window.app.navigateTo('main'); };
+  left.innerHTML = '<button class="icon-btn" aria-label="Назад" onclick="window.app.navigateTo(\'main\')">' + window.ICONS.back + '</button>';
   center.innerHTML = '<div class="hc-default">Заметки</div>';
-  right.innerHTML = '<button class="icon-btn" aria-label="Удалить все заметки">' + window.ICONS['trash-2'] + '</button>';
-  right.onclick = function() { notesDeleteAll(); };
+  right.innerHTML = '<button class="icon-btn" id="notesDeleteAllBtn" aria-label="Удалить все">' + window.ICONS['trash-2'] + '</button>';
+  var delAllBtn = document.getElementById('notesDeleteAllBtn');
+  if (delAllBtn) delAllBtn.onclick = function() { notesDeleteAll(); };
 }
 function showNotesDrawHeader() {
   var left = document.getElementById('headerLeft');
   var center = document.getElementById('headerCenter');
   var right = document.getElementById('headerRight');
-  left.innerHTML = '<button class="icon-btn notes-text-btn">Отмена</button>';
-  left.onclick = function() { showNotesList(); };
+  left.innerHTML = '<button class="icon-btn notes-text-btn" id="notesCancelBtn">Отмена</button>';
+  left.onclick = null;
+  var cancelBtn = document.getElementById('notesCancelBtn');
+  if (cancelBtn) cancelBtn.onclick = function() { showNotesList(); };
   center.innerHTML = '<div class="hc-default">Новая заметка</div>';
-  right.innerHTML = '<button class="icon-btn notes-text-btn">Сохранить</button>';
-  right.onclick = function() { notesSaveCurrent(); };
+  right.innerHTML = '<button class="icon-btn notes-text-btn" id="notesSaveBtn">Сохранить</button>';
+  var saveBtn = document.getElementById('notesSaveBtn');
+  if (saveBtn) saveBtn.onclick = function() { notesSaveCurrent(); };
 }
-function renderNotesHeader() {
-  showNotesListHeader();
-}
+function renderNotesHeader() { showNotesListHeader(); }
+
 function showNotesList() {
   _notesView = 'list';
-  renderNotesHeader();
+  showNotesListHeader();
   var container = document.getElementById('notesContainer');
   if (!container) return;
   window.app.showSkeleton(container, 'blocks');
@@ -106,23 +108,25 @@ function showNotesList() {
     var html = '<div class="notes-grid">';
     for (var i = 0; i < notes.length; i++) {
       var note = notes[i];
-      var date = new Date(note.ts).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' });
+      var date = new Date(note.ts).toLocaleDateString('ru-RU', { day:'2-digit', month:'2-digit', year:'2-digit', hour:'2-digit', minute:'2-digit' });
       html += '<div class="notes-card" data-note-id="' + note.id + '">' +
-        '<img class="notes-card-img" src="' + note.thumb + '" data-note-id="' + note.id + '" data-full-src="' + note.dataURL + '" alt="Заметка от ' + date + '" onerror="this.src=\'icon-192.png\'">' +
-        '<div class="notes-card-footer"><span class="notes-card-date">' + date + '</span>' +
-        '<button class="notes-card-delete" data-note-id="' + note.id + '" aria-label="Удалить заметку">' + window.ICONS['trash-2'] + '</button></div></div>';
+        '<img class="notes-card-img" src="' + note.thumb + '" data-note-id="' + note.id + '" data-full-src="' + note.dataURL + '" alt="Заметка от ' + date + '" onerror="this.src=\'icons/android-chrome-192.png\'">' +
+        '<div class="notes-card-footer">' +
+        '<span class="notes-card-date">' + date + '</span>' +
+        '<button class="notes-card-delete" data-note-id="' + note.id + '" aria-label="Удалить заметку">' + window.ICONS['trash-2'] + '</button>' +
+        '</div></div>';
     }
     html += '</div><button class="notes-fab" aria-label="Новая заметка">' + window.ICONS.plus + '</button>';
     window.app.hideSkeleton(container, html);
   }).catch(function() { window.app.showError(container, 'Не удалось загрузить заметки'); });
 }
+
 function showNotesDrawView() {
   _notesView = 'draw';
   showNotesDrawHeader();
   var container = document.getElementById('notesContainer');
   if (!container) return;
-  container.innerHTML =
-    '<div class="notes-draw-wrap">' +
+  container.innerHTML = '<div class="notes-draw-wrap">' +
     '<div class="notes-draw-toolbar">' +
     '<button class="notes-tool-btn notes-tool-clear" aria-label="Очистить">↺ Очистить</button>' +
     '<div class="notes-stroke-controls">' +
@@ -134,6 +138,7 @@ function showNotesDrawView() {
     '<canvas id="notesCanvas" class="notes-canvas"></canvas></div>';
   initNotesCanvas();
 }
+
 function initNotesCanvas() {
   var canvas = document.getElementById('notesCanvas');
   if (!canvas) return;
@@ -228,8 +233,8 @@ function initNotesCanvas() {
         _eraserMode = false;
         ctx.strokeStyle = '#1a1a1a';
         ctx.lineWidth = parseInt(strokeBtn.dataset.width, 10) || 3;
-        var eraserBtn2 = toolbar.querySelector('.notes-tool-eraser');
-        if (eraserBtn2) eraserBtn2.classList.remove('notes-eraser-active');
+        var eraserBtn = toolbar.querySelector('.notes-tool-eraser');
+        if (eraserBtn) eraserBtn.classList.remove('notes-eraser-active');
         return;
       }
       var eraserBtn = e.target.closest('.notes-tool-eraser');
@@ -243,10 +248,11 @@ function initNotesCanvas() {
       }
     });
   }
-  _notesActiveCanvas = canvas;
+  window._notesActiveCanvas = canvas;
 }
+
 function notesSaveCurrent() {
-  var canvas = _notesActiveCanvas;
+  var canvas = window._notesActiveCanvas;
   if (!canvas) { showNotesList(); return; }
   var dataURL = canvas.toDataURL('image/png');
   var img = new Image();
@@ -261,7 +267,7 @@ function notesSaveCurrent() {
     tctx.drawImage(img, 0, 0, thumbCanvas.width, thumbCanvas.height);
     var thumb = thumbCanvas.toDataURL('image/jpeg', 0.75);
     notesSaveDB(dataURL, thumb).then(function() {
-      _notesActiveCanvas = null;
+      window._notesActiveCanvas = null;
       window.app.showToast('Заметка сохранена');
       showNotesList();
     }).catch(function() { window.app.showToast('Ошибка сохранения'); });
@@ -269,50 +275,16 @@ function notesSaveCurrent() {
   img.onerror = function() { window.app.showToast('Ошибка сохранения'); };
   img.src = dataURL;
 }
-function notesDownload(id, src) {
-  var fullSrc = src;
-  if (src && src.startsWith('data:')) {
-    var a = document.createElement('a');
-    var date = new Date();
-    var name = 'note_' + date.getFullYear() + '-' + String(date.getMonth()+1).padStart(2,'0') + '-' + String(date.getDate()).padStart(2,'0') + '_' + String(date.getHours()).padStart(2,'0') + String(date.getMinutes()).padStart(2,'0') + '.png';
-    a.href = src;
-    a.download = name;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    return;
-  }
-  notesOpenDB().then(function(db) {
-    var tx = db.transaction('handwritten-notes', 'readonly');
-    var store = tx.objectStore('handwritten-notes');
-    var req = store.get(parseInt(id, 10));
-    req.onsuccess = function() {
-      if (!req.result) return;
-      var a = document.createElement('a');
-      var date = new Date(req.result.ts);
-      var name = 'note_' + date.getFullYear() + '-' + String(date.getMonth()+1).padStart(2,'0') + '-' + String(date.getDate()).padStart(2,'0') + '_' + String(date.getHours()).padStart(2,'0') + String(date.getMinutes()).padStart(2,'0') + '.png';
-      a.href = req.result.dataURL;
-      a.download = name;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    };
-  }).catch(function() { window.app.showToast('Не удалось скачать заметку'); });
-}
+
 function notesDeleteOne(id) {
-  notesDeleteDB(id).then(function() {
-    window.app.showToast('Заметка удалена');
-    showNotesList();
-  }).catch(function() { window.app.showToast('Ошибка удаления'); });
+  notesDeleteDB(id).then(function() { window.app.showToast('Заметка удалена'); showNotesList(); }).catch(function() { window.app.showToast('Ошибка удаления'); });
 }
 function notesDeleteAll() {
   window.app.showConfirm('Удалить все заметки? Это действие необратимо.', function() {
-    notesClearAllDB().then(function() {
-      window.app.showToast('Все заметки удалены');
-      showNotesList();
-    }).catch(function() { window.app.showToast('Ошибка удаления'); });
+    notesClearAllDB().then(function() { window.app.showToast('Все заметки удалены'); showNotesList(); }).catch(function() { window.app.showToast('Ошибка удаления'); });
   }, 'Удалить все');
 }
+
 function initNotes() {
   var openDraw = window._notesOpenDraw === true;
   window._notesOpenDraw = false;
@@ -324,15 +296,19 @@ function initNotes() {
       if (fab) { showNotesDrawView(); return; }
       var delBtn = e.target.closest('.notes-card-delete');
       if (delBtn) { var id = parseInt(delBtn.dataset.noteId, 10); notesDeleteOne(id); return; }
-      var card = e.target.closest('.notes-card-img');
-      if (card) { notesDownload(card.dataset.noteId, card.src); return; }
+      var cardImg = e.target.closest('.notes-card-img');
+      if (cardImg) {
+        var a = document.createElement('a');
+        a.href = cardImg.dataset.fullSrc;
+        a.download = 'note.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        return;
+      }
     });
     container.dataset.delegated = 'true';
   }
-  if (openDraw) {
-    showNotesDrawView();
-  } else {
-    renderNotesHeader();
-    showNotesList();
-  }
+  if (openDraw) showNotesDrawView();
+  else { renderNotesHeader(); showNotesList(); }
 }

@@ -1,4 +1,4 @@
-/* modules/faq.js */
+// modules/faq.js
 function renderFAQHeader() {
   var left = document.getElementById('headerLeft');
   var center = document.getElementById('headerCenter');
@@ -9,6 +9,7 @@ function renderFAQHeader() {
   right.innerHTML = '';
   right.onclick = null;
 }
+
 function renderFAQContent(content) {
   if (!content) return '';
   var safe = content.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -20,63 +21,68 @@ function renderFAQContent(content) {
   }
   return result;
 }
+
 function renderFAQ(data) {
   var sections = (data && Array.isArray(data.sections)) ? data.sections : [];
   var links = (data && Array.isArray(data.links)) ? data.links : [];
   var html = '';
   if (sections.length > 0) {
-    html += '<nav class="faq-toc" aria-label="Оглавление">';
+    html += '<div class="faq-toc">';
     for (var i = 0; i < sections.length; i++) {
-      html += '<a class="faq-toc-link" data-target="faq-section-' + sections[i].id + '" href="#">' + sections[i].title + '</a>';
+      html += '<button class="faq-toc-pill" data-target="faq-section-' + sections[i].id + '">' + sections[i].title + '</button>';
     }
-    if (links.length > 0) {
-      html += '<a class="faq-toc-link" data-target="faq-links" href="#">Ссылки</a>';
-    }
-    html += '</nav>';
+    if (links.length > 0) html += '<button class="faq-toc-pill" data-target="faq-links">Ссылки</button>';
+    html += '</div>';
   }
   for (var j = 0; j < sections.length; j++) {
     var sec = sections[j];
     html += '<section class="faq-section" id="faq-section-' + sec.id + '">' +
       '<h2 class="faq-section-title">' + sec.title + '</h2>' +
-      '<div class="faq-section-body">' + renderFAQContent(sec.content) + '</div></section>';
+      '<div class="faq-section-body">' + renderFAQContent(sec.content) + '</div>' +
+      '</section>';
   }
   if (links.length > 0) {
-    html += '<section class="faq-section faq-links-section" id="faq-links">' +
-      '<h2 class="faq-section-title">Ссылки</h2><div class="faq-links-list">';
+    html += '<section class="faq-section" id="faq-links">' +
+      '<h2 class="faq-section-title">Ссылки</h2>' +
+      '<div class="faq-links-list">';
     for (var k = 0; k < links.length; k++) {
       var link = links[k];
       html += '<a class="faq-link-item" href="' + link.url + '" target="_blank" rel="noopener noreferrer">' +
         '<span class="faq-link-icon">' + window.ICONS['external-link'] + '</span>' +
+        '<div class="faq-link-content">' +
         '<span class="faq-link-label">' + link.label + '</span>' +
         (link.desc ? '<span class="faq-link-desc">' + link.desc + '</span>' : '') +
-        '</a>';
+        '</div></a>';
     }
     html += '</div></section>';
   }
   return html || '<p class="empty-message">FAQ пуст</p>';
 }
+
 function initFAQ() {
   renderFAQHeader();
   var container = document.getElementById('faqContainer');
   if (!container) { console.error('Контейнер faqContainer не найден!'); return; }
   if (!container.dataset.delegated) {
     container.addEventListener('click', function(e) {
-      var tocLink = e.target.closest('.faq-toc-link');
+      var tocLink = e.target.closest('.faq-toc-pill');
       if (tocLink) {
         e.preventDefault();
         var targetId = tocLink.dataset.target;
         var target = document.getElementById(targetId);
         if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-        container.querySelectorAll('.faq-toc-link').forEach(function(l) { l.classList.remove('faq-toc-link--active'); });
-        tocLink.classList.add('faq-toc-link--active');
-        return;
+        container.querySelectorAll('.faq-toc-pill').forEach(function(l) { l.classList.remove('faq-toc-pill--active'); });
+        tocLink.classList.add('faq-toc-pill--active');
       }
     });
     container.dataset.delegated = 'true';
   }
   window.app.showSkeleton(container, 'blocks');
   fetch('modules/faq.json')
-    .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-    .then(function(data) { var html = renderFAQ(data); window.app.hideSkeleton(container, html); })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var html = renderFAQ(data);
+      window.app.hideSkeleton(container, html);
+    })
     .catch(function() { window.app.showError(container, 'Не удалось загрузить FAQ'); });
 }
